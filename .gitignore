@@ -1,0 +1,16 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright
+.playwright-mcp/
+
+# Claude
+.claude/
+
+# Screenshots
+screenshots/
+*.png
+
+# Temp
+/tmp/
