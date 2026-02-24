@@ -75,6 +75,7 @@ Front-end-page/
 
 ## Regles
 
+- **Le copy du site ne doit pas sonner comme de l'IA** : pas d'em-dash (—), pas de formulations generiques type ChatGPT. Ecriture directe, phrases courtes, ton humain.
 - Garder le fichier unique `index.html` — pas de framework, pas de build
 - Privilegier la qualite visuelle et l'originalite sur la rapidite
 - Pas de noms d'employeurs sur la page (SESAMm, Finance Active, etc.)
