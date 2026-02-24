@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Landing page pour **Toussaint Consulting** — product builder & strategy consultant freelance. Positionnement : "I build products from concept to launch" + consulting PM pour entreprises.
+Landing page pour **Toussaint Consulting** — freelance product leader & builder. Positionnement 50/50 : "PRODUCT LEADERSHIP MEETS EXECUTION." — product leadership pour entreprises (freelance PM, fractional CPO) + product building pour fondateurs (MVP en 4-6 semaines).
 
 ## Stack Technique
 
@@ -23,7 +23,7 @@ Front-end-page/
 
 ## Direction Esthetique
 
-**"Bold Builder"** — noir pur + accent terracotta, typographie massive, animations editoriales :
+**"Monochrome Kinetic"** — noir pur + accent terracotta + bleu tech, typographie massive, animations editoriales :
 
 ### Palette
 - Background : `#0A0A0A` (void)
@@ -31,8 +31,8 @@ Front-end-page/
 - Borders : `#2A251E` / `#3A342A`
 - Text : `#E8DCC4` (off-white chaud)
 - Text secondary : `#B8AFA0` / `#8A837A`
-- Accent : `#C97A5F` (terracotta)
-- Tech : `#4A9EFF` (bleu tech — usage secondaire)
+- Accent : `#C97A5F` (terracotta — Product Building)
+- Tech : `#4A9EFF` (bleu tech — Product Leadership)
 
 ### Typographie
 - **Display** : Clash Display (Fontshare) — bold, uppercase
@@ -49,11 +49,11 @@ Front-end-page/
 ## Sections de la Page
 
 1. **Navbar** — sticky, frosted glass dark, 4 liens (Services, How I Work, About, Contact), CTA "Book a Call"
-2. **Hero** — "I BUILD PRODUCTS. YOU SCALE THEM." + terminal mockup + trust bar (10+ yrs, 3 products)
-3. **Services** — 2 cartes asymetriques (8+4 cols) : Product Builder (primary) + Strategy & Consulting
+2. **Hero** — "PRODUCT LEADERSHIP MEETS EXECUTION." + terminal mockup (--help style) + trust bar (10+ yrs, 3 products) + floating badges (Available, Strategy → Execution)
+3. **Services** — 2 cartes 50/50 (6+6 cols) : Product Leadership (bleu tech) + Product Building (terracotta)
 4. **How I Work** — 3 principes : Understand Fast, Build Lean, Iterate Relentlessly
-5. **About** — "Product Manager Turned Builder" + key facts grid + bio sans noms d'employeurs
-6. **Contact** — "GOT A PROJECT? LET'S BUILD IT." + 2 cartes (Calendar + Email), pas de formulaire
+5. **About** — "Product Leader Who Builds." + key facts grid + bio sans noms d'employeurs
+6. **Contact** — "LET'S WORK TOGETHER." + 2 cartes (Calendar + Email), pas de formulaire
 7. **Footer** — logo + nav + connect (LinkedIn, Email, Book a Call)
 
 ## Contenu Business
@@ -62,15 +62,15 @@ Front-end-page/
 - **Fondateur** : Alexandre Toussaint
 - **Entite** : Toussaint Technologies SASU
 - **Marque commerciale** : Toussaint Consulting
-- **Positionnement** : Product Builder & Strategy Consultant
-- **Offre 1** : Product Builder — MVP/produits digitaux de concept a launch
-- **Offre 2** : Product Strategy & Consulting — audit produit, roadmap, PM freelance
+- **Positionnement** : Product Leader & Builder (50/50)
+- **Offre 1** : Product Leadership — embedded PM (3-6 mois), fractional CPO, product audits, roadmap
+- **Offre 2** : Product Building — MVP/produits digitaux de concept a launch en 4-6 semaines
 - **Side projects** : Closter (AI lead gen), Seya (Chrome extension YouTube)
 - **Langues** : Francais, Anglais
 - **Email** : contact@toussaint-consulting.com
 
 ### Mots-cles du messaging
-**Utiliser** : build, ship, launch, product, strategy, concept-to-launch, end-to-end, fast, lean
+**Utiliser** : product leadership, execution, embed, build, ship, launch, strategy, end-to-end, fractional CPO, freelance PM
 **Eviter** : AI automation, workflow, n8n, Make, Zapier, ROI (galvaude), transformation, solutions
 
 ## Regles
