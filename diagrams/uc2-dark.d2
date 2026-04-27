@@ -1,0 +1,105 @@
+# UC2 — Prospection amont, hors Salesforce (Cat 1 + tool-calling)
+# DARK MODE — for HTML on-screen rendering
+
+vars: {
+  d2-config: {
+    theme-overrides: {
+      N7: "#251F18"
+    }
+  }
+}
+
+direction: down
+
+classes: {
+  source: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#3A342A"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  tool: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#C97A5F"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  step: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  crm: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#8A837A"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+}
+
+signaux: Signaux {
+  grid-columns: 2
+  grid-gap: 20
+  style: {
+    fill: "#1F1815"
+    stroke: "#C97A5F"
+    stroke-width: 1
+    stroke-dash: 3
+    font-color: "#C97A5F"
+    font-size: 28
+    border-radius: 6
+  }
+  levees: "Levées · presse" { class: source }
+  recrut: "Recrutements" { class: source }
+  stack: "Changements stack" { class: source }
+  linkedin: "Activité LinkedIn" { class: source }
+}
+
+enrich: Enrichissement {
+  grid-columns: 3
+  grid-gap: 20
+  style: {
+    fill: "#1F1815"
+    stroke: "#C97A5F"
+    stroke-width: 1
+    stroke-dash: 3
+    font-color: "#C97A5F"
+    font-size: 28
+    border-radius: 6
+  }
+  clearbit: "Clearbit · Apollo" { class: tool }
+  builtwith: "BuiltWith" { class: tool }
+  g2: "G2 · presse" { class: tool }
+}
+
+scoring: "1. Scoring\nadéquation · intention · timing" { class: step }
+accroche: "2. Accroche (LLM)\nmessage d'ouverture par compte" { class: step }
+revue: "3. Revue commerciale\napprouver · éditer" { class: step }
+crm: "CRM\npré-rempli" { class: crm }
+
+signaux -> enrich: { style: { stroke: "#8A837A"; stroke-width: 10 } }
+enrich -> scoring: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+scoring -> accroche: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+accroche -> revue: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+revue -> crm: { style: { stroke: "#C97A5F"; stroke-width: 10 } }

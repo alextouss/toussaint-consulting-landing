@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capgemini Open Innovation · Trois patterns agentiques | Toussaint Consulting</title>
+  <meta name="description" content="Brief PDF-ready pour Capgemini Open Innovation : du brief au code, sans intermédiaire. Trois patterns agentiques, un exemple concret par cas.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Self-hosted font CSS (Paged.js can't XHR-fetch cross-origin CSS due to CORS).
+       woff2 files still load from the CDN via @font-face — browser font loading is not XHR. -->
+  <link href="assets/fonts/clash-display.css" rel="stylesheet">
+  <link href="assets/fonts/bitter.css" rel="stylesheet">
+  <link href="assets/fonts/inter-mono.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --font-display: 'Clash Display', 'Arial Black', sans-serif;
+      --font-subheading: 'Bitter', serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --color-void: #0A0A0A;
+      --color-surface: #1A1410;
+      --color-surface-raised: #251F18;
+      --color-border: #2A251E;
+      --color-border-light: #3A342A;
+      --color-text: #E8DCC4;
+      --color-text-secondary: #B8AFA0;
+      --color-text-muted: #8A837A;
+      --color-accent: #C97A5F;
+      --color-accent-hover: #D98F74;
+      --color-accent-dim: rgba(201, 122, 95, 0.08);
+      --color-tech: #4A9EFF;
+      --color-tech-dim: rgba(74, 158, 255, 0.08);
+    }
+  </style>
+
+  <!-- Vanilla CSS — Paged.js parses this without choking on Tailwind v4 @theme syntax -->
+  <style>
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0A0A0A; }
+    ::-webkit-scrollbar-thumb { background: #2A251E; border-radius: 3px; }
+    ::selection { background-color: rgba(201, 122, 95, 0.25); color: #E8DCC4; }
+
+    .font-subheading { font-family: var(--font-subheading); }
+    .font-mono { font-family: var(--font-mono); }
+
+    /* === D2 schema toggle: dark on screen, light in print === */
+    .schema-light { display: none; }
+    .schema-dark {
+      display: block;
+      max-width: 100%;
+      max-height: 560px;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* === Readability bumps — screen + print === */
+    body { font-size: 16px; line-height: 1.6; }
+    .text-\[9px\]  { font-size: 11px !important; }
+    .text-\[10px\] { font-size: 12px !important; letter-spacing: 0.15em !important; }
+    .text-\[11px\] { font-size: 13px !important; }
+    .text-\[12px\] { font-size: 13.5px !important; }
+    .text-xs       { font-size: 15.5px !important; line-height: 1.55 !important; }
+    .text-sm       { font-size: 16px !important; line-height: 1.6 !important; }
+    .text-base     { font-size: 17.5px !important; }
+    .text-lg       { font-size: 19px !important; }
+    .text-xl       { font-size: 22px !important; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-reveal { opacity: 0; animation: fadeInUp 0.6s ease forwards; }
+    .hero-reveal:nth-child(2) { animation-delay: 0.08s; }
+    .hero-reveal:nth-child(3) { animation-delay: 0.16s; }
+    .hero-reveal:nth-child(4) { animation-delay: 0.24s; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal, .hero-reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== SCHEMA DIAGRAMS ===== */
+    .schema-node {
+      fill: #251F18;
+      stroke: #C97A5F;
+      stroke-width: 1;
+    }
+    .schema-node-tech {
+      fill: #251F18;
+      stroke: #4A9EFF;
+      stroke-width: 1;
+    }
+    .schema-node-muted {
+      fill: #1A1410;
+      stroke: #3A342A;
+      stroke-width: 1;
+    }
+    .schema-text {
+      fill: #E8DCC4;
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 500;
+    }
+    .schema-text-sub {
+      fill: #8A837A;
+      font-family: var(--font-body);
+      font-size: 13px;
+    }
+    .schema-arrow {
+      stroke: #8A837A;
+      stroke-width: 1;
+      fill: none;
+    }
+    .schema-arrow-accent {
+      stroke: #C97A5F;
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .schema-arrow-tech {
+      stroke: #4A9EFF;
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .schema-label-accent {
+      fill: #C97A5F;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .schema-group-bg {
+      fill: rgba(201, 122, 95, 0.04);
+      stroke: rgba(201, 122, 95, 0.2);
+      stroke-width: 1;
+      stroke-dasharray: 3 3;
+    }
+    .schema-group-bg-tech {
+      fill: rgba(74, 158, 255, 0.04);
+      stroke: rgba(74, 158, 255, 0.2);
+      stroke-width: 1;
+      stroke-dasharray: 3 3;
+    }
+    .schema-badge-circle {
+      fill: #C97A5F;
+      stroke: none;
+    }
+    .schema-badge-circle-tech {
+      fill: #4A9EFF;
+      stroke: none;
+    }
+    .schema-badge-text {
+      fill: #0A0A0A;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+    }
+    .schema-node-title {
+      fill: #E8DCC4;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== TOC ===== */
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(58, 52, 42, 0.6);
+      text-decoration: none;
+      color: #B8AFA0;
+      transition: color 0.15s;
+    }
+    .toc-item:hover { color: #C97A5F; }
+    .toc-item .dots {
+      flex: 1;
+      border-bottom: 1px dotted #3A342A;
+      transform: translateY(-4px);
+    }
+
+    /* ===== PRINT — full dark brand-consistent ===== */
+
+    /* sr-only utility used by .uc-running-title spans (kept for future Paged.js path) */
+    .uc-running-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;  /* edge-to-edge dark — Chrome ignore @page background, donc on tue les marges et on padde via .print-page */
+    }
+
+    @media print {
+      html, body {
+        background: #0A0A0A !important;
+        color: #E8DCC4 !important;
+        font-size: 13pt;        /* +18% pour lisibilité slide-deck */
+        line-height: 1.6;
+      }
+      body { padding: 0 !important; margin: 0 !important; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; break-before: page; }
+      .avoid-break { page-break-inside: avoid; break-inside: avoid; }
+      h2, h3, h4 { page-break-after: avoid; break-after: avoid; }
+      .reveal, .hero-reveal { opacity: 1 !important; transform: none !important; animation: none !important; }
+
+      /* Each section = one slide, content vertically centered like a real slide deck.
+         `safe center` falls back to flex-start when content > container — évite le crop top.
+         Padding 12mm laisse plus de room pour le contenu (UC slides denses débordaient à 18mm). */
+      section {
+        padding: 12mm 22mm !important;
+        min-height: calc(100vh - 4mm); /* buffer pour éviter overflow d'1mm qui crée page vide */
+        box-sizing: border-box;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: safe center !important;
+      }
+      section > div { width: 100%; }
+
+      /* Aérer le rythme vertical — slide deck, pas brochure */
+      .mb-12 { margin-bottom: 12mm !important; }
+      .mb-10 { margin-bottom: 9mm !important; }
+      .mb-8  { margin-bottom: 7mm !important; }
+      .mb-6  { margin-bottom: 6mm !important; }
+      .mb-5  { margin-bottom: 5mm !important; }
+      .mb-4  { margin-bottom: 4mm !important; }
+      .mb-3  { margin-bottom: 3mm !important; }
+      /* py-14/py-20/py-10 NOT overridden — they're on <section> elements but section CSS already
+         sets padding: 18mm 22mm. Old CSS reset these to 0 which killed our slide padding. */
+      .pt-16 { padding-top: 0 !important; }
+      .pb-12 { padding-bottom: 0 !important; }
+      .p-5, .p-6, .p-8, .p-10, .md\:p-6, .md\:p-8, .md\:p-10 { padding: 8mm !important; }
+      .gap-6, .md\:gap-4 { gap: 6mm !important; }
+      .gap-3, .md\:gap-3 { gap: 4mm !important; }
+
+      /* Livrable cards : padding compact pour faire tenir 6 cartes + header sur 1 slide */
+      section .grid.md\:grid-cols-3 > .bg-surface-raised.p-5 { padding: 5mm !important; }
+
+      /* Tailwind md: grid columns — sécurise au cas où Paged.js / le viewport ne déclenche pas md: */
+      .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+      .md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+      .md\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+
+      /* Brand identity preserved: NO light flip */
+      .bg-void { background: #0A0A0A !important; }
+      .bg-surface { background: #1A1410 !important; }
+      .bg-surface-raised { background: #251F18 !important; }
+      .text-text { color: #E8DCC4 !important; }
+      .text-text-secondary { color: #B8AFA0 !important; }
+      .text-text-muted { color: #8A837A !important; }
+      .text-accent { color: #C97A5F !important; }
+      .text-tech { color: #4A9EFF !important; }
+      h1, h2, h3, h4 { color: #E8DCC4 !important; }
+      .border-border { border-color: #2A251E !important; }
+      .border-border-light { border-color: #3A342A !important; }
+
+      /* D2 schemas: dark variant, sized for slide-deck visual impact */
+      .schema-dark { display: block !important; max-height: none !important; max-width: 100% !important; margin: 0 auto !important; }
+      .schema-light { display: none !important; }
+      img[src*="diagrams/"] { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 145mm !important; object-fit: contain; }
+      img[src*="uc3-"] { max-height: 155mm !important; }
+
+      a { color: #C97A5F !important; text-decoration: underline; }
+      .print-url::after { content: " [" attr(href) "]"; font-size: 8pt; color: #8A837A; font-weight: normal; }
+
+      .toc-item { color: #B8AFA0 !important; padding: 14px 0 !important; font-size: 13pt !important; }
+      .toc-item .dots { border-color: #3A342A !important; }
+
+      /* Headings — slide-deck scale */
+      h1 { font-size: 44pt !important; line-height: 1.0 !important; letter-spacing: -0.01em !important; }
+      h2 { font-size: 30pt !important; line-height: 1.15 !important; margin-top: 0 !important; }
+      h3 { font-size: 18pt !important; line-height: 1.25 !important; }
+      h4 { font-size: 14pt !important; }
+
+      /* Bump small text classes (eyebrows, badges) for slide readability */
+      .text-\[10px\] { font-size: 10pt !important; letter-spacing: 0.22em !important; }
+      .text-\[11px\] { font-size: 11pt !important; }
+      .text-\[12px\] { font-size: 12pt !important; }
+      .text-xs       { font-size: 12pt !important; line-height: 1.55 !important; }
+      .text-sm       { font-size: 13pt !important; line-height: 1.6 !important; }
+      .text-base     { font-size: 14pt !important; }
+      .text-lg       { font-size: 16pt !important; }
+      .text-xl       { font-size: 18pt !important; }
+      .text-2xl      { font-size: 22pt !important; }
+      .text-3xl      { font-size: 26pt !important; }
+
+      p { margin-bottom: 0.7em; }
+      ul, ol { margin-bottom: 1em; }
+      li { margin-bottom: 0.4em; }
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(201, 122, 95, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 122, 95, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+  </style>
+</head>
+<body class="bg-void text-text font-body antialiased overflow-x-hidden">
+
+  <!-- ========== HEADER (screen only) ========== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-void/80 backdrop-blur-xl border-b border-transparent transition-all duration-300 no-print" id="navbar">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+      <a href="https://toussaint-consulting.com" class="flex items-center gap-2.5 group">
+        <div class="w-7 h-7 rounded-md bg-accent flex items-center justify-center">
+          <span class="font-display text-sm font-bold text-void leading-none">T</span>
+        </div>
+        <div class="flex items-baseline gap-1.5">
+          <span class="font-display text-lg font-bold text-text uppercase tracking-[0.05em]">Toussaint</span>
+          <span class="font-body text-[10px] font-light text-text-muted uppercase tracking-[0.3em]">Consulting</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-5">
+        <a href="https://calendar.app.google/w35WNGT9Lsk65n5x8" target="_blank" rel="noopener noreferrer" class="bg-accent text-void px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.1em] hover:bg-accent-hover transition-all">Prendre RDV</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== COVER ========== -->
+  <section class="pt-16 relative overflow-hidden grid-bg">
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10 pt-16 pb-12 relative">
+      <div class="flex items-center gap-3 mb-6 hero-reveal">
+        <div class="w-8 h-px bg-accent"></div>
+        <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted">Brief · Capgemini Open Innovation</p>
+      </div>
+      <h1 class="font-display font-bold text-text leading-[0.95] tracking-tight mb-5 hero-reveal">
+        <span class="block text-4xl md:text-5xl lg:text-6xl">TROIS PATTERNS</span>
+        <span class="block text-4xl md:text-5xl lg:text-6xl text-accent">AGENTIQUES.</span>
+      </h1>
+      <p class="font-subheading text-lg md:text-xl text-text leading-snug max-w-3xl mb-5 hero-reveal">
+        Du brief au code, sans intermédiaire.
+      </p>
+      <p class="font-subheading text-sm md:text-base text-text-secondary leading-relaxed max-w-3xl mb-6 hero-reveal">
+        Vos trois sujets du call, reformulés en systèmes agentiques. Pour chacun : ma lecture, l'architecture, un exemple concret livré sur ce pattern, et ce qui change pour votre équipe.
+      </p>
+
+      <!-- Suite à notre échange -->
+      <div class="bg-surface-raised border border-border p-5 md:p-6 mb-8 hero-reveal avoid-break">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Suite à notre échange</p>
+        <ul class="space-y-2 text-sm text-text-secondary">
+          <li class="flex gap-3"><span class="text-accent font-mono text-xs shrink-0">01</span><span><span class="text-text">Vos briefs internes : améliorer la pertinence.</span> Pré-meeting client, briefs comptes, veille secteur. Beaucoup de signal en entrée, pertinence variable pour le lecteur final.</span></li>
+          <li class="flex gap-3"><span class="text-accent font-mono text-xs shrink-0">02</span><span><span class="text-text">Prospecter en dehors de Salesforce.</span> Tout le travail amont avant qu'un lead n'atterrisse dans le CRM.</span></li>
+          <li class="flex gap-3"><span class="text-accent font-mono text-xs shrink-0">03</span><span><span class="text-text">Scouter et analyser des startups pour vos clients.</span> Éléments de due diligence sur beaucoup de data, avec des livrables que vos clients exploitent.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GRILLE DE LECTURE (own page) ========== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">Grille de lecture · trois catégories d'agent</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+      <div class="mb-6 hero-reveal avoid-break">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Grille de lecture · trois catégories d'agent</p>
+        <div class="grid md:grid-cols-3 gap-3 md:gap-4">
+          <div class="bg-surface border border-border p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="font-mono text-[10px] font-bold text-accent">01</span>
+              <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em]">Cat 1 · Déterministe</p>
+            </div>
+            <p class="text-xs text-text-secondary leading-snug mb-2">Étapes posées à l'avance. LLM uniquement sur les nœuds créatifs (extraction, rédaction). Le reste : code classique.</p>
+            <p class="text-[11px] text-text-muted leading-snug"><span class="text-text">Quand :</span> volume, livrable récurrent, fiabilité &gt; créativité.</p>
+          </div>
+          <div class="bg-surface border border-border p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="font-mono text-[10px] font-bold text-accent">02</span>
+              <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em]">Cat 2 · Raisonné</p>
+            </div>
+            <p class="text-xs text-text-secondary leading-snug mb-2">Un LLM décide de l'ordre des étapes à partir d'outils disponibles. Une seule boucle, un seul agent.</p>
+            <p class="text-[11px] text-text-muted leading-snug"><span class="text-text">Quand :</span> parcours variable selon l'entrée, périmètre d'outils stable.</p>
+          </div>
+          <div class="bg-surface border border-border p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="font-mono text-[10px] font-bold text-tech">03</span>
+              <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em]">Cat 3 · Multi-agents</p>
+            </div>
+            <p class="text-xs text-text-secondary leading-snug mb-2">Plusieurs spécialistes en parallèle, un superviseur qui réconcilie. On reproduit une équipe humaine.</p>
+            <p class="text-[11px] text-text-muted leading-snug"><span class="text-text">Quand :</span> plusieurs domaines distincts, livrable structuré à citer.</p>
+          </div>
+        </div>
+        <p class="text-xs text-text-muted mt-3 italic">Vos trois sujets retombent sur Cat 1 (rapports et prospection) et Cat 3 (scouting). Pas le même pattern, pas les mêmes arbitrages. La suite détaille pour chacun.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOMMAIRE (own page) ========== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">Sommaire</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+      <div class="hero-reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-3">Sommaire</p>
+        <div class="space-y-0">
+          <a href="#uc1" class="toc-item"><span class="text-accent font-mono text-xs">01</span><span class="text-sm">Rapports internes à partir de données hétérogènes — <span class="text-text-muted">Cat 1 · déterministe</span></span><span class="dots"></span><span class="text-text-muted text-xs">p. 2</span></a>
+          <a href="#uc2" class="toc-item"><span class="text-accent font-mono text-xs">02</span><span class="text-sm">Prospection amont, hors Salesforce — <span class="text-text-muted">Cat 1 · déterministe</span></span><span class="dots"></span><span class="text-text-muted text-xs">p. 3</span></a>
+          <a href="#uc3" class="toc-item"><span class="text-accent font-mono text-xs">03</span><span class="text-sm">Scouting &amp; due diligence de startups — <span class="text-text-muted">Cat 3 · multi-agents</span></span><span class="dots"></span><span class="text-text-muted text-xs">p. 4-5</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== USE CASE 1 ========== -->
+  <section id="uc1" class="py-14 md:py-20 relative page-break">
+    <span class="uc-running-title">UC 01 · Rapports internes · Cat 1</span>
+    <div class="absolute top-0 left-0 right-0 h-px bg-border"></div>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <div class="mb-8 reveal">
+        <div class="flex items-center gap-4 mb-3">
+          <span class="font-display text-5xl font-bold text-accent/30 leading-none">01</span>
+          <div>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-accent bg-accent-dim px-2 py-1 border border-accent/20">Cat 1 · Déterministe</span>
+            <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted mt-1">Cas d'usage</p>
+          </div>
+        </div>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">Rapports internes à partir de <span class="text-accent">données hétérogènes.</span></h2>
+        <div class="border-l-2 border-accent pl-4 max-w-3xl">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-1">Vous m'avez dit</p>
+          <p class="font-subheading text-sm md:text-base text-text-secondary italic leading-relaxed">Vos briefs internes (pré-meeting client, briefs comptes, veille secteur) sont produits en masse mais leur pertinence pour le lecteur final reste un vrai sujet : signal noyé, format générique, peu d'angle adapté à qui lit.</p>
+        </div>
+      </div>
+
+      <!-- Type de problèmes + Type de solutions -->
+      <div class="grid md:grid-cols-2 gap-6 mb-8 avoid-break reveal">
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de problèmes</p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Sources hétérogènes en entrée (CRM, Salesforce, presse, bases internes, livrables passés, slides) mais brief de sortie souvent générique.</li>
+            <li>Un même brief diffusé à des lecteurs aux contextes différents (BU, compte, séniorité). Personne n'y trouve son angle.</li>
+            <li>Pertinence non mesurée : impossible de savoir ce qui est lu, ce qui est ignoré, ce qui manque pour le prochain brief.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de solutions · briques que j'assemble</p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Flow Cat 1 déterministe : étapes posées à l'avance, LLM uniquement sur la synthèse et le rephrasing par lecteur.</li>
+            <li>Extraction structurée (JSON typé) + résolution d'entités (embeddings + règles métier) pour relier comptes, secteurs, signaux entre sources.</li>
+            <li>Personnalisation par profil de lecteur : même socle, angle et niveau de détail adaptés au compte / BU / rôle. Chaque claim cité, traçable.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== UC1 · Slide 2: Architecture ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 01 · Architecture</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <!-- Schema UC1 (D2-generated, dark + light) -->
+      <div class="bg-surface-raised border border-border p-4 md:p-6 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Architecture</p>
+        <img src="diagrams/uc1-dark.svg" alt="Architecture UC1 — pipeline déterministe" class="schema-dark w-full h-auto block" />
+        <img src="diagrams/uc1-light.svg" alt="Architecture UC1 — pipeline déterministe" class="schema-light w-full h-auto block" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UC1 · Slide 3: Références + Pattern + Change ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 01 · Pattern &amp; Preuve marché</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <!-- Référence marché · Abridge -->
+      <div class="mb-8 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Référence marché · Abridge</p>
+        <div class="bg-surface border border-border p-5 md:p-6">
+          <p class="text-sm text-text-secondary leading-relaxed">
+            <a href="https://www.abridge.com/" target="_blank" rel="noopener noreferrer" class="text-text font-semibold underline decoration-accent/40 hover:decoration-accent">Abridge</a> applique ce pattern Cat 1 au compte-rendu médecin-patient : signal vocal hétérogène en entrée, brief structuré en sortie, chaque claim traçable. Déployé à l'échelle dans les plus grands health systems US, c'est la preuve qu'un Cat 1 déterministe tient en production sur du contenu sensible.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pattern de référence · brief consolidé multi-sources -->
+      <div class="mb-6 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Pattern de référence · brief consolidé multi-sources</p>
+        <div class="bg-surface border border-border p-5 md:p-6">
+          <p class="text-sm text-text-secondary leading-relaxed mb-4">
+            Pour ce type de problème, voilà les arbitrages d'archi que je prends. Mêmes briques pour le brief pré-meeting client, le brief compte hebdo ou la veille secteur. On adapte juste les sources et la rubrique au profil du lecteur.
+          </p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Ingestion hétérogène avec normalisation par source avant tout LLM.</li>
+            <li>Extraction typée (sortie JSON validée) plutôt que texte libre.</li>
+            <li>Résolution d'entités par embeddings + règles métier, pas que par nom.</li>
+            <li>Revue humaine ciblée sur les claims sensibles, pas sur tout le brief.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ce qui change pour vous · UC1 -->
+      <div class="bg-accent/5 border-l-2 border-accent pl-5 pr-4 py-4 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-1">Ce qui change pour vous</p>
+        <p class="text-sm text-text-secondary leading-relaxed">Vos consultants reçoivent un brief calibré à leur compte et à leur rôle, pas un brief générique. Les claims sont cités, le format est stable, et la production passe de l'agrégation manuelle à la validation ciblée.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== USE CASE 2 ========== -->
+  <section id="uc2" class="py-14 md:py-20 relative page-break">
+    <span class="uc-running-title">UC 02 · Prospection amont · Cat 1</span>
+    <div class="absolute top-0 left-0 right-0 h-px bg-border"></div>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <div class="mb-8 reveal">
+        <div class="flex items-center gap-4 mb-3">
+          <span class="font-display text-5xl font-bold text-accent/30 leading-none">02</span>
+          <div>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-accent bg-accent-dim px-2 py-1 border border-accent/20">Cat 1 · Déterministe + tool-calling</span>
+            <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted mt-1">Cas d'usage</p>
+          </div>
+        </div>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">Prospection amont, <span class="text-accent">hors Salesforce.</span></h2>
+        <div class="border-l-2 border-accent pl-4 max-w-3xl">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-1">Vous m'avez dit</p>
+          <p class="font-subheading text-sm md:text-base text-text-secondary italic leading-relaxed">Prospecter en dehors de Salesforce : tout le travail amont (signaux, recherche, enrichissement, qualification) avant qu'un lead n'atterrisse dans le CRM.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8 avoid-break reveal">
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de problèmes</p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Le CRM est en aval. Tout l'amont (signaux, recherche, enrichissement, priorisation) est manuel et éclaté.</li>
+            <li>Plafond de volume et qualité variable : seniors profonds mais peu de comptes, juniors en surface sans rubrique commune.</li>
+            <li>La majorité du temps commercial passe en travail pré-CRM, pas en conversation client.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de solutions · briques que j'assemble</p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Flow Cat 1 : signal → enrichir → scorer → accroche → remise au commercial. Branches posées à l'avance.</li>
+            <li>APIs d'enrichissement parallélisées (Clearbit, Apollo, BuiltWith) + rubrique de scoring explicite, LLM sur les nœuds créatifs uniquement.</li>
+            <li>Accroche personnalisée conditionnée au signal détecté. Le commercial reste décideur : il approuve, édite ou rejette avant push CRM.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== UC2 · Slide 2: Architecture ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 02 · Architecture</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <!-- Schema UC2 (D2-generated, dark + light) -->
+      <div class="bg-surface-raised border border-border p-4 md:p-6 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Architecture</p>
+        <img src="diagrams/uc2-dark.svg" alt="Architecture UC2 — prospection amont" class="schema-dark w-full h-auto block" />
+        <img src="diagrams/uc2-light.svg" alt="Architecture UC2 — prospection amont" class="schema-light w-full h-auto block" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UC2 · Slide 3: Références + Pattern + Change ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 02 · Pattern &amp; Preuve marché</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <!-- Référence marché · Clay -->
+      <div class="mb-8 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Référence marché · Clay</p>
+        <div class="bg-surface border border-border p-5 md:p-6">
+          <p class="text-sm text-text-secondary leading-relaxed">
+            <a href="https://www.clay.com/" target="_blank" rel="noopener noreferrer" class="text-text font-semibold underline decoration-accent/40 hover:decoration-accent">Clay</a> orchestre tout le travail de prospection amont — signaux, enrichissement multi-API, qualification, accroche — selon le pattern Cat 1 + tool-calling présenté ici. Le CRM reçoit des comptes pré-qualifiés, pas des leads à retraiter. Catégorie "GTM engineering" qu'ils ont structurée et qui s'est imposée chez les équipes commerciales modernes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ce que j'ai construit · Cas passé B2B SaaS -->
+      <div class="mb-5 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Cas livré · système de lead gen B2B SaaS</p>
+        <div class="bg-surface border border-border p-5 md:p-6">
+          <p class="text-sm text-text-secondary leading-relaxed mb-3">
+            Pipeline end-to-end livré pour une équipe commerciale B2B SaaS : sourcing → enrichissement → scoring → outreach → CRM. Temps de qualification manuelle réduit d'un ordre de grandeur.
+          </p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Scoring déterministe avec rubrique explicite, LLM uniquement sur les nœuds créatifs.</li>
+            <li>Orchestration HubSpot + Lemlist + APIs d'enrichissement, sans glue code fragile.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ce qui change pour vous · UC2 -->
+      <div class="bg-accent/5 border-l-2 border-accent pl-5 pr-4 py-4 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-1">Ce qui change pour vous</p>
+        <p class="text-sm text-text-secondary leading-relaxed">Vos commerciaux arrivent le matin avec des comptes pré-qualifiés et des accroches prêtes à valider. La journée passe en conversation client, pas en recherche. Une rubrique de scoring commune, comparable entre équipes, remplace l'intuition.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== USE CASE 3 ========== -->
+  <section id="uc3" class="py-14 md:py-20 relative page-break">
+    <span class="uc-running-title">UC 03 · Scouting startups · Cat 3</span>
+    <div class="absolute top-0 left-0 right-0 h-px bg-border"></div>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <div class="mb-8 reveal">
+        <div class="flex items-center gap-4 mb-3">
+          <span class="font-display text-5xl font-bold text-tech/30 leading-none">03</span>
+          <div>
+            <span class="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-tech bg-tech-dim px-2 py-1 border border-tech/20">Cat 3 · Réseau multi-agents</span>
+            <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted mt-1">Cas d'usage</p>
+          </div>
+        </div>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">Scouting &amp; due diligence <span class="text-tech">de startups à l'échelle.</span></h2>
+        <div class="border-l-2 border-tech pl-4 max-w-3xl">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-1">Vous m'avez dit</p>
+          <p class="font-subheading text-sm md:text-base text-text-secondary italic leading-relaxed">Scouter et analyser des startups pour vos clients. Beaucoup de data à traiter, éléments de due diligence, livrables que vos clients doivent pouvoir exploiter directement.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8 avoid-break reveal">
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de problèmes</p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Une due diligence couvre 4-5 domaines distincts, chacun avec ses données et son raisonnement propre.</li>
+            <li>Qualité variable entre analystes, difficile de comparer une cohorte sur une même grille. Mémoire institutionnelle qui se perd d'un brief à l'autre.</li>
+            <li>Livrable client : chaque affirmation doit citer sa source.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de solutions · briques que j'assemble</p>
+          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
+            <li>Architecture Cat 3 : on reproduit une équipe humaine. Chaque spécialiste a ses outils (Crunchbase, GitHub, presse, bases financières) et sa rubrique.</li>
+            <li>Superviseur qui réconcilie, arbitre les contradictions, pose un score global. Mémoire longue (base vectorielle) pour capitaliser les due diligences passées.</li>
+            <li>LLM forcé à citer sa source pour chaque affirmation, sinon rejet. Traçabilité auditable.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== UC3 · Slide 2: Architecture ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 03 · Architecture</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <!-- Schema UC3 (D2-generated, dark + light) -->
+      <div class="bg-surface-raised border border-border p-4 md:p-6 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Architecture</p>
+        <img src="diagrams/uc3-dark.svg" alt="Architecture UC3 — réseau multi-agents" class="schema-dark w-full h-auto block" />
+        <img src="diagrams/uc3-light.svg" alt="Architecture UC3 — réseau multi-agents" class="schema-light w-full h-auto block" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UC3 · Slide 3: Références + Pattern + Change ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 03 · Pattern &amp; Preuve marché</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <!-- Référence marché · Harvey -->
+      <div class="mb-6 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Référence marché · Harvey</p>
+        <div class="bg-surface border border-border p-5 md:p-6">
+          <p class="text-sm text-text-secondary leading-relaxed">
+            <a href="https://www.harvey.ai/" target="_blank" rel="noopener noreferrer" class="text-text font-semibold underline decoration-tech/40 hover:decoration-tech">Harvey</a> fait de la due diligence légale et de l'analyse contractuelle en production chez les plus grands cabinets mondiaux. Même architecture Cat 3 : plusieurs spécialistes en parallèle, supervision, sources citées par affirmation. C'est la preuve la plus aboutie que ce pattern tient en entreprise sur du livrable client à enjeu.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ce qui change pour vous · UC3 -->
+      <div class="bg-tech/5 border-l-2 border-tech pl-5 pr-4 py-4 avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-tech mb-1">Ce qui change pour vous</p>
+        <p class="text-sm text-text-secondary leading-relaxed">Votre analyste passe d'un dossier à la fois à une cohorte entière comparée sur la même grille, en parallèle. Les due diligences passées nourrissent les suivantes au lieu de disparaître. Chaque affirmation livrée à votre client est citée, rien n'est opinion.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== UC3 · Slide 3 bis : Démonstrateur due diligence ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 03 · Démonstrateur</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+
+      <!-- Démonstrateur · due diligence fictive -->
+      <div class="reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Démonstrateur · due diligence sur dossier fictif</p>
+        <div class="bg-surface border border-border p-5 md:p-6">
+          <p class="text-[11px] text-text-muted italic mb-4">Dossier fictif à titre d'illustration. Le brief, la rubrique et le format de scorecard sont ceux que j'applique ; les noms et scores sont inventés.</p>
+          <div class="flex items-baseline gap-3 mb-3 flex-wrap">
+            <p class="font-subheading text-base font-semibold text-text">Brief reçu</p>
+            <p class="text-[11px] uppercase tracking-wider text-text-muted">Exemple</p>
+          </div>
+          <div class="border-l-2 border-tech pl-4 mb-5">
+            <p class="font-subheading text-sm text-text-secondary italic leading-relaxed">
+              "Client CAC40, secteur assurance. Propose-nous 5 startups agentiques prêtes à industrialiser l'automatisation des déclarations de sinistres. Horizon 12 mois, Europe et US, Series A minimum, focus équipe technique et traction sur le segment."
+            </p>
+          </div>
+
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-3">Déroulé du pipeline</p>
+          <div class="grid md:grid-cols-5 gap-2 mb-5">
+            <div class="bg-surface-raised border border-border p-3">
+              <p class="font-mono text-[10px] text-tech mb-1">01</p>
+              <p class="font-subheading text-xs font-semibold text-text mb-1">Intake</p>
+              <p class="text-[11px] text-text-secondary leading-snug">Rubrique de due diligence dérivée du brief : 5 critères, poids, seuils go/no-go.</p>
+            </div>
+            <div class="bg-surface-raised border border-border p-3">
+              <p class="font-mono text-[10px] text-tech mb-1">02</p>
+              <p class="font-subheading text-xs font-semibold text-text mb-1">Découverte</p>
+              <p class="text-[11px] text-text-secondary leading-snug">Shortlist élargie depuis Crunchbase, Dealroom, presse spé. Dédup, filtre stade.</p>
+            </div>
+            <div class="bg-surface-raised border border-border p-3">
+              <p class="font-mono text-[10px] text-tech mb-1">03</p>
+              <p class="font-subheading text-xs font-semibold text-text mb-1">5 spécialistes</p>
+              <p class="text-[11px] text-text-secondary leading-snug">Équipe · marché · tech · traction · financials. Appels parallélisés, chacun dans son domaine.</p>
+            </div>
+            <div class="bg-surface-raised border border-border p-3">
+              <p class="font-mono text-[10px] text-tech mb-1">04</p>
+              <p class="font-subheading text-xs font-semibold text-text mb-1">Superviseur</p>
+              <p class="text-[11px] text-text-secondary leading-snug">Réconcilie, arbitre les contradictions, produit un score global et une recommandation.</p>
+            </div>
+            <div class="bg-surface-raised border border-border p-3">
+              <p class="font-mono text-[10px] text-tech mb-1">05</p>
+              <p class="font-subheading text-xs font-semibold text-text mb-1">Scorecard</p>
+              <p class="text-[11px] text-text-secondary leading-snug">Top 5 livré avec score par dimension, forces, risques, sources citées par affirmation.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UC3 · Slide 3 ter : Scorecard livrable ===== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">UC 03 · Scorecard</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+      <div class="reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Démonstrateur · extrait de scorecard livrable</p>
+        <div class="bg-surface border border-border p-5 md:p-6">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Extrait de scorecard · format livrable</p>
+          <div class="bg-surface-raised border border-border overflow-x-auto">
+            <table class="w-full text-xs">
+              <thead class="bg-void/40">
+                <tr class="text-text-muted text-[10px] uppercase tracking-wider">
+                  <th class="text-left px-3 py-2 font-medium">Startup</th>
+                  <th class="text-center px-2 py-2 font-medium">Équipe</th>
+                  <th class="text-center px-2 py-2 font-medium">Marché</th>
+                  <th class="text-center px-2 py-2 font-medium">Tech</th>
+                  <th class="text-center px-2 py-2 font-medium">Traction</th>
+                  <th class="text-center px-2 py-2 font-medium">Financials</th>
+                  <th class="text-center px-2 py-2 font-medium">Score global</th>
+                  <th class="text-left px-3 py-2 font-medium">Note du superviseur</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-t border-border">
+                  <td class="px-3 py-2 text-text font-semibold">Startup A</td>
+                  <td class="text-center px-2 py-2">8,5</td>
+                  <td class="text-center px-2 py-2">7,0</td>
+                  <td class="text-center px-2 py-2 text-tech font-semibold">9,0</td>
+                  <td class="text-center px-2 py-2">6,5</td>
+                  <td class="text-center px-2 py-2">7,5</td>
+                  <td class="text-center px-2 py-2 text-tech font-bold">7,7</td>
+                  <td class="px-3 py-2 text-[11px]">Profil équipe solide, tech différenciée, traction à confirmer hors DACH.</td>
+                </tr>
+                <tr class="border-t border-border">
+                  <td class="px-3 py-2 text-text font-semibold">Startup B</td>
+                  <td class="text-center px-2 py-2">7,0</td>
+                  <td class="text-center px-2 py-2 text-tech font-semibold">8,5</td>
+                  <td class="text-center px-2 py-2">7,5</td>
+                  <td class="text-center px-2 py-2 text-tech font-semibold">8,5</td>
+                  <td class="text-center px-2 py-2">8,0</td>
+                  <td class="text-center px-2 py-2 text-tech font-bold">7,9</td>
+                  <td class="px-3 py-2 text-[11px]">Traction client assurance déjà établie, positionnement net. Dépendance OpenAI à challenger.</td>
+                </tr>
+                <tr class="border-t border-border">
+                  <td class="px-3 py-2 text-text font-semibold">Startup C</td>
+                  <td class="text-center px-2 py-2">7,5</td>
+                  <td class="text-center px-2 py-2">7,5</td>
+                  <td class="text-center px-2 py-2">7,0</td>
+                  <td class="text-center px-2 py-2">5,5</td>
+                  <td class="text-center px-2 py-2">6,0</td>
+                  <td class="text-center px-2 py-2 text-text font-bold">6,7</td>
+                  <td class="px-3 py-2 text-[11px]">Tech prometteuse mais trop tôt pour l'industrialisation demandée.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-[10px] text-text-muted italic mt-2">Chaque cellule du tableau final est adossée à des sources citées (LinkedIn, Crunchbase, presse, site produit). Le superviseur rejette toute affirmation non sourcée.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== LIVRABLE (hero + 6 transferts fusionnés) ========== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">Livrable · 6 transferts</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10 avoid-break">
+      <div class="mb-3 reveal">
+        <div class="flex items-baseline gap-3 flex-wrap mb-2">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent">Livrable</p>
+          <h2 class="font-subheading text-xl md:text-2xl font-semibold text-text tracking-tight">Ce que <span class="text-accent">votre équipe récupère.</span></h2>
+        </div>
+        <p class="font-subheading text-sm text-text-secondary max-w-3xl">À la fin du build, votre équipe reprend la main. Pas de boîte noire, pas de SaaS facturé au mois. Voici ce qui est transféré dans tous les cas.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-3 md:gap-4 reveal">
+        <div class="bg-surface-raised border border-border p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
+              <span class="font-mono text-[10px] font-bold text-accent">01</span>
+            </div>
+            <p class="font-subheading text-sm font-semibold text-text">Code source complet</p>
+          </div>
+          <p class="text-xs text-text-secondary leading-relaxed">Python ou TypeScript selon la stack. Tests, typage strict, conventions documentées. Déposé dans votre dépôt Git, propriété pleine.</p>
+        </div>
+        <div class="bg-surface-raised border border-border p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
+              <span class="font-mono text-[10px] font-bold text-accent">02</span>
+            </div>
+            <p class="font-subheading text-sm font-semibold text-text">Jeu d'évaluation</p>
+          </div>
+          <p class="text-xs text-text-secondary leading-relaxed">Cas de référence avec vérité terrain, rejouable en une commande. Toute modif du prompt ou du modèle se mesure immédiatement, zéro régression silencieuse.</p>
+        </div>
+        <div class="bg-surface-raised border border-border p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
+              <span class="font-mono text-[10px] font-bold text-accent">03</span>
+            </div>
+            <p class="font-subheading text-sm font-semibold text-text">Observabilité en production</p>
+          </div>
+          <p class="text-xs text-text-secondary leading-relaxed">Traces, coûts, latence, taux d'acceptation par nœud. Dashboard prêt. Vous voyez où l'agent passe son temps et combien ça vous coûte à l'appel.</p>
+        </div>
+        <div class="bg-surface-raised border border-border p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
+              <span class="font-mono text-[10px] font-bold text-accent">04</span>
+            </div>
+            <p class="font-subheading text-sm font-semibold text-text">Documentation &amp; runbook</p>
+          </div>
+          <p class="text-xs text-text-secondary leading-relaxed">Architecture, schémas de données, prompts commentés, runbook d'exploitation (déploiement, rollback, incidents fréquents). Votre équipe opère sans moi.</p>
+        </div>
+        <div class="bg-surface-raised border border-border p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
+              <span class="font-mono text-[10px] font-bold text-accent">05</span>
+            </div>
+            <p class="font-subheading text-sm font-semibold text-text">Transfert de compétence</p>
+          </div>
+          <p class="text-xs text-text-secondary leading-relaxed">2 sessions de pair-programming avec l'équipe qui reprend. Lecture de code ensemble, questions à chaud, ajustements sous les yeux. Pas de "magic box" à reverse.</p>
+        </div>
+        <div class="bg-surface-raised border border-border p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
+              <span class="font-mono text-[10px] font-bold text-accent">06</span>
+            </div>
+            <p class="font-subheading text-sm font-semibold text-text">Garantie post-livraison</p>
+          </div>
+          <p class="text-xs text-text-secondary leading-relaxed">2 semaines de support inclus après le handoff. Tout bug ou régression est corrigé sans re-facturation. Au-delà, forfait mensuel optionnel.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== POUR CREUSER + FOOTER (fusionnés) ========== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">Pour creuser</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+      <div class="avoid-break reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-2">Pour creuser</p>
+        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl mb-4">Pour aller plus loin sur l'un des trois cas, le plus simple est un deuxième échange pour cadrer ensemble le sujet qu'on priorise. Cadence, périmètre et livrables s'ajustent au cas précis. L'IA bouge vite, je préfère proposer un plan qui colle à votre contexte plutôt qu'un template.</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 items-center text-sm">
+          <a href="https://calendar.app.google/w35WNGT9Lsk65n5x8" target="_blank" rel="noopener noreferrer" class="text-accent font-semibold hover:underline print-url">Prendre RDV</a>
+          <span class="text-text-muted">·</span>
+          <a href="mailto:contact@toussaint-consulting.com" class="text-accent hover:underline">contact@toussaint-consulting.com</a>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4 reveal">
+        <a href="https://toussaint-consulting.com" class="flex items-center gap-2 group">
+          <div class="w-6 h-6 rounded-md bg-accent flex items-center justify-center">
+            <span class="font-display text-[11px] font-bold text-void leading-none">T</span>
+          </div>
+          <div class="flex items-baseline gap-1.5">
+            <span class="font-display text-base font-bold text-text uppercase tracking-[0.05em]">Toussaint</span>
+            <span class="font-body text-[9px] font-light text-text-muted uppercase tracking-[0.3em]">Consulting</span>
+          </div>
+        </a>
+        <p class="text-[10px] font-light text-text-muted tracking-wide">
+          Préparé pour Capgemini Open Innovation · Confidentiel
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('border-border');
+        navbar.classList.remove('border-transparent');
+      } else {
+        navbar.classList.remove('border-border');
+        navbar.classList.add('border-transparent');
+      }
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => io.observe(r));
+  </script>
+</body>
+</html>

@@ -12,6 +12,9 @@ Thumbs.db
 screenshots/
 *.png
 
+# Prospects (notes privées, non deployées)
+prospects/
+
 # Temp
 /tmp/
 .vercel

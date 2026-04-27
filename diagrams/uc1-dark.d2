@@ -1,0 +1,79 @@
+# UC1 — Rapports internes à partir de données hétérogènes (Cat 1 · déterministe)
+# DARK MODE — for HTML on-screen rendering (matches site palette)
+
+vars: {
+  d2-config: {
+    theme-overrides: {
+      N7: "#251F18"
+    }
+  }
+}
+
+direction: down
+
+classes: {
+  source: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#3A342A"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  step: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  delivery: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#8A837A"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+}
+
+sources: Sources {
+  grid-columns: 4
+  grid-gap: 20
+  style: {
+    fill: "#1F1815"
+    stroke: "#C97A5F"
+    stroke-width: 1
+    stroke-dash: 3
+    font-color: "#C97A5F"
+    font-size: 28
+    border-radius: 6
+  }
+
+  texte: "Texte libre" { class: source }
+  form: "Formulaires" { class: source }
+  ocr: "OCR · voix" { class: source }
+  apis: "APIs internes" { class: source }
+}
+
+extraction: "1. Lecture des sources\ntexte brut → données structurées" { class: step }
+entities: "2. Résolution d'entités\nliaison + timeline" { class: step }
+synthesis: "3. Synthèse\nbrief + citation par claim" { class: step }
+validation: "4. Validation humaine\nrelecture ciblée" { class: step }
+delivery: "5. Livraison\nemail · API" { class: delivery }
+
+sources -> extraction: { style: { stroke: "#8A837A"; stroke-width: 10 } }
+extraction -> entities: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+entities -> synthesis: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+synthesis -> validation: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+validation -> delivery: { style: { stroke: "#C97A5F"; stroke-width: 10 } }

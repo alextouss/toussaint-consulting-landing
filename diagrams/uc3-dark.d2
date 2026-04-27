@@ -1,0 +1,113 @@
+# UC3 — Scouting & due diligence (Cat 3 · multi-agents)
+# DARK MODE — for HTML on-screen rendering
+
+vars: {
+  d2-config: {
+    theme-overrides: {
+      N7: "#251F18"
+    }
+  }
+}
+
+direction: down
+
+classes: {
+  input: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#8A837A"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  step: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#4A9EFF"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  specialist: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#4A9EFF"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 28
+      border-radius: 4
+    }
+  }
+  supervisor: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 3
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  memory: {
+    shape: cylinder
+    style: {
+      fill: "#1A1410"
+      stroke: "#8A837A"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 28
+    }
+  }
+  output: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+}
+
+brief: "Brief client" { class: input }
+intake: "1. Intake agent\nrubrique + paramètres du brief" { class: step }
+discovery: "2. Découverte · Cat 2\nCrunchbase · Dealroom · presse" { class: step }
+
+specialistes: "3. Cinq spécialistes en parallèle" {
+  style: {
+    fill: "#15191F"
+    stroke: "#4A9EFF"
+    stroke-width: 1
+    stroke-dash: 3
+    font-color: "#4A9EFF"
+    font-size: 26
+    border-radius: 6
+  }
+
+  equipe: "Équipe\nLinkedIn · sorties" { class: specialist }
+  marche: "Marché\ntaille · concurrence" { class: specialist }
+  tech: "Tech\nGitHub · benchmarks" { class: specialist }
+  traction: "Traction\nclients · presse" { class: specialist }
+  financials: "Financials\nlevées · burn" { class: specialist }
+}
+
+supervisor: "4. Superviseur\nréconcilie · arbitre · score" { class: supervisor }
+memory: "Mémoire\nbriefs passés" { class: memory }
+scorecard: "5. Scorecard\navec citations" { class: output }
+
+brief -> intake: { style: { stroke: "#8A837A"; stroke-width: 10 } }
+intake -> discovery: { style: { stroke: "#4A9EFF"; stroke-width: 10 } }
+discovery -> specialistes: { style: { stroke: "#4A9EFF"; stroke-width: 10 } }
+specialistes -> supervisor: { style: { stroke: "#4A9EFF"; stroke-width: 10 } }
+supervisor <-> memory: { style: { stroke: "#8A837A"; stroke-width: 10; stroke-dash: 3 } }
+supervisor -> scorecard: { style: { stroke: "#C97A5F"; stroke-width: 10 } }

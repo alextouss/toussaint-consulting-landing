@@ -1,0 +1,70 @@
+# UC1 — Rapports internes à partir de données hétérogènes (Cat 1 · déterministe)
+# LIGHT MODE — fonts bumped for PDF/print readability
+
+direction: right
+
+classes: {
+  source: {
+    shape: rectangle
+    style: {
+      fill: "#FAFAF5"
+      stroke: "#3A342A"
+      stroke-width: 1
+      font-color: "#1A1410"
+      font-size: 20
+      border-radius: 4
+    }
+  }
+  step: {
+    shape: rectangle
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#1A1410"
+      font-size: 20
+      border-radius: 4
+      bold: true
+    }
+  }
+  delivery: {
+    shape: rectangle
+    style: {
+      fill: "#FAFAF5"
+      stroke: "#8A837A"
+      stroke-width: 2
+      font-color: "#1A1410"
+      font-size: 20
+      border-radius: 4
+    }
+  }
+}
+
+sources: Sources {
+  style: {
+    fill: "#FDF8F3"
+    stroke: "#C97A5F"
+    stroke-width: 1
+    stroke-dash: 3
+    font-color: "#C97A5F"
+    font-size: 18
+    border-radius: 6
+  }
+
+  texte: "Texte libre" { class: source }
+  form: "Formulaires" { class: source }
+  ocr: "OCR · voix" { class: source }
+  apis: "APIs internes" { class: source }
+}
+
+extraction: "1. Extraction\nLLM typé par source" { class: step }
+entities: "2. Résolution d'entités\nliaison + timeline" { class: step }
+synthesis: "3. Synthèse\nbrief + citation par claim" { class: step }
+validation: "4. Validation humaine\nrelecture ciblée" { class: step }
+delivery: "5. Livraison\nemail · API" { class: delivery }
+
+sources -> extraction: { style: { stroke: "#8A837A"; stroke-width: 2 } }
+extraction -> entities: { style: { stroke: "#C97A5F"; stroke-width: 2 } }
+entities -> synthesis: { style: { stroke: "#C97A5F"; stroke-width: 2 } }
+synthesis -> validation: { style: { stroke: "#C97A5F"; stroke-width: 2 } }
+validation -> delivery: { style: { stroke: "#C97A5F"; stroke-width: 2 } }
