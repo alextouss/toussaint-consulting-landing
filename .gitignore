@@ -11,6 +11,7 @@ Thumbs.db
 # Screenshots
 screenshots/
 *.png
+!diagrams/*.png
 
 # Prospects (notes privées, non deployées)
 prospects/

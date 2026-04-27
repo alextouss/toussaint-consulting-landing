@@ -127,9 +127,17 @@ Slides de clôture (~5) :
 - Langue : FR ou EN selon le prospect
 - `meta robots noindex, nofollow`
 - Preuves marché : uniquement cas publics avec chiffres datés + URL. Jamais de cas inventé.
-- Schémas : **D2 (diagram-as-code)** dans `diagrams/`, pas de SVG inline. Variante **dark = défaut écran ET PDF**. Light optionnelle, gardée pour qui veut une version papier imprimable. Compilées via `d2 --layout elk --pad 30 source.d2 source.svg` (ELK > dagre par défaut). Embed par paire de `<img>` :
+- Schémas : **D2 (diagram-as-code)** dans `diagrams/`, pas de SVG inline. Variante **dark = défaut écran ET PDF**. Light optionnelle, gardée pour qui veut une version papier imprimable. Compilées en deux formats :
+  ```bash
+  # SVG pour aperçu HTML écran (vector, léger)
+  d2 --layout elk --pad 30 source.d2 source.svg
+  # PNG haute résolution pour le PDF (raster, fiable)
+  d2 --layout elk --pad 30 --scale 3 source.d2 source.png
+  ```
+  Raison de la double génération : Chrome `--print-to-pdf` rend les flèches/markers SVG de manière instable (apparaissent/disparaissent selon zoom du viewer PDF — bug connu). Le PNG `--scale 3` (~460 DPI sur slide A4 landscape) garantit un rendu identique sur tous les viewers, à tous les zooms. Trade-off : plus de vector dans le PDF, mais reliability > vector pour un livrable prospect.
+  Embed dans le HTML (le PDF embarque le PNG) :
   ```html
-  <img src="diagrams/ucN-dark.svg"  class="schema-dark  w-full h-auto block" />
+  <img src="diagrams/ucN-dark.png"  class="schema-dark  w-full h-auto block" />
   <img src="diagrams/ucN-light.svg" class="schema-light w-full h-auto block" />
   ```
   CSS toggle : `.schema-light { display: none }` partout. `.schema-dark { display: block; max-height: 560px; ... }` à l'écran, `max-height: 145mm` en print (slide-deck pleine page).
