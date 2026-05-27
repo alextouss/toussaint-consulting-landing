@@ -9,11 +9,19 @@ Ce projet sert **deux usages** :
 2. **Slide-deck PDF sur mesure par prospect** — pour chaque prospect, produire un **PDF format slide-deck** (~20 slides, A4 landscape, dark brandé edge-to-edge) à envoyer après un call de découverte. Contient un framework Cat 1/2/3 + 3 use cases alignés sur ses vraies douleurs (avec schémas D2), preuves marché publiques. Livrable final = PDF généré via skill `pdf-export` (Chrome headless). L'HTML est l'intermédiaire — chaque `<section>` du HTML = une slide du PDF.
 
 **Workflow par prospect** :
-1. Call de découverte → noter les 3 use cases / douleurs exprimées dans `prospects/<nom-entite>-<contexte>.md` (notes privées, gitignorées)
-2. Construire/dupliquer le HTML template `capgemini-openinnov.html` → `<nom-entite>-<contexte>.html`
-3. Customiser les 3 use cases avec les douleurs du prospect, schémas adaptés, preuves marché pertinentes
-4. Export PDF via skill `pdf-export` (Chrome headless `--print-to-pdf`, dark brandé). Aperçu : ouvrir le HTML dans le navigateur + Cmd+P pour voir l'équivalent print.
-5. Envoyer le PDF au prospect par email / LinkedIn DM
+1. Call de découverte → noter les 3 use cases / douleurs exprimées dans `prospects/<slug>.md` (notes privées, gitignorées)
+2. `cp templates/prospect-deck.html <slug>.html` puis find/replace `{{PROSPECT_NAME}}`, `{{PROSPECT_SLUG}}`, `{{PROSPECT_CONTEXT}}` dans l'éditeur
+3. `mkdir diagrams/<slug>` — un dossier par prospect, jamais de collision avec les diagrammes d'autres prospects
+4. Pour chaque diagramme UC :
+   ```bash
+   cp templates/diagram-dark.d2 diagrams/<slug>/ucN-dark.d2
+   # customise nodes/edges, puis compile :
+   d2 --layout elk --pad 30           diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.svg
+   d2 --layout elk --pad 30 --scale 3 diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.png
+   ```
+5. Remplis les blocs `<!-- TODO -->` du HTML (cover, sommaire, 3 UCs) avec Claude en conversation
+6. Export PDF via skill `pdf-export` (Chrome headless `--print-to-pdf`, dark brandé)
+7. Envoie le PDF au prospect par email / LinkedIn DM
 
 ## Stack Technique
 
@@ -36,24 +44,30 @@ Ce projet sert **deux usages** :
 ```
 tc_website/
   index.html                       <- Landing page (publique, indexée)
-  capgemini-openinnov.html         <- PDF-template prospect Capgemini Open Innovation
+  capgemini-openinnov.html         <- Deck prospect Capgemini Open Innovation (livré)
+  capgemini-openinnov_Brief.pdf    <- PDF exporté correspondant
   CLAUDE.md                        <- Ce fichier
   competitive-analysis.md          <- Analyse concurrentielle
   .gitignore
   .vercel/                         <- Config deploiement Vercel
   screenshots/                     <- Captures Playwright
+  templates/                       <- Scaffolds réutilisables pour nouveaux prospects
+    prospect-deck.html             <- HTML stripped, tokens {{PROSPECT_NAME}} etc.
+    diagram-dark.d2                <- D2 dark template (classes + theme override)
   prospects/                       <- GITIGNORÉ · notes brutes par prospect
     capgemini-openinnov.md         <- Contact + 3 use cases bruts du call + à-faire
-  diagrams/                        <- Source D2 + SVG générés des schémas par UC
-    uc1-dark.d2  / uc1-dark.svg    <- Dark  = écran ET PDF (full dark brandé)
-    uc1-light.d2 / uc1-light.svg   <- Light = optionnel, version imprimable papier
-    uc2-*.d2 + uc2-*.svg
-    uc3-*.d2 + uc3-*.svg
+  diagrams/                        <- D2 sources + SVG/PNG générés, namespacés par prospect
+    capgemini/                     <- Diagrammes du deck Capgemini (3 UCs × dark+light)
+      uc1-dark.{d2,svg,png}        <- Dark = écran ET PDF (PNG --scale 3 pour PDF reliability)
+      uc1-light.{d2,svg}           <- Light = optionnel, version imprimable papier
+      uc2-*, uc3-*
+    <slug>/                        <- Un dossier par futur prospect (ex: mellow-nest/)
   assets/
     favicon.svg                    <- Favicon SVG (terracotta + T)
     alex-portrait.jpeg             <- Photo portrait (OG image)
     logo.png                       <- Logo export
     linkedin-cover.png             <- Cover LinkedIn
+    fonts/                         <- CSS self-hostés (woff2 toujours via CDN @font-face)
 ```
 
 **Règles sur les fichiers prospects** :
@@ -98,7 +112,7 @@ tc_website/
 6. **Contact** — "LET'S WORK TOGETHER." + 2 cartes (Calendar + Email), pas de formulaire
 7. **Footer** — logo + nav + connect (LinkedIn, Email, Book a Call)
 
-## Structure d'un follow-up prospect (template `capgemini-openinnov.html`)
+## Structure d'un follow-up prospect (template `templates/prospect-deck.html`)
 
 **Format = slide-deck PDF.** Chaque `<section>` du HTML correspond à **exactement une slide** dans le PDF exporté : fond `#0A0A0A` edge-to-edge, contenu centré verticalement, page-break forcé entre chaque section. Voir skill `pdf-export` pour le pattern CSS complet.
 
@@ -127,26 +141,17 @@ Slides de clôture (~5) :
 - Langue : FR ou EN selon le prospect
 - `meta robots noindex, nofollow`
 - Preuves marché : uniquement cas publics avec chiffres datés + URL. Jamais de cas inventé.
-- Schémas : **D2 (diagram-as-code)** dans `diagrams/`, pas de SVG inline. Variante **dark = défaut écran ET PDF**. Light optionnelle, gardée pour qui veut une version papier imprimable. Compilées en deux formats :
+- Schémas : **D2 (diagram-as-code)**, namespacés par prospect dans `diagrams/<slug>/`. Pas de SVG inline. Partir du template `templates/diagram-dark.d2` (palette, classes, theme override, font sizes 32/28/26 déjà calibrés). Compiler en deux formats :
   ```bash
-  # SVG pour aperçu HTML écran (vector, léger)
-  d2 --layout elk --pad 30 source.d2 source.svg
-  # PNG haute résolution pour le PDF (raster, fiable)
-  d2 --layout elk --pad 30 --scale 3 source.d2 source.png
+  d2 --layout elk --pad 30           diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.svg
+  d2 --layout elk --pad 30 --scale 3 diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.png
   ```
-  Raison de la double génération : Chrome `--print-to-pdf` rend les flèches/markers SVG de manière instable (apparaissent/disparaissent selon zoom du viewer PDF — bug connu). Le PNG `--scale 3` (~460 DPI sur slide A4 landscape) garantit un rendu identique sur tous les viewers, à tous les zooms. Trade-off : plus de vector dans le PDF, mais reliability > vector pour un livrable prospect.
-  Embed dans le HTML (le PDF embarque le PNG) :
+  Pourquoi les deux : Chrome `--print-to-pdf` rend les flèches/markers SVG de manière instable (apparaissent/disparaissent selon zoom du viewer PDF — bug connu). Le PNG `--scale 3` (~460 DPI sur slide A4 landscape) garantit un rendu identique sur tous les viewers. SVG = aperçu HTML écran, PNG = embed dans le PDF. Embed :
   ```html
-  <img src="diagrams/ucN-dark.png"  class="schema-dark  w-full h-auto block" />
-  <img src="diagrams/ucN-light.svg" class="schema-light w-full h-auto block" />
+  <img src="diagrams/<slug>/ucN-dark.png" class="schema-dark  w-full h-auto block" />
+  <img src="diagrams/<slug>/ucN-dark.svg" class="schema-light w-full h-auto block" />
   ```
-  CSS toggle : `.schema-light { display: none }` partout. `.schema-dark { display: block; max-height: 560px; ... }` à l'écran, `max-height: 145mm` en print (slide-deck pleine page).
-- Convention couleurs D2 : dark → fonds `#251F18`/`#1A1410`, font `#E8DCC4`. Override le canvas D2 (sinon il sort blanc) :
-  ```d2
-  vars: { d2-config: { theme-overrides: { N7: "#251F18" } } }
-  ```
-  Light (optionnel) → fonds `#FFFFFF`/`#FAFAF5`, font `#1A1410`.
-- Tailles D2 dark : 32/28/26 (nodes/sub/container) — calibrées pour rendu écran ~560px et PDF pleine slide.
+  CSS toggle : `.schema-light { display: none }` partout. `.schema-dark { display: block; max-height: 560px; ... }` à l'écran, `max-height: 145mm` en print.
 - **Export PDF = slide-deck.** Chaque `<section>` doit être atomique (un concept par slide). Pattern CSS complet dans skill `pdf-export` : `@page margin 0` (edge-to-edge dark), `section { padding: 12mm 22mm; min-height: calc(100vh - 4mm); display: flex; justify-content: safe center }` (centrage vertical), Tailwind v4 CDN reste tel quel.
 - **Splitter dès qu'une section déborde une page**. Symptômes : page noire vide entre 2 slides (overflow d'1mm), contenu collé en haut d'une page (overflow), box/schéma coupé en deux (card trop grande). Fix : extraire le bloc débordant en nouvelle `<section class="page-break">` distincte.
 - Chaque section doit porter `class="page-break"` (sauf la toute première du doc) + un `<span class="uc-running-title">...</span>` au début (caché à l'écran via `.sr-only` style, gardé pour réactivation future de Paged.js).
@@ -187,7 +192,7 @@ Slides de clôture (~5) :
 
 - **Pas de ton IA** : pas d'em-dash (—), pas de formulations generiques type ChatGPT. Ecriture directe, phrases courtes, ton humain. S'applique à la landing ET aux follow-ups prospects.
 - **Landing** : garder le fichier unique `index.html`, pas de framework, pas de build
-- **Follow-ups** : un fichier HTML par prospect, duplique le template `capgemini-openinnov.html` et customise. Supprime la version précédente quand tu en livres une nouvelle.
+- **Follow-ups** : un fichier HTML par prospect, partir de `templates/prospect-deck.html` (jamais dupliquer un deck prospect existant — le template est la source canonique). Supprimer la version précédente quand on en livre une nouvelle.
 - Privilegier la qualite visuelle et l'originalite sur la rapidite
 - Pas de noms d'employeurs sur la landing (SESAMm, Finance Active, etc.) — les follow-ups peuvent citer des cas anonymisés
 - Pas de metriques non verifiables. Pour les follow-ups, uniquement des preuves marché publiques avec URL.

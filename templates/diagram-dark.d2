@@ -1,0 +1,99 @@
+# UC{{N}} — {{TITLE}}   (Cat {{CAT}})
+# DARK MODE — for HTML on-screen rendering AND PDF embed
+#
+# Compile (run from repo root):
+#   d2 --layout elk --pad 30           diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.svg
+#   d2 --layout elk --pad 30 --scale 3 diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.png
+#
+# Why both? SVG = light, fast, vector for browser preview. PNG --scale 3 (~460 DPI)
+# = bulletproof for Chrome --print-to-pdf which renders SVG arrows unreliably.
+
+vars: {
+  d2-config: {
+    theme-overrides: {
+      N7: "#251F18"
+    }
+  }
+}
+
+direction: down
+
+classes: {
+  source: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#3A342A"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  step: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  specialist: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#4A9EFF"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 28
+      border-radius: 4
+    }
+  }
+  supervisor: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 3
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  memory: {
+    shape: cylinder
+    style: {
+      fill: "#1A1410"
+      stroke: "#8A837A"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 28
+    }
+  }
+  output: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+}
+
+# Example structure — replace with your actual UC nodes and edges.
+# Arrow stroke-width 10 is calibrated for slide readability.
+
+input: "Entrée" { class: source }
+step1: "1. Première étape\nsous-détail" { class: step }
+step2: "2. Deuxième étape\nsous-détail" { class: step }
+result: "Sortie" { class: output }
+
+input -> step1: { style: { stroke: "#8A837A"; stroke-width: 10 } }
+step1 -> step2: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+step2 -> result: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
