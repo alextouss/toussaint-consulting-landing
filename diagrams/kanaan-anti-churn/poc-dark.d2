@@ -1,0 +1,88 @@
+# POC Architecture — Evidence Playback (Kanaan anti-churn)
+# Agent unique, 3 sources, dashboard 1-écran
+#
+# Compile (run from repo root):
+#   d2 --layout elk --pad 30           diagrams/kanaan-anti-churn/poc-dark.d2 diagrams/kanaan-anti-churn/poc-dark.svg
+#   d2 --layout elk --pad 30 --scale 3 diagrams/kanaan-anti-churn/poc-dark.d2 diagrams/kanaan-anti-churn/poc-dark.png
+
+vars: {
+  d2-config: {
+    theme-overrides: {
+      N7: "#251F18"
+    }
+  }
+}
+
+direction: down
+
+classes: {
+  source: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#3A342A"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 28
+      border-radius: 4
+    }
+  }
+  source-evidence: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 28
+      border-radius: 4
+    }
+  }
+  step: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  output: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+}
+
+sources: "Trois sources" {
+  style: {
+    fill: "#0A0A0A"
+    stroke: "#2A251E"
+    stroke-width: 1
+    font-color: "#8A837A"
+    font-size: 24
+    border-radius: 4
+  }
+
+  hubspot: "HubSpot\nCRM, contrats, dates" { class: source }
+  intercom: "Intercom\nSupport, conversations\n(source d'evidence)" { class: source-evidence }
+  usage: "Product usage\nConnexions, features clés" { class: source }
+}
+
+agent: "Agent LLM\nCroise les 3 signaux\nExtrait les citations Intercom" { class: step }
+ranker: "Ranker\nTop 10 comptes à risque\n+ evidence quotes + action" { class: step }
+dashboard: "Dashboard\n1 écran · 1 ligne = 1 compte" { class: output }
+
+sources.hubspot -> agent: { style: { stroke: "#8A837A"; stroke-width: 8 } }
+sources.intercom -> agent: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+sources.usage -> agent: { style: { stroke: "#8A837A"; stroke-width: 8 } }
+agent -> ranker: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+ranker -> dashboard: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
