@@ -377,28 +377,46 @@
       <div class="mb-5 reveal">
         <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">POC 3K€ · Evidence Playback</p>
         <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-2">2 semaines, 3 sources, 1 écran.</h2>
-        <p class="text-sm text-text-secondary">URL démo, code complet, dataset calibré. Livrable autonome que tu utilises sans dépendance à mon support.</p>
+        <p class="text-sm text-text-secondary">URL démo, code complet, dataset calibré. Livrable autonome.</p>
       </div>
-      <div class="grid md:grid-cols-2 gap-6 reveal avoid-break">
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Périmètre</p>
-          <p class="text-sm text-text-secondary leading-relaxed mb-3">Trois sources cohérentes avec ta vision d'unification :</p>
-          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4 mb-3">
-            <li><span class="text-text font-medium">HubSpot</span> : CRM, contrats, contacts, dates clés.</li>
-            <li><span class="text-text font-medium">Intercom</span> : support, tickets, conversations.</li>
-            <li><span class="text-text font-medium">Product usage</span> : connexions, features clés utilisées.</li>
-          </ul>
-          <p class="text-sm text-text-secondary leading-relaxed">Un agent unique croise les 3, identifie les comptes à risque, et remonte les citations Intercom qui justifient l'alerte.</p>
-        </div>
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Livrable</p>
+
+      <div class="grid md:grid-cols-3 gap-3 md:gap-4 mb-5 reveal avoid-break">
+        <div class="bg-surface border border-border p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Inclus</p>
           <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
-            <li>URL démo en ligne (auth simple).</li>
-            <li>Code complet, repo Github privé, propriété pleine.</li>
-            <li>Dataset calibré sur un B2B SaaS type. Données réelles si accès dispo à J+0, sinon mockées sur les schémas API officiels.</li>
-            <li>Notice technique, runbook, variables à ajuster.</li>
+            <li><span class="text-text font-medium">3 sources</span> : HubSpot, Intercom, product usage.</li>
+            <li><span class="text-text font-medium">Agent unique</span> tool-calling sur les 3 sources.</li>
+            <li><span class="text-text font-medium">Dashboard 1-écran</span> · top 10 comptes à risque.</li>
+            <li>Code repo, runbook, dataset calibré sur B2B SaaS type.</li>
           </ul>
         </div>
+        <div class="bg-surface border border-border p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-3">Pas inclus → Phase 2</p>
+          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>Multi-agent, orchestrateur, spécialistes.</li>
+            <li>Calibration sur tes vrais clients (mock par défaut).</li>
+            <li>Production-grade : intégration prod, SSO/SOC2, observabilité, evals.</li>
+            <li>Sources additionnelles (Slack, AirCall, Pennylane…).</li>
+          </ul>
+        </div>
+        <div class="bg-surface border border-border p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Livré quand</p>
+          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>URL démo accessible (auth simple).</li>
+            <li>10 comptes scorés visibles + triables.</li>
+            <li>Citations Intercom sourcées sur 100% des alertes.</li>
+            <li>Repo Github privé + runbook 5p remis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal text-sm text-text-secondary leading-relaxed mb-3 avoid-break">
+        <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mr-2">Tu fournis à J+0</span>
+        Sample data anonymisé (50-100 clients) · Accès sandbox API HubSpot + Intercom · 1 sync feedback à J+7.
+      </div>
+
+      <div class="reveal text-xs text-text-muted">
+        <span class="font-mono text-accent">Kickoff J+0</span> · <span class="font-mono text-accent">Mid-check J+7</span> · <span class="font-mono text-accent">Livraison J+14</span> &nbsp;·&nbsp; toute extension du périmètre push en Phase 2 (cf. roadmap).
       </div>
     </div>
   </section>
