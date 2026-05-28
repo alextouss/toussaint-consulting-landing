@@ -203,6 +203,11 @@
       .roadmap-grid { gap: 2mm !important; }
       .roadmap-card .text-sm { line-height: 1.4 !important; }
       .roadmap-card .text-xs { line-height: 1.35 !important; font-size: 11pt !important; }
+
+      /* Slide 5 (POC scope) — compress to fit one page with avoid-break */
+      .poc-compact .p-5 { padding: 5mm !important; }
+      .poc-compact .space-y-3 > * + * { margin-top: 2.5mm !important; }
+      .poc-compact .mb-4 { margin-bottom: 3mm !important; }
     }
 
     .grid-bg {
@@ -347,10 +352,11 @@
   </section>
 
   <!-- ========== SLIDE 5 · CE QUE VALIDE CE POC ========== -->
-  <section class="relative page-break">
+  <section class="relative page-break poc-compact">
     <span class="uc-running-title">Ce que valide ce POC</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-4 reveal">
+     <div class="reveal avoid-break">
+      <div class="mb-4">
         <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">POC scope</p>
         <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-4">Ce que ce POC valide. Ce qu'il ne valide pas.</h2>
         <div class="inline-flex items-baseline gap-3 bg-accent/5 border-l-2 border-accent pl-4 pr-5 py-2">
@@ -359,7 +365,7 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-4 reveal avoid-break">
+      <div class="grid md:grid-cols-2 gap-4">
         <div class="bg-surface border border-border p-5">
           <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-4">Les 3 questions auxquelles on répond</p>
           <div class="space-y-3">
@@ -396,6 +402,7 @@
           </div>
         </div>
       </div>
+     </div>
     </div>
   </section>
 
@@ -554,6 +561,11 @@
           <span class="block font-mono text-[10px] font-bold text-accent mb-2">RETAIL · MODE</span>
           <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Essayage virtuel de vêtements</p>
           <p class="text-xs text-text-secondary leading-snug">Un client uploade sa photo et un vêtement, l'app génère en quelques secondes l'image photoréaliste du vêtement porté. Modèle vision spécialisé, interface web légère.</p>
+          <a href="https://lv-tryon-demo.vercel.app" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-1.5 text-accent hover:text-accent-hover transition-colors mt-4 font-mono text-[10px] uppercase tracking-[0.2em]">
+            <span>Voir le mockup</span>
+            <span>→</span>
+          </a>
         </div>
       </div>
     </div>
