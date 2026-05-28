@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jean-Philippe Kanaan · Anti-churn agent · Proposition POC | Toussaint Consulting</title>
-  <meta name="description" content="Proposition POC pour Jean-Philippe Kanaan. Preuve client : agent unique, 3 sources, dashboard 1-écran.">
+  <meta name="description" content="Proposition POC pour Jean-Philippe Kanaan. Preuve client : agent unique, 3 sources, dashboard portefeuille + détail client.">
   <meta name="robots" content="noindex, nofollow">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -199,8 +199,10 @@
 
     /* Roadmap compact cards : print (override .p-5 reset) */
     @media print {
-      .roadmap-card { padding: 4mm 6mm !important; }
-      .roadmap-grid { gap: 3mm !important; }
+      .roadmap-card { padding: 3mm 6mm !important; }
+      .roadmap-grid { gap: 2mm !important; }
+      .roadmap-card .text-sm { line-height: 1.4 !important; }
+      .roadmap-card .text-xs { line-height: 1.35 !important; font-size: 11pt !important; }
     }
 
     .grid-bg {
@@ -371,7 +373,7 @@
             </div>
             <div>
               <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-2">Q3 · Est-ce montrable ?</p>
-              <p class="text-xs text-text-secondary leading-snug">URL démo + dashboard 1-écran + citations sourcées. Un artefact ouvrable en 90 secondes devant un prospect, un futur CTO, un board.</p>
+              <p class="text-xs text-text-secondary leading-snug">URL démo cliquable, dashboard portefeuille + détail client, citations sourcées. Un asset que tu ouvres directement devant un prospect, un futur CTO, un board.</p>
             </div>
           </div>
         </div>
@@ -381,7 +383,7 @@
           <div class="space-y-3">
             <div>
               <p class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] mb-1">Livré</p>
-              <p class="text-xs text-text-secondary leading-snug">Un agent qui lit 3 sources, score 0-100, extrait les citations. Un dashboard 1-écran avec top comptes à risque. Code repo + runbook + URL démo.</p>
+              <p class="text-xs text-text-secondary leading-snug">Un agent qui lit 3 sources, score 0-100, extrait les citations. Un dashboard deux vues : portefeuille + détail client. Code repo + runbook + URL démo.</p>
             </div>
             <div>
               <p class="text-[10px] font-mono text-text-muted uppercase tracking-[0.2em] mb-1">Simulé</p>
@@ -389,7 +391,7 @@
             </div>
             <div>
               <p class="text-[10px] font-mono text-text-muted uppercase tracking-[0.2em] mb-1">Hors scope</p>
-              <p class="text-xs text-text-secondary leading-snug">Intégration prod, observabilité, multi-tenant, SSO/SOC2, multi-agent, calibrage sur tes clients spécifiques.</p>
+              <p class="text-xs text-text-secondary leading-snug">Intégration prod, monitoring prod, multi-tenant, SSO/SOC2, multi-agent, calibrage sur tes clients spécifiques.</p>
             </div>
           </div>
         </div>
@@ -419,7 +421,7 @@
         <div class="bg-surface border border-border p-5">
           <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Semaine 2 · Dashboard + livraison</p>
           <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
-            <li>Vue 1-écran top comptes à risque</li>
+            <li>Vue portefeuille + détail client</li>
             <li>Calibrage du scoring et des citations</li>
             <li>URL démo, repo Github, runbook</li>
             <li>Sync de livraison</li>
@@ -442,7 +444,7 @@
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
       <div class="mb-4 reveal">
         <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-2">Architecture POC</p>
-        <h2 class="font-subheading text-xl md:text-2xl font-semibold text-text tracking-tight">Agent unique. Trois sources. Un écran.</h2>
+        <h2 class="font-subheading text-xl md:text-2xl font-semibold text-text tracking-tight">Agent unique. Trois sources. Deux vues.</h2>
         <p class="text-xs text-text-muted mt-2">Stack : Python + FastAPI + OpenAI Responses API. Connecteurs HubSpot et Intercom via API officielle.</p>
       </div>
       <div class="bg-surface-raised border border-border p-4 md:p-6 reveal avoid-break">
@@ -465,17 +467,26 @@
       <div class="space-y-2 roadmap-grid">
         <div class="bg-surface border border-border roadmap-card grid md:grid-cols-[180px_1fr_auto] gap-4 items-baseline">
           <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent whitespace-nowrap">Phase 1 · POC</p>
-          <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">Preuve client v1.</span> 3 sources, agent unique, dashboard 1-écran. Source des données cadrée au kickoff.</p>
+          <div>
+            <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">Preuve client v1.</span> 3 sources, agent unique, dashboard.</p>
+            <p class="text-xs text-text-muted leading-snug mt-0.5"><span class="text-accent/80 font-medium">Décision :</span> le signal est là, ou pas.</p>
+          </div>
           <p class="text-sm text-accent font-mono whitespace-nowrap">3K€ · 2 sem</p>
         </div>
         <div class="bg-surface border border-border roadmap-card grid md:grid-cols-[180px_1fr_auto] gap-4 items-baseline">
           <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent whitespace-nowrap">Phase 2 · Pilote</p>
-          <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">1 client en production.</span> 3 intégrations réelles, HITL workflow, observabilité, evals.</p>
-          <p class="text-sm text-accent font-mono whitespace-nowrap">10-15K€ · 2 mois</p>
+          <div>
+            <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">1 client en production.</span> 3 intégrations réelles, HITL workflow, monitoring, evals.</p>
+            <p class="text-xs text-text-muted leading-snug mt-0.5"><span class="text-accent/80 font-medium">Décision :</span> le CSM lui fait confiance sans reprendre la main.</p>
+          </div>
+          <p class="text-sm text-accent font-mono whitespace-nowrap">15-20K€ · 2 mois</p>
         </div>
         <div class="bg-surface border border-border roadmap-card grid md:grid-cols-[180px_1fr_auto] gap-4 items-baseline">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent whitespace-nowrap">Phase 3 · Multi-tenant</p>
-          <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">Multi-agent si justifié.</span> Architecture spécialisée si les métriques POC le justifient. Sinon, agent unique scalé.</p>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent whitespace-nowrap">Phase 3 · Scaler</p>
+          <div>
+            <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">Architecture spécialisée si justifiée</span> par les métriques pilote. Sinon, agent unique scalé.</p>
+            <p class="text-xs text-text-muted leading-snug mt-0.5"><span class="text-accent/80 font-medium">Décision :</span> devient produit, ou reste sur-mesure.</p>
+          </div>
           <p class="text-sm text-accent font-mono whitespace-nowrap">à scoper</p>
         </div>
       </div>
@@ -502,7 +513,7 @@
           <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center shrink-0">
             <span class="font-mono text-[10px] font-bold text-accent">02</span>
           </div>
-          <p class="text-sm text-text-secondary leading-relaxed pt-1"><span class="text-text font-medium">Builder solo avec Claude Code.</span> Livraison en 2 semaines calendaires, pas en 2 semaines de roadmap. Daily check court, zéro overhead d'agence, décisions prises et défendues par celui qui livre.</p>
+          <p class="text-sm text-text-secondary leading-relaxed pt-1"><span class="text-text font-medium">AI PM, pas dev LLM.</span> Mes agents naissent avec leurs evals, leurs traces, leur scoring auditable. Je build pour qu'un audit soit possible, pas pour qu'une démo plaise. Tu repars avec un agent que ton futur CTO peut challenger ligne à ligne.</p>
         </div>
         <div class="flex gap-4 items-start">
           <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center shrink-0">
