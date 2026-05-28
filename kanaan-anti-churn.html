@@ -279,7 +279,6 @@
           </ul>
         </div>
       </div>
-      <p class="text-xs text-text-muted italic mt-6 reveal">Budget évoqué : POC quelques milliers d'euros, produit complet 10 à 20K€.</p>
     </div>
   </section>
 
@@ -311,32 +310,7 @@
     </div>
   </section>
 
-  <!-- ========== SLIDE 4 · L'ANGLE ========== -->
-  <section class="relative page-break">
-    <span class="uc-running-title">L'angle</span>
-    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-8 reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">L'angle</p>
-        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-accent leading-[1.0] tracking-tight">LA PREUVE BAT LE SCORE.</h2>
-      </div>
-      <div class="bg-accent/5 border-l-2 border-accent pl-6 pr-5 py-6 reveal space-y-5 avoid-break">
-        <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-1">L'idée</p>
-          <p class="text-base text-text leading-relaxed">L'alerte qui remonte la phrase exacte du client qui prouve qu'il décroche. Pas un score 86 sur 100. Une citation horodatée, un compte, une action recommandée.</p>
-        </div>
-        <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-1">Pourquoi maintenant</p>
-          <p class="text-sm text-text-secondary leading-relaxed">L'extraction de preuves depuis du texte non-structuré était impossible avant 2023, triviale en 2026. Les LLM lisent une conversation Intercom comme un humain et citent leurs sources.</p>
-        </div>
-        <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-1">Pourquoi ça vend</p>
-          <p class="text-sm text-text-secondary leading-relaxed">Un CSM peut transférer l'alerte à son manager avec la preuve en pièce jointe. Le score se discute, la preuve se traite. Adoption virale en interne.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SLIDE 5 · MOCK-UP ========== -->
+  <!-- ========== SLIDE 4 · MOCK-UP ========== -->
   <section class="relative page-break">
     <span class="uc-running-title">Mock-up</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
@@ -344,7 +318,7 @@
         <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Mock-up · aperçu du livrable</p>
         <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-2">À quoi ressemblera le livrable.</h2>
         <p class="text-sm text-text-secondary leading-relaxed max-w-3xl">
-          Mock-up sur données fictives, pour fixer le format visuel. Le POC connectera tes vraies sources et calibrera les signaux churn sur ton activité B2B SaaS.
+          Mock-up sur données fictives, pour fixer le format visuel. Le POC remplace ces données par un agent qui lit, score et cite réellement 3 sources. La source des données est à cadrer ensemble.
         </p>
       </div>
 
@@ -370,58 +344,96 @@
     </div>
   </section>
 
-  <!-- ========== SLIDE 6 · POC SCOPE ========== -->
+  <!-- ========== SLIDE 5 · CE QUE VALIDE CE POC ========== -->
   <section class="relative page-break">
-    <span class="uc-running-title">POC · Scope</span>
+    <span class="uc-running-title">Ce que valide ce POC</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-5 reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">POC 3K€ · Preuve client</p>
-        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-2">2 semaines, 3 sources, 1 écran.</h2>
-        <p class="text-sm text-text-secondary">URL démo, code complet, dataset calibré. Livrable autonome.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-3 md:gap-4 mb-5 reveal avoid-break">
-        <div class="bg-surface border border-border p-5">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Inclus</p>
-          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
-            <li><span class="text-text font-medium">3 sources</span> : HubSpot, Intercom, product usage.</li>
-            <li><span class="text-text font-medium">Agent unique</span> tool-calling sur les 3 sources.</li>
-            <li><span class="text-text font-medium">Dashboard 1-écran</span> · top 10 comptes à risque.</li>
-            <li>Code repo, runbook, dataset calibré sur B2B SaaS type.</li>
-          </ul>
-        </div>
-        <div class="bg-surface border border-border p-5">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-3">Pas inclus → Phase 2</p>
-          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
-            <li>Multi-agent, orchestrateur, spécialistes.</li>
-            <li>Calibration sur tes vrais clients (mock par défaut).</li>
-            <li>Production-grade : intégration prod, SSO/SOC2, observabilité, evals.</li>
-            <li>Sources additionnelles (Slack, AirCall, Pennylane…).</li>
-          </ul>
-        </div>
-        <div class="bg-surface border border-border p-5">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Livré quand</p>
-          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
-            <li>URL démo accessible (auth simple).</li>
-            <li>10 comptes scorés visibles + triables.</li>
-            <li>Citations Intercom sourcées sur 100% des alertes.</li>
-            <li>Repo Github privé + runbook 5p remis.</li>
-          </ul>
+      <div class="mb-6 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">POC scope</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-2">Ce que ce POC valide. Ce qu'il ne valide pas.</h2>
+        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl mb-4">Un POC IA n'est pas un mini-produit. C'est une réponse à deux questions concrètes.</p>
+        <div class="inline-flex items-baseline gap-3 bg-accent/5 border-l-2 border-accent pl-4 pr-5 py-2">
+          <span class="font-display text-2xl md:text-3xl font-bold text-accent leading-none">3 000 €</span>
+          <span class="text-[10px] font-semibold uppercase tracking-[0.25em] text-text-muted">HT · 2 semaines · livraison clé en main</span>
         </div>
       </div>
 
-      <div class="reveal text-sm text-text-secondary leading-relaxed mb-3 avoid-break">
-        <span class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mr-2">Tu fournis à J+0</span>
-        Sample data anonymisé (50-100 clients) · Accès sandbox API HubSpot + Intercom · 1 sync feedback à J+7.
-      </div>
+      <div class="grid md:grid-cols-2 gap-4 reveal avoid-break">
+        <div class="bg-surface border border-border p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-4">Les 2 questions auxquelles on répond</p>
+          <div class="space-y-4">
+            <div>
+              <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-2">Q1 · Le signal est-il là ?</p>
+              <p class="text-xs text-text-secondary leading-snug">Peut-on détecter des signaux churn utiles dans les conversations support ? On regarde ensemble si les comptes flaggés par l'agent sont effectivement à risque selon ton jugement métier.</p>
+            </div>
+            <div>
+              <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-2">Q2 · Les citations sont-elles crédibles ?</p>
+              <p class="text-xs text-text-secondary leading-snug">Pour chaque alerte, l'agent doit sourcer la phrase exacte qui la justifie. Tu juges si c'est convaincant pour un CSM.</p>
+            </div>
+          </div>
+        </div>
 
-      <div class="reveal text-xs text-text-muted">
-        <span class="font-mono text-accent">Kickoff J+0</span> · <span class="font-mono text-accent">Mid-check J+7</span> · <span class="font-mono text-accent">Livraison J+14</span> &nbsp;·&nbsp; toute extension du périmètre push en Phase 2 (cf. roadmap).
+        <div class="bg-surface border border-border p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-4">Ce qui sort du POC</p>
+          <div class="space-y-3">
+            <div>
+              <p class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] mb-1">Livré</p>
+              <p class="text-xs text-text-secondary leading-snug">Un agent qui lit 3 sources, score 0-100, extrait les citations. Un dashboard 1-écran avec top comptes à risque. Code repo + runbook + URL démo.</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono text-text-muted uppercase tracking-[0.2em] mb-1">Simulé</p>
+              <p class="text-xs text-text-secondary leading-snug">Volumes et contexte client. La source des données du POC est cadrée ensemble (cf. slide suivante).</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono text-text-muted uppercase tracking-[0.2em] mb-1">Hors scope</p>
+              <p class="text-xs text-text-secondary leading-snug">Intégration prod, observabilité, multi-tenant, SSO/SOC2, multi-agent, calibrage sur tes clients spécifiques.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== SLIDE 6 · POC ARCHITECTURE ========== -->
+  <!-- ========== SLIDE 6 · MÉTHODE + DATA ========== -->
+  <section class="relative page-break">
+    <span class="uc-running-title">Méthode + données</span>
+    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
+      <div class="mb-6 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Méthode + données</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight">Deux semaines de build. Une question ouverte.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-5 reveal avoid-break">
+        <div class="bg-surface border border-border p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Semaine 1 · Build agent</p>
+          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>Architecture data sur le périmètre cadré</li>
+            <li>Agent unique tool-calling 3 sources (HubSpot, Intercom, product usage)</li>
+            <li>Scoring + extraction citations</li>
+            <li>Première version qu'on revoit ensemble</li>
+          </ul>
+        </div>
+        <div class="bg-surface border border-border p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Semaine 2 · Dashboard + livraison</p>
+          <ul class="space-y-1.5 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>Vue 1-écran top comptes à risque</li>
+            <li>Calibrage du scoring et des citations</li>
+            <li>URL démo, repo Github, runbook</li>
+            <li>Sync de livraison</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-accent/5 border-l-2 border-accent p-5 reveal avoid-break">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-2">Data — à cadrer ensemble</p>
+        <p class="text-sm text-text-secondary leading-relaxed">
+          Tu n'as pas de SaaS B2B en propre aujourd'hui. La source des données du POC sera tranchée lors d'un cadrage rapide avant kickoff, selon ce que tu peux mobiliser. Plusieurs options possibles. On discute des trade-offs ensemble.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 7 · POC ARCHITECTURE ========== -->
   <section class="relative page-break">
     <span class="uc-running-title">POC · Architecture</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
@@ -450,7 +462,7 @@
       <div class="space-y-2 roadmap-grid">
         <div class="bg-surface border border-border roadmap-card grid md:grid-cols-[180px_1fr_auto] gap-4 items-baseline">
           <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent whitespace-nowrap">Phase 1 · POC</p>
-          <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">Preuve client v1.</span> 3 sources, agent unique, dashboard 1-écran. Mock calibré ou data réelle.</p>
+          <p class="text-sm text-text-secondary leading-snug"><span class="text-text font-medium">Preuve client v1.</span> 3 sources, agent unique, dashboard 1-écran. Source des données cadrée au kickoff.</p>
           <p class="text-sm text-accent font-mono whitespace-nowrap">3K€ · 2 sem</p>
         </div>
         <div class="bg-surface border border-border roadmap-card grid md:grid-cols-[180px_1fr_auto] gap-4 items-baseline">
@@ -525,9 +537,9 @@
           <p class="text-xs text-text-secondary leading-snug">Un agent qui retrieve les memos historiques pertinents, génère les comparable companies et propose les questions de due diligence. Cible : ~2 jours gagnés par deal. Agent multi-modèles + RAG sur archive interne.</p>
         </div>
         <div class="bg-surface border border-border p-5 flex flex-col">
-          <span class="block font-mono text-[10px] font-bold text-accent mb-2">RETAIL · LUXE</span>
-          <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Virtual try-on garment</p>
-          <p class="text-xs text-text-secondary leading-snug">Un client uploade sa photo et un vêtement, l'app génère le composite réaliste en quelques secondes. Vision model spécialisé hors-contexte LLM, interface web légère.</p>
+          <span class="block font-mono text-[10px] font-bold text-accent mb-2">RETAIL · MODE</span>
+          <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Essayage virtuel de vêtements</p>
+          <p class="text-xs text-text-secondary leading-snug">Un client uploade sa photo et un vêtement, l'app génère en quelques secondes l'image photoréaliste du vêtement porté. Modèle vision spécialisé, interface web légère.</p>
         </div>
       </div>
     </div>
@@ -539,8 +551,8 @@
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
       <div class="mb-8 reveal">
         <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Pour creuser</p>
-        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">30 minutes pour cadrer le scope final.</h2>
-        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl">Si l'angle te parle, on cale un échange pour cadrer le scope final, choisir les sources prioritaires et lancer le POC.</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">30 minutes pour cadrer la donnée du POC et le scope final.</h2>
+        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl">Si l'approche te parle, on cale un échange pour trancher la source des données, cadrer le scope final et lancer le POC.</p>
       </div>
       <div class="grid md:grid-cols-2 gap-4 mb-12 reveal max-w-3xl avoid-break">
         <a href="https://calendar.app.google/w35WNGT9Lsk65n5x8" target="_blank" rel="noopener noreferrer" class="bg-surface-raised border border-border p-5 hover:border-accent/50 transition-colors block">
