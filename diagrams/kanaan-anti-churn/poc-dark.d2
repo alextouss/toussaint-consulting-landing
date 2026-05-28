@@ -1,4 +1,4 @@
-# POC Architecture — Evidence Playback (Kanaan anti-churn)
+# POC Architecture — Preuve client (Kanaan anti-churn)
 # Agent unique, 3 sources, dashboard 1-écran
 #
 # Compile (run from repo root):
@@ -27,7 +27,7 @@ classes: {
       border-radius: 4
     }
   }
-  source-evidence: {
+  source-preuve: {
     shape: rectangle
     style: {
       fill: "#1A1410"
@@ -73,12 +73,12 @@ sources: "Trois sources" {
   }
 
   hubspot: "HubSpot\nCRM, contrats, dates" { class: source }
-  intercom: "Intercom\nSupport, conversations\n(source d'evidence)" { class: source-evidence }
+  intercom: "Intercom\nSupport, conversations\n(source de preuve)" { class: source-preuve }
   usage: "Product usage\nConnexions, features clés" { class: source }
 }
 
 agent: "Agent LLM\nCroise les 3 signaux\nExtrait les citations Intercom" { class: step }
-ranker: "Ranker\nTop 10 comptes à risque\n+ evidence quotes + action" { class: step }
+ranker: "Ranker\nTop 10 comptes à risque\n+ citations + action" { class: step }
 dashboard: "Dashboard\n1 écran · 1 ligne = 1 compte" { class: output }
 
 sources.hubspot -> agent: { style: { stroke: "#8A837A"; stroke-width: 8 } }
