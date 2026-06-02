@@ -4,7 +4,7 @@
 
 Ce projet sert **deux usages** :
 
-1. **Landing page** (`index.html`) — Toussaint Consulting, freelance product leader & builder. Positionnement 50/50 : "PRODUCT LEADERSHIP MEETS EXECUTION." — product leadership pour entreprises (freelance PM, fractional CPO) + product building pour fondateurs (MVP en 4-6 semaines).
+1. **Landing page** (`index.html`) — Toussaint Consulting, freelance product leader & builder. Positionnement 50/50 : "PRODUCT LEADERSHIP MEETS EXECUTION." — product leadership pour les équipes (freelance PM, fractional CPO) + product building = construire et fiabiliser des logiciels et systèmes IA production-grade. **Le framing "MVP en 4-6 semaines" a été retiré (juin 2026)** car commoditisé par l'IA-native ; carte 02 reformulée autour de la robustesse prouvée (tests + evals + mesure sur de vraies données, force data PM), wording audience-agnostique. Cf. `market-analysis-ai-transformation-2026.md`.
 
 2. **Slide-deck PDF sur mesure par prospect** — pour chaque prospect, produire un **PDF format slide-deck** (A4 landscape, dark brandé edge-to-edge) à envoyer après un call de découverte. Deux formats existent (voir "Structure d'un follow-up prospect" plus bas) :
    - **Discovery 3-UCs** (~16 slides) : prospect avec 3 douleurs distinctes au call → framework Cat 1/2/3 + 3 use cases. Exemple : `capgemini-openinnov.html`.
@@ -214,10 +214,10 @@ Structure (restructure lourde du template, garder shell head/header/footer/CSS p
 - **Marque commerciale** : Toussaint Consulting
 - **Positionnement** : Product Leader & Builder (50/50)
 - **Offre 1** : Product Leadership — embedded PM (3-6 mois), fractional CPO, product audits, roadmap
-- **Offre 2** : Product Building — MVP/produits digitaux de concept a launch en 4-6 semaines
+- **Offre 2** : Product Building — construire et fiabiliser des logiciels et systèmes IA production-grade, de bout en bout. Différenciateur = robustesse prouvée (tests + evals + mesure sur de vraies données), ancrée sur la force data PM. "Run" (opérer dans la durée) proposé en option. Wording audience-agnostique (PME, fondateurs, scale-ups, enterprise). Ancien framing "MVP en 4-6 semaines" retiré (juin 2026, commoditisé).
 - **Side projects** : Closter (AI lead gen B2B), Seya (SaaS data intelligence — ne pas citer comme Chrome extension en public)
 - **Langues** : Francais, Anglais
-- **Email** : contact@toussaint-consulting.com
+- **Email** : alexandrea.toussaint@toussaint-consulting.com
 - **Booking** : Google Calendar (`calendar.app.google/w35WNGT9Lsk65n5x8`)
 
 ### Mots-cles du messaging

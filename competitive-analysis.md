@@ -290,3 +290,29 @@ Liste des entreprises et freelancers positionnés sur le même marché (Data/AI 
 | **Trust signals** | 20+ logos clients en marquee, 8 témoignages nommés avec photos + 5 étoiles, diplômes prestigieux (Polytechnique, HEC), badge N8N Ambassador |
 | **Ton** | Professionnel mais accessible, vouvoiement, copywriting malin ("En 2026, les voitures se conduisent toutes seules. Les entreprises sont encore sur Excel.") |
 | **Diff. vs TC** | Flowlab = agence ops complète avec équipe, orientée PME/ETI, build de solutions custom (interfaces + automatisation). TC = freelance solo, plus orienté data/AI strategy + PM. Overlap sur l'automatisation et l'IA, mais Flowlab cible les ops globales tandis que TC est plus spécialisé data/AI |
+
+### 4. Blackfig
+
+| | |
+|---|---|
+| **URL** | [blackfig.tech](https://blackfig.tech/) |
+| **Type** | Studio AI transformation (France) — petite équipe |
+| **Fondateurs** | Erwan Navellou (stratégie, AI, ops — ex-Kearney) · Chloé Roumengas (produit, adoption, brand — ex-Theodo) |
+| **Services** | 4 phases : stratégie & identification des use-cases (3-4 sem.) → déploiement d'agents IA custom (2-3 mois) → intégration aux outils existants (CRM/ERP/email) → pilotage ROI continu + dashboards + change management / upskilling |
+| **Cible** | PME & mid-market / ETI — BTP, VC, conseil, agences, legal, immobilier, industrie |
+| **Modèle** | Projet (stratégie puis déploiement) + pilotage récurrent, ROI-focused, KPIs visibles |
+| **Ton** | FR/EN, "Your AI transformation partner" · "Identifier les usages, concevoir des systèmes adaptés, mesurer l'impact" |
+| **Diff. vs TC** | **Le concurrent le plus aligné sur le pivot TC (juin 2026).** Combine pedigree stratégie (Kearney) + produit/dev (Theodo) + le "run" (pilotage ROI) → occupe partiellement l'angle "Product Leadership + build + run" qu'on croyait vierge. Edge TC : **solo senior qui build ET opère lui-même** (pas de handoff à des juniors, pas de cabinet 2 têtes + équipe), plus lean/rapide, et différenciation sur la **robustesse prouvée (tests + evals + mesure sur de vraies données)** ancrée sur la force data PM. À surveiller de près. |
+
+### 5. Autres acteurs FR (compact)
+
+| Acteur | Cible | Pricing | Angle |
+|---|---|---|---|
+| **Stema Partners** | PME/ETI B2B | Diag dès 5K€ · PoC 10-50K€ | Funding-first, **accrédité BPIfrance** |
+| **Koino** | Mid-market → grandes entreprises | Diag dès 2K€ · dev 15-50K€+ | Conseil IA stratégique, ROI-focused, skew enterprise |
+| **Nocode Factory** | Startups, PME, entreprises | "Quelques milliers d'€" → infra agentique | Tool-first (Make + n8n + OpenAI), "10x plus vite, 2x moins cher" |
+| **Oakflow AI** | PME/TPE (40+ clients) | ~600-900€/jour implicite | **Solo**, n8n + LLM, content-driven |
+| **Agences "AI automation" génériques** | Toute PME | 500-5K$/mois ou 5-15K$/projet | Tool-first (n8n/Make/Zapier), saturé, prix sous pression |
+| **Big 4** (Capgemini, Deloitte, Accenture) | Grandes entreprises / ETI 250+ | 150-500K€ minimum | Transformation IA à l'échelle, inaccessible PME |
+
+**Implication positionnement (juin 2026)** : l'angle "AI transformation pour mid-market" n'est plus vierge (Blackfig l'occupe). L'espace blanc de TC n'est PAS "je fais de la transfo IA" (eux aussi) mais : **(1) solo senior qui build ET opère lui-même, (2) robustesse prouvée par tests / evals / mesure sur de vraies données — force data PM, (3) profondeur verticale.** Analyse complète : `market-analysis-ai-transformation-2026.md`.
