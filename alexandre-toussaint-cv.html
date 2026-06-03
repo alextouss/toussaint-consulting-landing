@@ -66,6 +66,8 @@
 
     /* ============ Base / WYSIWYG (sizes in pt so screen ≈ print) ============ */
     body { background: #2A251E; margin: 0; }
+    /* Links stay visually identical to the design (clickable, no blue/underline) — see @media print for the same. */
+    a { color: inherit; text-decoration: none; }
     @media screen { body { padding: 26px 0; } }
 
     .cv-page {
@@ -187,8 +189,8 @@
       <p class="cv-role" style="margin-top: 3.5mm;">AI &amp; Data Product Leader</p>
       <p class="cv-sub" style="margin-top: 1.5mm;">AI and data transformation for regulated, data-intensive businesses.</p>
       <div class="contact-row" style="margin-top: 3mm; padding-top: 3mm; border-top: 1px solid var(--color-rule); line-height: 1.65;">
-        Paris, France<span class="sep">·</span>+33 6 80 94 58 46<br>
-        alexandrea.toussaint@toussaint-consulting.com<span class="sep">·</span>linkedin.com/in/alexandre-toussaint
+        Paris, France<span class="sep">·</span><a href="tel:+33680945846">+33 6 80 94 58 46</a><br>
+        <a href="mailto:alexandrea.toussaint@toussaint-consulting.com">alexandrea.toussaint@toussaint-consulting.com</a><span class="sep">·</span><a href="https://www.linkedin.com/in/alexandre-toussaint">linkedin.com/in/alexandre-toussaint</a>
       </div>
     </header>
 
@@ -291,12 +293,12 @@
             <div class="role-title">AI and Data Product Lead</div>
             <div class="role-meta">2025–Present</div>
           </div>
-          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Toussaint Consulting · Freelance</div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);"><a href="https://toussaint-consulting.com">Toussaint Consulting</a> · Freelance</div>
           <p class="lede" style="margin-top: 2mm; margin-bottom: 2.5mm;">
             I build and ship AI agents and data products that scale operations, raise data reliability and open new revenue.
           </p>
 
-          <div class="eng-label" style="margin-bottom: 1mm;">Europ Assistance <span class="place">· Insurance</span></div>
+          <div class="eng-label" style="margin-bottom: 1mm;"><a href="https://www.europ-assistance.com">Europ Assistance</a> <span class="place">· Insurance</span></div>
           <ul class="b-list" style="margin-bottom: 3mm;">
             <li>Led the digital launch and commercialization of new insurance products across e-commerce and partner platforms.</li>
             <li>Designed and delivered an AI product turning unstructured documents into reliable insurance-guarantee data, combining LLMs, rule-based logic and RPA for a critical-data environment.</li>
@@ -315,7 +317,7 @@
             <div class="role-title">Lead Product Manager</div>
             <div class="role-meta">2020–2025</div>
           </div>
-          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">SESAMm · Paris</div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);"><a href="https://www.sesamm.com">SESAMm</a> · Paris</div>
           <p class="lede" style="margin-top: 2mm; margin-bottom: 2.5mm;">
             Owned product strategy for TextReveal, an AI and data platform used by asset managers to detect
             ESG controversies and monitor reputational risk.
@@ -355,11 +357,11 @@
         </div>
         <div class="stat">
           <div class="stat-num">70<span class="u">%</span></div>
-          <div class="stat-cap">less manual processing time, Europ Assistance</div>
+          <div class="stat-cap">less manual processing time, <a href="https://www.europ-assistance.com">Europ Assistance</a></div>
         </div>
         <div class="stat">
           <div class="stat-num">30<span class="u">M</span></div>
-          <div class="stat-cap">unstructured documents processed daily with NLP and LLMs, SESAMm</div>
+          <div class="stat-cap">unstructured documents processed daily with NLP and LLMs, <a href="https://www.sesamm.com">SESAMm</a></div>
         </div>
         <div class="stat" style="border-bottom: none;">
           <div class="stat-num">95<span class="u">%</span></div>
@@ -385,7 +387,7 @@
             <div class="role-title">Product Manager</div>
             <div class="role-meta">2019–2020</div>
           </div>
-          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Finance Active · Paris</div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);"><a href="https://www.financeactive.com">Finance Active</a> · Paris</div>
           <ul class="b-list" style="margin-top: 2mm;">
             <li>Delivered features for a SaaS managing corporate financial guarantees: workflows, access control, reporting.</li>
             <li>Led a Scrum team of six engineers with a data-driven product approach.</li>
@@ -399,7 +401,7 @@
             <div class="role-title">Key Account Manager</div>
             <div class="role-meta">2018–2019</div>
           </div>
-          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Finance Active · Paris</div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);"><a href="https://www.financeactive.com">Finance Active</a> · Paris</div>
           <ul class="b-list" style="margin-top: 2mm;">
             <li>Managed a portfolio of 60+ international clients across Debt, FX and Guarantees platforms.</li>
             <li>Generated <b>€187k</b> of additional revenue through upsell and cross-sell.</li>
@@ -412,7 +414,7 @@
             <div class="role-title">Professional Services</div>
             <div class="role-meta">2017–2018</div>
           </div>
-          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Finance Active · Paris</div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);"><a href="https://www.financeactive.com">Finance Active</a> · Paris</div>
           <ul class="b-list" style="margin-top: 2mm;">
             <li>Led deployment of SaaS solutions for international clients including EDF Energy, Solvay, SPIE and Ahold Delhaize.</li>
           </ul>
@@ -421,9 +423,9 @@
         <!-- Earlier -->
         <div class="exp-entry">
           <div class="sec-label" style="margin-bottom: 3.5mm;">Earlier</div>
-          <div class="earlier-item"><b>Natixis</b> · Debt Capital Markets, High Yield · Paris · 2016. Supported origination and executed high-yield bond transactions (Nexans €250m, Tereos €400m).</div>
-          <div class="earlier-item"><b>Allianz Global Investors</b> · Portfolio Management · Frankfurt · 2015. Analyzed and simulated investment strategies across asset classes.</div>
-          <div class="earlier-item"><b>CACIB</b> · Interest Rate Derivatives Sales · France · 2014–2015. Sold swaps and options to corporates and public institutions.</div>
+          <div class="earlier-item"><a href="https://www.natixis.com"><b>Natixis</b></a> · Debt Capital Markets, High Yield · Paris · 2016. Supported origination and executed high-yield bond transactions (Nexans €250m, Tereos €400m).</div>
+          <div class="earlier-item"><a href="https://www.allianzgi.com"><b>Allianz Global Investors</b></a> · Portfolio Management · Frankfurt · 2015. Analyzed and simulated investment strategies across asset classes.</div>
+          <div class="earlier-item"><a href="https://www.ca-cib.com"><b>CACIB</b></a> · Interest Rate Derivatives Sales · France · 2014–2015. Sold swaps and options to corporates and public institutions.</div>
         </div>
 
       </main>
@@ -443,11 +445,11 @@
 
     <!-- Footer -->
     <div class="flex items-center justify-between" style="position: absolute; left: 15mm; right: 15mm; bottom: 11mm; padding-top: 3mm; border-top: 1px solid var(--color-rule-strong);">
-      <div class="flex items-center" style="gap: 7px;">
+      <a href="https://toussaint-consulting.com" class="flex items-center" style="gap: 7px;">
         <span class="logo-mark"><span>T</span></span>
         <span style="font-family: var(--font-display); font-weight: 600; color: var(--color-ink); font-size: 9pt; letter-spacing: 0.02em;">Toussaint Consulting</span>
-      </div>
-      <div class="foot">toussaint-consulting.com</div>
+      </a>
+      <div class="foot"><a href="https://toussaint-consulting.com">toussaint-consulting.com</a></div>
     </div>
 
   </section>
