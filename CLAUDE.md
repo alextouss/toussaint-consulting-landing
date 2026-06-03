@@ -219,7 +219,7 @@ Structure (restructure lourde du template, garder shell head/header/footer/CSS p
 - **Offre 2** : Product Building — construire et fiabiliser des logiciels et systèmes IA production-grade, de bout en bout. Différenciateur = robustesse prouvée (tests + evals + mesure sur de vraies données), ancrée sur la force data PM. "Run" (opérer dans la durée) proposé en option. Wording audience-agnostique (PME, fondateurs, scale-ups, enterprise). Ancien framing "MVP en 4-6 semaines" retiré (juin 2026, commoditisé).
 - **Side projects** : Closter (AI lead gen B2B), Seya (SaaS data intelligence — ne pas citer comme Chrome extension en public)
 - **Langues** : Francais, Anglais
-- **Email** : alexandrea.toussaint@toussaint-consulting.com
+- **Email** : a.toussaint@toussaint-consulting.com
 - **LinkedIn** : `linkedin.com/in/alexandre-toussaint` (vérifié, URL correcte)
 - **Booking** : Google Calendar (`calendar.app.google/w35WNGT9Lsk65n5x8`)
 
