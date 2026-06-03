@@ -53,6 +53,8 @@ Ce projet sert **deux usages** :
 ```
 tc_website/
   index.html                       <- Landing page (publique, indexée)
+  alexandre-toussaint-cv.html      <- CV perso d'Alex (light editorial cream, A4 portrait 2 pages, noindex, non lié)
+  Alexandre_Toussaint_CV.pdf       <- PDF exporté du CV
   capgemini-openinnov.html         <- Deck prospect Capgemini (format 3-UCs, livré)
   capgemini-openinnov_Brief.pdf    <- PDF exporté correspondant
   kanaan-anti-churn.html           <- Deck prospect Kanaan (format lean proposition, livré)
@@ -218,6 +220,7 @@ Structure (restructure lourde du template, garder shell head/header/footer/CSS p
 - **Side projects** : Closter (AI lead gen B2B), Seya (SaaS data intelligence — ne pas citer comme Chrome extension en public)
 - **Langues** : Francais, Anglais
 - **Email** : alexandrea.toussaint@toussaint-consulting.com
+- **LinkedIn** : `linkedin.com/in/alexandre-toussaint` (vérifié, URL correcte)
 - **Booking** : Google Calendar (`calendar.app.google/w35WNGT9Lsk65n5x8`)
 
 ### Mots-cles du messaging

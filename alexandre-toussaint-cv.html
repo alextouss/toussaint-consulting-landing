@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--
+  CV · Alexandre Toussaint · Toussaint Consulting
+  Light editorial, A4 portrait, 2 pages. Built on the Monochrome Kinetic brand.
+  Positioned for a fractional AI leadership / PE Tech-Digital-Data audience (vertical, not firm-specific).
+  noindex, not linked from index.html. Export to PDF via the pdf-export pattern (portrait).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alexandre Toussaint · AI & Data Product Leader | Toussaint Consulting</title>
+  <meta name="description" content="CV of Alexandre Toussaint. AI and data product leader, transformation in regulated industries.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Self-hosted font CSS (woff2 still load from CDN via @font-face). -->
+  <link href="assets/fonts/clash-display.css" rel="stylesheet">
+  <link href="assets/fonts/bitter.css" rel="stylesheet">
+  <link href="assets/fonts/inter-mono.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --font-display: 'Clash Display', 'Arial Black', sans-serif;
+      --font-subheading: 'Bitter', serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --color-paper:        #F4ECDB;
+      --color-paper-raised: #FBF5E9;
+      --color-rule:         #E0D4BE;
+      --color-rule-strong:  #CDBE9F;
+      --color-ink:          #20180F;
+      --color-ink-soft:     #5A4F40;
+      --color-ink-muted:    #8A7E6B;
+      --color-accent:       #C97A5F;
+      --color-accent-soft:  rgba(201, 122, 95, 0.10);
+      --color-tech:         #2E6FD6;
+    }
+  </style>
+
+  <style>
+    /* Plain :root vars so every var() resolves in headless Chrome print-to-pdf,
+       independent of whether Tailwind's @theme emits them to :root. */
+    :root {
+      --font-display: 'Clash Display', 'Arial Black', sans-serif;
+      --font-subheading: 'Bitter', serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --color-paper:        #F4ECDB;
+      --color-paper-raised: #FBF5E9;
+      --color-rule:         #E0D4BE;
+      --color-rule-strong:  #CDBE9F;
+      --color-ink:          #20180F;
+      --color-ink-soft:     #5A4F40;
+      --color-ink-muted:    #8A7E6B;
+      --color-accent:       #C97A5F;
+      --color-accent-soft:  rgba(201, 122, 95, 0.10);
+      --color-tech:         #2E6FD6;
+    }
+
+    /* ============ Base / WYSIWYG (sizes in pt so screen ≈ print) ============ */
+    body { background: #2A251E; margin: 0; }
+    @media screen { body { padding: 26px 0; } }
+
+    .cv-page {
+      width: 210mm;
+      min-height: 296mm;            /* 1mm under A4 to dodge the phantom-page bug */
+      margin: 0 auto;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      box-sizing: border-box;
+      position: relative;
+      padding: 15mm 15mm 12mm;
+      font-family: var(--font-body);
+      font-size: 9.5pt;
+      line-height: 1.45;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    @media screen { .cv-page { margin-bottom: 26px; box-shadow: 0 12px 44px rgba(0,0,0,.45); } }
+
+    .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4.5px; background: var(--color-accent); }
+
+    /* ============ Typographic roles ============ */
+    .eyebrow      { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.30em; color: var(--color-accent); font-size: 7.5pt; font-weight: 500; }
+    .cv-name      { font-family: var(--font-display); text-transform: uppercase; color: var(--color-ink); font-weight: 700; letter-spacing: -0.005em; line-height: 0.9; font-size: 28pt; margin: 0; }
+    .cv-role      { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); font-size: 13pt; letter-spacing: 0.005em; margin: 0; }
+    .cv-role .hl  { color: var(--color-accent); }
+    .cv-sub       { font-family: var(--font-subheading); color: var(--color-ink-soft); font-size: 9.5pt; font-style: italic; }
+    .contact-row  { font-family: var(--font-mono); color: var(--color-ink-muted); font-size: 8pt; letter-spacing: 0.01em; }
+    .contact-row .sep { color: var(--color-rule-strong); padding: 0 5px; }
+
+    .sec-label    { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.20em; color: var(--color-accent); font-size: 9.5pt; font-weight: 600; padding-bottom: 3pt; border-bottom: 1px solid var(--color-rule-strong); }
+    .rail-label   { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-accent); font-size: 8pt; font-weight: 600; padding-bottom: 2.5pt; border-bottom: 1px solid var(--color-rule); }
+
+    /* ============ Experience ============ */
+    .role-title   { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); font-size: 11pt; line-height: 1.1; }
+    .role-meta    { font-family: var(--font-mono); color: var(--color-ink-muted); font-size: 7.5pt; letter-spacing: 0.02em; white-space: nowrap; }
+    .lede         { font-family: var(--font-subheading); color: var(--color-ink-soft); font-size: 9pt; line-height: 1.4; }
+    .eng-label    { font-family: var(--font-body); font-weight: 600; color: var(--color-ink); font-size: 8.5pt; }
+    .eng-label .place { color: var(--color-ink-muted); font-weight: 400; }
+
+    .b-list { list-style: none; padding: 0; margin: 0; }
+    .b-list li { position: relative; padding-left: 11px; margin-bottom: 2pt; color: var(--color-ink); font-size: 9pt; line-height: 1.38; }
+    .b-list li::before { content: ""; position: absolute; left: 0; top: 4.3pt; width: 3px; height: 3px; background: var(--color-accent); border-radius: 50%; }
+    .b-list li b { font-weight: 600; }
+
+    /* ============ Rail blocks ============ */
+    .focus-list { list-style: none; padding: 0; margin: 0; }
+    .focus-list li { position: relative; padding-left: 10px; margin-bottom: 2.5pt; color: var(--color-ink-soft); font-size: 8.5pt; line-height: 1.32; }
+    .focus-list li::before { content: ""; position: absolute; left: 0; top: 3.6pt; width: 4px; height: 1.5px; background: var(--color-accent); }
+
+    .skill-cat   { font-weight: 600; color: var(--color-ink); font-size: 8.5pt; }
+    .skill-items { color: var(--color-ink-soft); font-size: 8.5pt; line-height: 1.5; }
+
+    .edu-school  { font-weight: 600; color: var(--color-ink); font-size: 9pt; line-height: 1.2; }
+    .edu-deg     { color: var(--color-ink-soft); font-size: 8.5pt; }
+    .cert-name   { font-weight: 600; color: var(--color-ink); font-size: 9pt; }
+
+    .lang-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3pt; }
+    .lang-name { font-size: 8.5pt; color: var(--color-ink); }
+    .lang-cap  { font-size: 7.5pt; color: var(--color-ink-muted); margin-left: auto; margin-right: 8px; }
+    .dots { display: inline-flex; gap: 3px; }
+    .dot  { width: 5px; height: 5px; border-radius: 50%; background: var(--color-rule-strong); }
+    .dot.on { background: var(--color-accent); }
+
+    /* ============ Page-2 stats ============ */
+    .stat { padding: 4mm 0; border-bottom: 1px solid var(--color-rule); }
+    .stat:first-of-type { padding-top: 3mm; }
+    .stat-num { font-family: var(--font-display); font-weight: 700; color: var(--color-ink); font-size: 23pt; line-height: 1; }
+    .stat-num .u { color: var(--color-accent); }
+    .stat-cap { font-size: 7.5pt; color: var(--color-ink-soft); line-height: 1.3; margin-top: 1.5mm; }
+
+    /* ============ Earlier + footer ============ */
+    .earlier-item { font-size: 8.5pt; line-height: 1.4; margin-bottom: 2.5pt; color: var(--color-ink-soft); }
+    .earlier-item b { color: var(--color-ink); font-weight: 600; }
+
+    .logo-mark { width: 18px; height: 18px; border-radius: 4px; background: var(--color-accent); display: inline-flex; align-items: center; justify-content: center; }
+    .logo-mark span { font-family: var(--font-display); font-weight: 700; color: var(--color-paper); font-size: 10pt; line-height: 1; }
+    .foot { font-family: var(--font-mono); color: var(--color-ink-muted); font-size: 7.5pt; letter-spacing: 0.02em; }
+
+    /* ============ Page-2 engagement band + chips + contact ============ */
+    .eng-card { flex: 1; background: var(--color-paper-raised); border: 1px solid var(--color-rule); border-radius: 6px; padding: 3.5mm 4mm; }
+    .ec-t { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); font-size: 9pt; line-height: 1.1; }
+    .ec-d { color: var(--color-ink-soft); font-size: 7.8pt; line-height: 1.3; margin-top: 1.4mm; }
+    .chip { display: inline-block; border: 1px solid var(--color-rule-strong); border-radius: 999px; padding: 1mm 2.6mm; font-size: 7.8pt; color: var(--color-ink-soft); margin: 0 2mm 2mm 0; }
+    .cb-line { font-family: var(--font-mono); font-size: 7.6pt; color: var(--color-ink-soft); margin-bottom: 1.5mm; line-height: 1.3; word-break: break-word; }
+
+    /* ============ Print mechanics ============ */
+    @page { size: A4 portrait; margin: 0; }
+
+    @media print {
+      html, body { background: var(--color-paper) !important; margin: 0 !important; padding: 0 !important; }
+      .cv-page {
+        width: 210mm; height: 296mm; min-height: 296mm;
+        overflow: hidden;
+        box-shadow: none !important;
+        margin: 0 !important;
+      }
+      .cv-page + .cv-page { break-before: page; page-break-before: always; }
+      .cv-page:last-child { page-break-after: avoid; }
+      .avoid-break, .exp-entry, .rail-block { page-break-inside: avoid; break-inside: avoid; }
+      h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+      a { color: inherit !important; text-decoration: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================== PAGE 1 ============================== -->
+  <section class="cv-page">
+    <div class="top-bar"></div>
+
+    <!-- Header lockup -->
+    <header class="avoid-break" style="margin-bottom: 5mm;">
+      <div class="eyebrow" style="margin-bottom: 3mm;">Advise &nbsp;·&nbsp; Build &nbsp;·&nbsp; Ship</div>
+      <h1 class="cv-name">Alexandre Toussaint</h1>
+      <p class="cv-role" style="margin-top: 3.5mm;">AI &amp; <span class="hl">Data</span> Product Leader</p>
+      <p class="cv-sub" style="margin-top: 1.5mm;">AI and data transformation for regulated, data-intensive businesses.</p>
+      <div class="contact-row" style="margin-top: 4mm; padding-top: 3mm; border-top: 1px solid var(--color-rule); line-height: 1.8;">
+        Paris, France<span class="sep">·</span>+33 6 80 94 58 46<br>
+        alexandrea.toussaint@toussaint-consulting.com<span class="sep">·</span>linkedin.com/in/alexandre-toussaint
+      </div>
+    </header>
+
+    <!-- Two columns -->
+    <div class="flex" style="gap: 9mm;">
+
+      <!-- Left rail -->
+      <aside style="width: 33%; border-right: 1px solid var(--color-rule); padding-right: 7mm;">
+
+        <div class="rail-block" style="margin-bottom: 5mm;">
+          <div class="rail-label">Focus</div>
+          <ul class="focus-list" style="margin-top: 3mm;">
+            <li>From AI opportunity to shipped product</li>
+            <li>AI and data products in regulated, data-heavy environments</li>
+            <li>Operational efficiency, revenue, data reliability</li>
+            <li>Transformation and value creation</li>
+          </ul>
+        </div>
+
+        <div class="rail-block" style="margin-bottom: 5mm;">
+          <div class="rail-label">Core Skills</div>
+          <div style="margin-top: 3mm;">
+            <div class="skill-cat">AI and Data Products</div>
+            <div class="skill-items">AI agents and agentic systems · AI product management · Data products and quality · LLM orchestration (Claude Code) · Python</div>
+          </div>
+          <div style="margin-top: 3mm;">
+            <div class="skill-cat">Delivery and Advisory</div>
+            <div class="skill-items">Roadmapping and prioritization · JIRA, Amplitude, Aha! · Scrum and Product Ownership</div>
+          </div>
+        </div>
+
+        <div class="rail-block" style="margin-bottom: 5mm;">
+          <div class="rail-label">Certifications</div>
+          <div style="margin-top: 3mm;">
+            <div class="cert-name">Certified Scrum Product Owner</div>
+            <div class="role-meta" style="white-space: normal;">Mountain Goat Software · Mike Cohn · London</div>
+          </div>
+          <div style="margin-top: 2.5mm;">
+            <div class="cert-name">CFA · Level 1</div>
+          </div>
+        </div>
+
+        <div class="rail-block" style="margin-bottom: 5mm;">
+          <div class="rail-label">Education</div>
+          <div style="margin-top: 3mm;">
+            <div class="edu-school">Product Management for AI and Data Science</div>
+            <div class="edu-deg">Udemy <span style="color: var(--color-ink-muted);">· 2021</span></div>
+          </div>
+          <div style="margin-top: 2.5mm;">
+            <div class="edu-school">ICN Business School</div>
+            <div class="edu-deg">MSc, Finance <span style="color: var(--color-ink-muted);">· 2011–2015</span></div>
+          </div>
+          <div style="margin-top: 2.5mm;">
+            <div class="edu-school">Classe Préparatoire ECS</div>
+            <div class="edu-deg">Lycée International de Strasbourg <span style="color: var(--color-ink-muted);">· 2009–2011</span></div>
+          </div>
+        </div>
+
+        <div class="rail-block">
+          <div class="rail-label">Languages</div>
+          <div style="margin-top: 3mm;">
+            <div class="lang-row">
+              <span class="lang-name">English</span>
+              <span class="lang-cap">Bilingual</span>
+              <span class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></span>
+            </div>
+            <div class="lang-row">
+              <span class="lang-name">French</span>
+              <span class="lang-cap">Native</span>
+              <span class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></span>
+            </div>
+            <div class="lang-row">
+              <span class="lang-name">German</span>
+              <span class="lang-cap">Intermediate</span>
+              <span class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Right main -->
+      <main style="width: 67%;">
+
+        <div class="avoid-break" style="margin-bottom: 6.5mm;">
+          <div class="sec-label">Profile</div>
+          <p class="lede" style="margin-top: 3mm; font-size: 9.5pt; line-height: 1.45;">
+            Product leader with nine years in data and AI across fintech, ESG and insurance, on a
+            foundation in finance. I help companies turn AI and data into working products, not strategy
+            decks. I find the opportunity, structure the problem, define the roadmap, then build and ship
+            it end to end.
+          </p>
+        </div>
+
+        <div class="sec-label" style="margin-bottom: 4mm;">Selected Experience</div>
+
+        <!-- Entry 1 -->
+        <div class="exp-entry" style="margin-bottom: 5mm;">
+          <div class="flex items-baseline justify-between" style="gap: 8px;">
+            <div class="role-title">AI and Data Product Lead</div>
+            <div class="role-meta">2025–Present</div>
+          </div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Toussaint Consulting · Freelance</div>
+          <p class="lede" style="margin-top: 2mm; margin-bottom: 2.5mm;">
+            I build and ship AI agents and data products that scale operations, raise data reliability and open new revenue.
+          </p>
+
+          <div class="eng-label" style="margin-bottom: 1mm;">Europ Assistance <span class="place">· Insurance</span></div>
+          <ul class="b-list" style="margin-bottom: 3mm;">
+            <li>Led the digital launch and commercialization of new insurance products across e-commerce and partner platforms.</li>
+            <li>Designed and delivered an AI product turning unstructured documents into reliable insurance-guarantee data, combining LLMs, rule-based logic and RPA for a critical-data environment.</li>
+            <li>Cut manual processing time by <b>70%</b> while improving data quality and consistency.</li>
+          </ul>
+
+          <div class="eng-label" style="margin-bottom: 1mm;">Outsourced mobile app development agency</div>
+          <ul class="b-list">
+            <li>Built an end-to-end AI lead-generation and qualification system, from data sourcing to sales activation. Cut qualification time by <b>95%</b>.</li>
+          </ul>
+        </div>
+
+        <!-- Entry 2 -->
+        <div class="exp-entry">
+          <div class="flex items-baseline justify-between" style="gap: 8px;">
+            <div class="role-title">Lead Product Manager</div>
+            <div class="role-meta">2020–2025</div>
+          </div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">SESAMm · Paris</div>
+          <p class="lede" style="margin-top: 2mm; margin-bottom: 2.5mm;">
+            Owned product strategy for TextReveal, an AI and data platform used by asset managers to detect
+            ESG controversies and monitor reputational risk.
+          </p>
+          <ul class="b-list">
+            <li>Owned the roadmap for a data platform processing millions of documents with NLP and LLMs, turning unstructured text into signals asset managers act on.</li>
+            <li>Launched AI controversy detection and semantic search, improving signal discovery and cutting analysts' manual research.</li>
+            <li>Built the data and model experimentation foundations behind continuous improvement and faster feature delivery.</li>
+            <li>Partnered with ESG analysts to turn domain expertise into product features and models, and led two product managers.</li>
+          </ul>
+        </div>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- ============================== PAGE 2 ============================== -->
+  <section class="cv-page">
+    <div class="top-bar"></div>
+
+    <!-- Continuation header -->
+    <div class="flex items-baseline justify-between avoid-break" style="border-bottom: 1px solid var(--color-rule); padding-bottom: 3mm; margin-bottom: 6mm;">
+      <span class="cv-name" style="font-size: 13pt;">Alexandre Toussaint</span>
+      <span class="role-meta">AI &amp; Data Product Leader</span>
+    </div>
+
+    <!-- Two columns -->
+    <div class="flex" style="gap: 9mm;">
+
+      <!-- Left rail: proof strip -->
+      <aside style="width: 33%; border-right: 1px solid var(--color-rule); padding-right: 7mm;">
+        <div class="rail-label">At a Glance</div>
+
+        <div class="stat">
+          <div class="stat-num">9<span class="u"> yrs</span></div>
+          <div class="stat-cap">building AI and data products in fintech, ESG and insurance</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">70<span class="u">%</span></div>
+          <div class="stat-cap">less manual processing time, Europ Assistance</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Millions</div>
+          <div class="stat-cap">of documents processed with NLP and LLMs, SESAMm</div>
+        </div>
+        <div class="stat" style="border-bottom: none;">
+          <div class="stat-num">95<span class="u">%</span></div>
+          <div class="stat-cap">faster lead qualification, AI lead-gen system</div>
+        </div>
+
+        <div class="rail-block" style="margin-top: 7mm;">
+          <div class="rail-label">Sectors</div>
+          <div style="margin-top: 3mm;">
+            <span class="chip">Fintech</span><span class="chip">ESG</span><span class="chip">Insurance</span><span class="chip">Asset Management</span><span class="chip">Capital Markets</span>
+          </div>
+        </div>
+
+        <div class="rail-block" style="margin-top: 7mm;">
+          <div class="rail-label">Contact</div>
+          <div style="margin-top: 3mm;">
+            <div class="cb-line">alexandrea.toussaint@toussaint-consulting.com</div>
+            <div class="cb-line">+33 6 80 94 58 46</div>
+            <div class="cb-line">linkedin.com/in/alexandre-toussaint</div>
+            <div class="cb-line">Paris, France</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right main: experience continued -->
+      <main style="width: 67%;">
+
+        <div class="sec-label" style="margin-bottom: 4mm;">Selected Experience <span style="color: var(--color-ink-muted); font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 8pt; font-family: var(--font-mono);">continued</span></div>
+
+        <!-- Entry 3 -->
+        <div class="exp-entry" style="margin-bottom: 4.5mm;">
+          <div class="flex items-baseline justify-between" style="gap: 8px;">
+            <div class="role-title">Product Manager</div>
+            <div class="role-meta">2019–2020</div>
+          </div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Finance Active · Paris</div>
+          <ul class="b-list" style="margin-top: 2mm;">
+            <li>Delivered features for a SaaS managing corporate financial guarantees: workflows, access control, reporting.</li>
+            <li>Led a Scrum team of six engineers with a data-driven product approach.</li>
+            <li>Ran API integrations with the IT teams of major corporates including Vinci and Engie.</li>
+          </ul>
+        </div>
+
+        <!-- Entry 4 -->
+        <div class="exp-entry" style="margin-bottom: 4.5mm;">
+          <div class="flex items-baseline justify-between" style="gap: 8px;">
+            <div class="role-title">Key Account Manager</div>
+            <div class="role-meta">2018–2019</div>
+          </div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Finance Active · Paris</div>
+          <ul class="b-list" style="margin-top: 2mm;">
+            <li>Managed a portfolio of 60+ international clients across Debt, FX and Guarantees platforms.</li>
+            <li>Generated <b>€187k</b> of additional revenue through upsell and cross-sell.</li>
+          </ul>
+        </div>
+
+        <!-- Entry 5 -->
+        <div class="exp-entry" style="margin-bottom: 5.5mm;">
+          <div class="flex items-baseline justify-between" style="gap: 8px;">
+            <div class="role-title">Professional Services</div>
+            <div class="role-meta">2017–2018</div>
+          </div>
+          <div class="role-meta" style="margin-top: 1mm; color: var(--color-accent);">Finance Active · Paris</div>
+          <ul class="b-list" style="margin-top: 2mm;">
+            <li>Led deployment of SaaS solutions for international clients including EDF Energy, Solvay, SPIE and Ahold Delhaize.</li>
+          </ul>
+        </div>
+
+        <!-- Earlier -->
+        <div class="exp-entry">
+          <div class="sec-label" style="margin-bottom: 3.5mm;">Earlier</div>
+          <div class="earlier-item"><b>Natixis</b> · Debt Capital Markets, High Yield · Paris · 2016. Supported origination and executed high-yield bond transactions (Nexans €250m, Tereos €400m).</div>
+          <div class="earlier-item"><b>Allianz Global Investors</b> · Portfolio Management · Frankfurt · 2015. Analyzed and simulated investment strategies across asset classes.</div>
+          <div class="earlier-item"><b>CACIB</b> · Interest Rate Derivatives Sales · France · 2014–2015. Sold swaps and options to corporates and public institutions.</div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Engagement models -->
+    <div class="avoid-break" style="margin-top: 9mm; padding-top: 5mm; border-top: 1px solid var(--color-rule-strong);">
+      <div class="sec-label" style="border: none; padding: 0; margin-bottom: 1.5mm;">Engagement Models</div>
+      <div style="font-family: var(--font-mono); font-size: 8pt; color: var(--color-ink-muted); margin-bottom: 4mm;">Fractional, full-time contract, or project-based</div>
+      <div class="flex" style="gap: 4mm;">
+        <div class="eng-card"><div class="ec-t">AI Leadership</div><div class="ec-d">Embedded AI strategy and delivery</div></div>
+        <div class="eng-card"><div class="ec-t">Product Leadership</div><div class="ec-d">Product strategy and delivery</div></div>
+        <div class="eng-card"><div class="ec-t">Audit and Roadmap</div><div class="ec-d">AI and data opportunity assessment</div></div>
+        <div class="eng-card"><div class="ec-t">AI Build</div><div class="ec-d">Robust agentic systems, shipped end to end</div></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between" style="position: absolute; left: 15mm; right: 15mm; bottom: 11mm; padding-top: 3mm; border-top: 1px solid var(--color-rule);">
+      <div class="flex items-center" style="gap: 7px;">
+        <span class="logo-mark"><span>T</span></span>
+        <span style="font-family: var(--font-display); font-weight: 600; color: var(--color-ink); font-size: 9pt; letter-spacing: 0.02em;">Toussaint Consulting</span>
+      </div>
+      <div class="foot">toussaint-consulting.com</div>
+    </div>
+
+  </section>
+
+</body>
+</html>
