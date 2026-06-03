@@ -96,6 +96,9 @@
     .contact-row  { font-family: var(--font-mono); color: var(--color-ink-muted); font-size: 8pt; letter-spacing: 0.01em; }
     .contact-row .sep { color: var(--color-rule-strong); padding: 0 5px; }
 
+    /* Divider rule system — two tiers, keep consistent:
+       rule-strong = structural dividers (section-label underline, engagement band top, footer top)
+       rule        = sub-level hairlines (rail labels, rail divider, stat rows, header rules) */
     .sec-label    { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.20em; color: var(--color-accent); font-size: 9.5pt; font-weight: 600; padding-bottom: 3pt; border-bottom: 1px solid var(--color-rule-strong); }
     .rail-label   { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-accent); font-size: 8pt; font-weight: 600; padding-bottom: 2.5pt; border-bottom: 1px solid var(--color-rule); }
 
@@ -146,7 +149,7 @@
     .foot { font-family: var(--font-mono); color: var(--color-ink-muted); font-size: 7.5pt; letter-spacing: 0.02em; }
 
     /* ============ Page-2 engagement band + chips + contact ============ */
-    .eng-card { flex: 1; background: var(--color-paper-raised); border: 1px solid var(--color-rule); border-radius: 6px; padding: 3.5mm 4mm; }
+    .eng-card { flex: 1; background: var(--color-paper-raised); border: 1px solid var(--color-rule); border-radius: 6px; padding: 3mm 3.5mm; }
     .ec-t { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); font-size: 9pt; line-height: 1.1; }
     .ec-d { color: var(--color-ink-soft); font-size: 7.8pt; line-height: 1.3; margin-top: 1.4mm; }
     .chip { display: inline-block; border: 1px solid var(--color-rule-strong); border-radius: 999px; padding: 1mm 2.6mm; font-size: 7.8pt; color: var(--color-ink-soft); margin: 0 2mm 2mm 0; }
@@ -388,7 +391,7 @@
         <div class="sec-label" style="margin-bottom: 4mm;">Selected Experience <span style="color: var(--color-ink-muted); font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 8pt; font-family: var(--font-mono);">continued</span></div>
 
         <!-- Entry 3 -->
-        <div class="exp-entry" style="margin-bottom: 4.5mm;">
+        <div class="exp-entry" style="margin-bottom: 3.5mm;">
           <div class="flex items-baseline justify-between" style="gap: 8px;">
             <div class="role-title">Product Manager</div>
             <div class="role-meta">2019–2020</div>
@@ -402,7 +405,7 @@
         </div>
 
         <!-- Entry 4 -->
-        <div class="exp-entry" style="margin-bottom: 4.5mm;">
+        <div class="exp-entry" style="margin-bottom: 3.5mm;">
           <div class="flex items-baseline justify-between" style="gap: 8px;">
             <div class="role-title">Key Account Manager</div>
             <div class="role-meta">2018–2019</div>
@@ -415,7 +418,7 @@
         </div>
 
         <!-- Entry 5 -->
-        <div class="exp-entry" style="margin-bottom: 5.5mm;">
+        <div class="exp-entry" style="margin-bottom: 4mm;">
           <div class="flex items-baseline justify-between" style="gap: 8px;">
             <div class="role-title">Professional Services</div>
             <div class="role-meta">2017–2018</div>
@@ -438,9 +441,9 @@
     </div>
 
     <!-- Engagement models -->
-    <div class="avoid-break" style="margin-top: 9mm; padding-top: 5mm; border-top: 1px solid var(--color-rule-strong);">
+    <div class="avoid-break" style="margin-top: 5mm; padding-top: 4mm; border-top: 1px solid var(--color-rule-strong);">
       <div class="sec-label" style="border: none; padding: 0; margin-bottom: 1.5mm;">Engagement Models</div>
-      <div style="font-family: var(--font-mono); font-size: 8pt; color: var(--color-ink-muted); margin-bottom: 4mm;">Fractional, full-time contract, or project-based</div>
+      <div style="font-family: var(--font-mono); font-size: 8pt; color: var(--color-ink-muted); margin-bottom: 2.5mm;">Fractional, full-time contract, or project-based</div>
       <div class="flex" style="gap: 4mm;">
         <div class="eng-card"><div class="ec-t">AI Leadership</div><div class="ec-d">Embedded AI strategy and delivery</div></div>
         <div class="eng-card"><div class="ec-t">Product Leadership</div><div class="ec-d">Product strategy and delivery</div></div>
@@ -450,11 +453,12 @@
     </div>
 
     <!-- Footer -->
-    <div class="flex items-center justify-between" style="position: absolute; left: 15mm; right: 15mm; bottom: 11mm; padding-top: 3mm; border-top: 1px solid var(--color-rule);">
+    <div class="flex items-center justify-between" style="position: absolute; left: 15mm; right: 15mm; bottom: 11mm; padding-top: 3mm; border-top: 1px solid var(--color-rule-strong);">
       <div class="flex items-center" style="gap: 7px;">
         <span class="logo-mark"><span>T</span></span>
         <span style="font-family: var(--font-display); font-weight: 600; color: var(--color-ink); font-size: 9pt; letter-spacing: 0.02em;">Toussaint Consulting</span>
       </div>
+      <div class="foot">2 / 2</div>
       <div class="foot">toussaint-consulting.com</div>
     </div>
 
