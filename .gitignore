@@ -11,8 +11,7 @@ Thumbs.db
 # Screenshots
 screenshots/
 *.png
-!diagrams/**/*.png
-!assets/proto-kanaan/**/*.png
+!decks/**/*.png
 
 # Prospects (notes privées, non deployées)
 prospects/

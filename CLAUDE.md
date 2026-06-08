@@ -7,26 +7,26 @@ Ce projet sert **deux usages** :
 1. **Landing page** (`index.html`) — Toussaint Consulting, freelance product leader & builder. Positionnement 50/50 : "PRODUCT LEADERSHIP MEETS EXECUTION." — product leadership pour les équipes (freelance PM, fractional CPO) + product building = construire et fiabiliser des logiciels et systèmes IA production-grade. **Le framing "MVP en 4-6 semaines" a été retiré (juin 2026)** car commoditisé par l'IA-native ; carte 02 reformulée autour de la robustesse prouvée (tests + evals + mesure sur de vraies données, force data PM), wording audience-agnostique. Cf. `market-analysis-ai-transformation-2026.md`.
 
 2. **Slide-deck PDF sur mesure par prospect** — pour chaque prospect, produire un **PDF format slide-deck** (A4 landscape, dark brandé edge-to-edge) à envoyer après un call de découverte. Deux formats existent (voir "Structure d'un follow-up prospect" plus bas) :
-   - **Discovery 3-UCs** (~16 slides) : prospect avec 3 douleurs distinctes au call → framework Cat 1/2/3 + 3 use cases. Exemple : `capgemini-openinnov.html`.
-   - **Lean proposition** (~9 slides) : prospect avec 1 idée à valider ou follow-up freelance → recap + analyse + wedge + POC + roadmap + CTA. Exemple : `kanaan-anti-churn.html`.
+   - **Discovery 3-UCs** (~16 slides) : prospect avec 3 douleurs distinctes au call → framework Cat 1/2/3 + 3 use cases. Exemple : `decks/capgemini-openinnov/capgemini-openinnov.html`.
+   - **Lean proposition** (~9 slides) : prospect avec 1 idée à valider ou follow-up freelance → recap + analyse + wedge + POC + roadmap + CTA. Exemple : `decks/kanaan-anti-churn/kanaan-anti-churn.html`.
 
    Livrable final = PDF généré via skill `pdf-export` (Chrome headless). L'HTML est l'intermédiaire, chaque `<section>` du HTML = une slide du PDF.
 
 **Workflow par prospect** :
-1. Call de découverte → noter les use cases / douleurs / idée pitchée dans `prospects/<slug>.md` (notes privées, gitignorées)
+1. Call de découverte → créer `prospects/<slug>/` (gitignoré) ; y déposer le transcript du call, l'email reçu et les pièces jointes ; noter les use cases / douleurs / idée pitchée dans `prospects/<slug>/notes.md`
 2. **Choisir le format** : 3-UCs (douleurs distinctes) ou lean proposition (1 idée à challenger / wedge à isoler)
-3. `cp templates/prospect-deck.html <slug>.html` puis find/replace `{{PROSPECT_NAME}}`, `{{PROSPECT_SLUG}}`, `{{PROSPECT_CONTEXT}}`. Pour le lean : restructure lourde, supprimer grille Cat 1/2/3 + 3 UCs + livrable 6 transferts, voir `kanaan-anti-churn.html` comme référence.
-4. `mkdir diagrams/<slug>` — un dossier par prospect, jamais de collision avec les diagrammes d'autres prospects
+3. `mkdir -p decks/<slug>/diagrams` puis `cp templates/prospect-deck.html decks/<slug>/<slug>.html` ; find/replace `{{PROSPECT_NAME}}`, `{{PROSPECT_SLUG}}`, `{{PROSPECT_CONTEXT}}`. Pour le lean : restructure lourde, supprimer grille Cat 1/2/3 + 3 UCs + livrable 6 transferts, voir `decks/kanaan-anti-churn/kanaan-anti-churn.html` comme référence.
+4. `mkdir decks/<slug>/diagrams` — un dossier par prospect, jamais de collision avec les diagrammes d'autres prospects
 5. Pour chaque diagramme :
    ```bash
-   cp templates/diagram-dark.d2 diagrams/<slug>/<nom>-dark.d2
+   cp templates/diagram-dark.d2 decks/<slug>/diagrams/<nom>-dark.d2
    # customise nodes/edges, puis compile :
-   d2 --layout elk --pad 30           diagrams/<slug>/<nom>-dark.d2 diagrams/<slug>/<nom>-dark.svg
-   d2 --layout elk --pad 30 --scale 3 diagrams/<slug>/<nom>-dark.d2 diagrams/<slug>/<nom>-dark.png
+   d2 --layout elk --pad 30           decks/<slug>/diagrams/<nom>-dark.d2 decks/<slug>/diagrams/<nom>-dark.svg
+   d2 --layout elk --pad 30 --scale 3 decks/<slug>/diagrams/<nom>-dark.d2 decks/<slug>/diagrams/<nom>-dark.png
    ```
 6. Remplis les blocs du HTML avec Claude en conversation
-7. **Itère le layout sans re-exporter le PDF** : `node scripts/print-preview.mjs <slug>.html screenshots/preview.png` — Playwright headless avec print media emulation. ~3s vs ~8s pour Chrome `--print-to-pdf`. Visualise les overflows avant de générer le PDF final.
-8. Export PDF via skill `pdf-export` (Chrome headless `--print-to-pdf`, dark brandé)
+7. **Itère le layout sans re-exporter le PDF** : `node scripts/print-preview.mjs decks/<slug>/<slug>.html screenshots/preview.png` — Playwright headless avec print media emulation. ~3s vs ~8s pour Chrome `--print-to-pdf`. Visualise les overflows avant de générer le PDF final.
+8. Export PDF via skill `pdf-export` (Chrome headless `--print-to-pdf`, dark brandé) → `decks/<slug>/<slug>_Brief.pdf`
 9. `git add` + commit + push → **auto-deploy Vercel** depuis main (cf. section Deploiement). Plus besoin de `vercel --prod` à la main.
 10. Envoie le PDF au prospect par email / LinkedIn DM
 
@@ -46,7 +46,8 @@ Ce projet sert **deux usages** :
 - **Alias** : `toussaint.consulting`
 - **Hebergement** : Vercel (config dans `.vercel/`)
 - **Auto-deploy GitHub activé** (depuis 2026-05-27 via `vercel git connect`) : chaque `git push origin main` déclenche un deploy production en ~10s. Repo lié : `alextouss/toussaint-consulting-landing`. Plus besoin de `vercel --prod` manuel sauf pour tester un build sans push.
-- **Vérifier deploy en ligne** : `curl -s -o /dev/null -w "%{http_code}\n" https://toussaint-consulting.com/<slug>.html` doit retourner `200`.
+- **Vérifier deploy en ligne** : `curl -s -o /dev/null -w "%{http_code}\n" https://toussaint-consulting.com/decks/<slug>/<slug>.html` doit retourner `200`.
+- **Redirects** : `vercel.json` (racine) redirige les anciennes URLs racine (`/capgemini-openinnov.html`, `/kanaan-anti-churn.html`, …) vers `/decks/<slug>/<slug>.html`. Ajouter une entrée par deck déplacé.
 
 ## Structure du Projet
 
@@ -55,32 +56,35 @@ tc_website/
   index.html                       <- Landing page (publique, indexée)
   alexandre-toussaint-cv.html      <- CV perso d'Alex (light editorial cream, A4 portrait 2 pages, noindex, non lié)
   Alexandre_Toussaint_CV.pdf       <- PDF exporté du CV
-  capgemini-openinnov.html         <- Deck prospect Capgemini (format 3-UCs, livré)
-  capgemini-openinnov_Brief.pdf    <- PDF exporté correspondant
-  kanaan-anti-churn.html           <- Deck prospect Kanaan (format lean proposition, livré)
-  kanaan-anti-churn_Brief.pdf      <- PDF exporté correspondant
   CLAUDE.md                        <- Ce fichier
   competitive-analysis.md          <- Analyse concurrentielle
-  .gitignore                       <- !diagrams/**/*.png pour whitelister tous les PNG nestés
+  vercel.json                      <- Redirects : anciennes URLs racine -> /decks/<slug>/
+  .gitignore                       <- !decks/**/*.png pour whitelister les PNG des decks
   .vercel/                         <- Config deploiement Vercel
   screenshots/                     <- Captures Playwright (clean up après chaque session)
   scripts/
     print-preview.mjs              <- Playwright headless + print media emulation (itération layout)
   templates/                       <- Scaffolds réutilisables pour nouveaux prospects
-    prospect-deck.html             <- HTML 3-UCs avec tokens {{PROSPECT_NAME}} etc.
+    prospect-deck.html             <- HTML 3-UCs avec tokens {{PROSPECT_NAME}} (paths ../../assets)
     diagram-dark.d2                <- D2 dark template (classes + theme override)
-  prospects/                       <- GITIGNORÉ · notes brutes par prospect
-    capgemini-openinnov.md         <- Contact + 3 use cases bruts du call + à-faire
-    kanaan-anti-churn.md           <- Contact + idée pitchée + office-hours best-judgment
-  diagrams/                        <- D2 sources + SVG/PNG générés, namespacés par prospect
-    capgemini/                     <- Format 3-UCs : uc1/uc2/uc3 × dark(+light optionnel)
-      uc1-dark.{d2,svg,png}        <- Dark = écran ET PDF (PNG --scale 3 pour PDF reliability)
-      uc1-light.{d2,svg}           <- Light = optionnel, version imprimable papier
-      uc2-*, uc3-*
-    kanaan-anti-churn/             <- Format lean : 1 diagramme architecture POC
-      poc-dark.{d2,svg,png}
-    <slug>/                        <- Un dossier par futur prospect
-  assets/
+  decks/                           <- Livrables PUBLICS, 1 dossier/prospect (déployé à /decks/<slug>/)
+    capgemini-openinnov/           <- Format 3-UCs, livré
+      capgemini-openinnov.html     <- Deck (source HTML du PDF)
+      capgemini-openinnov_Brief.pdf
+      diagrams/                    <- uc1/uc2/uc3 × dark(+light optionnel)
+        uc1-dark.{d2,svg,png}      <- Dark = écran ET PDF (PNG --scale 3 pour PDF reliability)
+        uc1-light.{d2,svg}         <- Light = optionnel, version imprimable papier
+    kanaan-anti-churn/             <- Format lean, livré
+      kanaan-anti-churn.html
+      kanaan-anti-churn_Brief.pdf
+      diagrams/poc-dark.{d2,svg,png}
+      proto/                       <- screenshots prototype (dashboard.png, detail-*.png)
+    <slug>/                        <- 1 dossier par futur prospect (html + pdf + diagrams/)
+  prospects/                       <- GITIGNORÉ · INPUTS privés, 1 dossier/prospect
+    <slug>/
+      notes.md                     <- Contact + use cases bruts du call + à-faire
+      (transcript, email reçu, pièces jointes déposés ici)
+  assets/                          <- Partagé (référencé via ../../assets depuis les decks)
     favicon.svg                    <- Favicon SVG (terracotta + T)
     alex-portrait.jpeg             <- Photo portrait (OG image)
     logo.png                       <- Logo export
@@ -89,8 +93,9 @@ tc_website/
 ```
 
 **Règles sur les fichiers prospects** :
-- **HTML public** : un fichier par prospect à la racine, `<nom-entite>-<contexte>.html` (ex : `capgemini-openinnov.html`). Source pour générer le PDF.
-- **Notes privées** : `prospects/<nom-entite>-<contexte>.md` — notes brutes du call, à-faire, infos de contact. Gitignoré, jamais déployé.
+- **Livrables publics** : 1 dossier par prospect `decks/<nom-entite>-<contexte>/` contenant `<slug>.html` (source du PDF), `<slug>_Brief.pdf` et `diagrams/`. Déployé à `/decks/<slug>/<slug>.html`.
+- **Inputs privés** : `prospects/<nom-entite>-<contexte>/` — `notes.md` (notes brutes du call, à-faire, contact) + transcript, email reçu, pièces jointes. Tout `prospects/` est gitignoré, jamais déployé.
+- **Paths dans le HTML deck** : assets partagés via `../../assets/...`, diagrammes en local `diagrams/...` (le HTML vit dans `decks/<slug>/`).
 - Ne garder que la dernière version de chaque prospect (pas de `-v2`, `-draft`, etc.) : remplacer en place.
 - HTML accessible uniquement via URL directe, pas lié depuis `index.html`
 - `<meta name="robots" content="noindex, nofollow">` obligatoire sur chaque HTML prospect
@@ -136,7 +141,7 @@ tc_website/
 
 Deux formats canoniques (à choisir selon le contexte du call) :
 
-### Format A · Discovery 3-UCs (~16 slides) — référence : `capgemini-openinnov.html`
+### Format A · Discovery 3-UCs (~16 slides) — référence : `decks/capgemini-openinnov/capgemini-openinnov.html`
 
 Quand l'utiliser : prospect avec **3 douleurs distinctes** identifiées au call, qu'on adresse avec 3 patterns Cat 1/2/3 différents.
 
@@ -159,7 +164,7 @@ Slides de clôture (~5) :
 - **Pour creuser** — CTA discovery sprint + Calendar + email
 - **Footer** — Toussaint logo + "Préparé pour <prospect> · Confidentiel"
 
-### Format B · Lean proposition (~9 slides) — référence : `kanaan-anti-churn.html`
+### Format B · Lean proposition (~9 slides) — référence : `decks/kanaan-anti-churn/kanaan-anti-churn.html`
 
 Quand l'utiliser : prospect avec **1 idée à valider / wedge à isoler** (freelance pitch, founder advisory, follow-up "je te fais une proposition"). Pas 3 douleurs, 1 sujet à creuser.
 
@@ -186,15 +191,15 @@ Structure (restructure lourde du template, garder shell head/header/footer/CSS p
 - Langue : FR ou EN selon le prospect
 - `meta robots noindex, nofollow`
 - Preuves marché : uniquement cas publics avec chiffres datés + URL. Jamais de cas inventé. **Attention au staleness** : une acquisition / levée / valuation date vite. Vérifier que la ref est < 12 mois avant de la mettre, sinon préférer un pattern intemporel (e.g. "le LLM lit le non-structuré") à une citation chiffrée vieillissante. Le format lean (Kanaan) en a fait l'économie totale et c'est OK pour un follow-up "proposition POC".
-- Schémas : **D2 (diagram-as-code)**, namespacés par prospect dans `diagrams/<slug>/`. Pas de SVG inline. Partir du template `templates/diagram-dark.d2` (palette, classes, theme override, font sizes 32/28/26 déjà calibrés). Compiler en deux formats :
+- Schémas : **D2 (diagram-as-code)**, namespacés par prospect dans `decks/<slug>/diagrams/`. Pas de SVG inline. Partir du template `templates/diagram-dark.d2` (palette, classes, theme override, font sizes 32/28/26 déjà calibrés). Compiler en deux formats :
   ```bash
-  d2 --layout elk --pad 30           diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.svg
-  d2 --layout elk --pad 30 --scale 3 diagrams/<slug>/ucN-dark.d2 diagrams/<slug>/ucN-dark.png
+  d2 --layout elk --pad 30           decks/<slug>/diagrams/ucN-dark.d2 decks/<slug>/diagrams/ucN-dark.svg
+  d2 --layout elk --pad 30 --scale 3 decks/<slug>/diagrams/ucN-dark.d2 decks/<slug>/diagrams/ucN-dark.png
   ```
   Pourquoi les deux : Chrome `--print-to-pdf` rend les flèches/markers SVG de manière instable (apparaissent/disparaissent selon zoom du viewer PDF — bug connu). Le PNG `--scale 3` (~460 DPI sur slide A4 landscape) garantit un rendu identique sur tous les viewers. SVG = aperçu HTML écran, PNG = embed dans le PDF. Embed :
   ```html
-  <img src="diagrams/<slug>/ucN-dark.png" class="schema-dark  w-full h-auto block" />
-  <img src="diagrams/<slug>/ucN-dark.svg" class="schema-light w-full h-auto block" />
+  <img src="diagrams/ucN-dark.png" class="schema-dark  w-full h-auto block" />
+  <img src="diagrams/ucN-dark.svg" class="schema-light w-full h-auto block" />
   ```
   CSS toggle : `.schema-light { display: none }` partout. `.schema-dark { display: block; max-height: 560px; ... }` à l'écran, `max-height: 145mm` en print.
 - **Export PDF = slide-deck.** Chaque `<section>` doit être atomique (un concept par slide). Pattern CSS complet dans skill `pdf-export` : `@page margin 0` (edge-to-edge dark), `section { padding: 12mm 22mm; min-height: calc(100vh - 4mm); display: flex; justify-content: safe center }` (centrage vertical), Tailwind v4 CDN reste tel quel.
@@ -229,7 +234,7 @@ Structure (restructure lourde du template, garder shell head/header/footer/CSS p
 - Utiliser : product leadership, execution, embed, build, ship, launch, strategy, end-to-end, fractional CPO, freelance PM
 - Eviter : AI automation, workflow, n8n, Make, Zapier, ROI (galvauge), transformation, solutions
 
-**Follow-up prospects** (`<prospect>.html`) :
+**Follow-up prospects** (`decks/<slug>/<slug>.html`) :
 - Positionnement : AI Agent Builder (test de marché en parallèle, cf. `/Users/alexandretoussaint/.claude/plans/quel-postes-cibler-pour-expressive-fairy.md`)
 - Utiliser : AI agent, Cat 1/2/3, déterministe, raisonnement, multi-agents, shadow run, HITL, ground truth, evals
 - Eviter : AI automation, workflow, n8n, Zapier (saturés) — dire ce que fait l'agent, pas avec quoi
@@ -238,11 +243,11 @@ Structure (restructure lourde du template, garder shell head/header/footer/CSS p
 
 - **Pas de ton IA** : pas d'em-dash (—), pas de formulations generiques type ChatGPT. Ecriture directe, phrases courtes, ton humain. S'applique à la landing ET aux follow-ups prospects.
 - **Landing** : garder le fichier unique `index.html`, pas de framework, pas de build
-- **Follow-ups** : un fichier HTML par prospect, partir de `templates/prospect-deck.html` (jamais dupliquer un deck prospect existant — le template est la source canonique). Supprimer la version précédente quand on en livre une nouvelle.
+- **Follow-ups** : 1 dossier par prospect dans `decks/<slug>/`, partir de `templates/prospect-deck.html` (jamais dupliquer un deck prospect existant — le template est la source canonique). Supprimer la version précédente quand on en livre une nouvelle.
 - Privilegier la qualite visuelle et l'originalite sur la rapidite
 - Pas de noms d'employeurs sur la landing (SESAMm, Finance Active, etc.) — les follow-ups peuvent citer des cas anonymisés
 - Pas de metriques non verifiables. Pour les follow-ups, uniquement des preuves marché publiques avec URL.
 - Pricing : pas de prix affiches, discovery call uniquement
 - Screenshots Playwright si debug visuel necessaire : `npx playwright screenshot --browser chromium --wait-for-timeout 3000 --viewport-size "1440,900"`
-- **Itération layout deck prospect** : `node scripts/print-preview.mjs <slug>.html screenshots/preview.png` (Playwright headless + `emulateMedia({media:'print'})`). Beaucoup plus rapide qu'un PDF re-export à chaque tweak. Le script importe playwright depuis `chrome-extension-yt/node_modules/playwright` pour éviter une install locale.
+- **Itération layout deck prospect** : `node scripts/print-preview.mjs decks/<slug>/<slug>.html screenshots/preview.png` (Playwright headless + `emulateMedia({media:'print'})`). Beaucoup plus rapide qu'un PDF re-export à chaque tweak. Le script importe playwright depuis `chrome-extension-yt/node_modules/playwright` pour éviter une install locale.
 - **Toujours finir une tâche PDF par un lien ouvrable** : dès qu'on produit ou met à jour un PDF (CV ou proposition/follow-up prospect), terminer la réponse en donnant un lien cliquable pour l'ouvrir tout de suite — l'URL web déployée si le fichier est en ligne (`https://toussaint-consulting.com/<nom>.pdf`, et/ou la page `.html`), sinon le chemin local du PDF en lien markdown relatif. Le faire proactivement, sans que l'utilisateur ait à le demander.

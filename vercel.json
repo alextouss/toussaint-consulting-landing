@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/capgemini-openinnov.html", "destination": "/decks/capgemini-openinnov/capgemini-openinnov.html", "permanent": true },
+    { "source": "/capgemini-openinnov_Brief.pdf", "destination": "/decks/capgemini-openinnov/capgemini-openinnov_Brief.pdf", "permanent": true },
+    { "source": "/kanaan-anti-churn.html", "destination": "/decks/kanaan-anti-churn/kanaan-anti-churn.html", "permanent": true },
+    { "source": "/kanaan-anti-churn_Brief.pdf", "destination": "/decks/kanaan-anti-churn/kanaan-anti-churn_Brief.pdf", "permanent": true }
+  ]
+}
