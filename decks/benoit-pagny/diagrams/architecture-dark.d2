@@ -1,0 +1,90 @@
+# DAF augmenté — Architecture (Benoit Pagny)
+# Pennylane + ClickUp -> Supabase (vues SQL) -> outils MCP -> Claude / chat app
+#
+# Compile (run from repo root):
+#   d2 --layout elk --pad 30           decks/benoit-pagny/diagrams/architecture-dark.d2 decks/benoit-pagny/diagrams/architecture-dark.svg
+#   d2 --layout elk --pad 30 --scale 3 decks/benoit-pagny/diagrams/architecture-dark.d2 decks/benoit-pagny/diagrams/architecture-dark.png
+
+vars: {
+  d2-config: {
+    theme-overrides: {
+      N7: "#251F18"
+    }
+  }
+}
+
+direction: right
+
+classes: {
+  source: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#3A342A"
+      stroke-width: 1
+      font-color: "#E8DCC4"
+      font-size: 28
+      border-radius: 4
+    }
+  }
+  step: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 2
+      font-color: "#E8DCC4"
+      font-size: 30
+      border-radius: 4
+    }
+  }
+  output: {
+    shape: rectangle
+    style: {
+      fill: "#251F18"
+      stroke: "#C97A5F"
+      stroke-width: 3
+      font-color: "#E8DCC4"
+      font-size: 32
+      border-radius: 4
+    }
+  }
+  option: {
+    shape: rectangle
+    style: {
+      fill: "#1A1410"
+      stroke: "#4A9EFF"
+      stroke-width: 1
+      stroke-dash: 4
+      font-color: "#B8AFA0"
+      font-size: 26
+      border-radius: 4
+    }
+  }
+}
+
+sources: "Deux sources · clé = code projet" {
+  style: {
+    fill: "#0A0A0A"
+    stroke: "#2A251E"
+    stroke-width: 1
+    font-color: "#8A837A"
+    font-size: 24
+    border-radius: 4
+  }
+
+  pennylane: "Pennylane\nDevis, factures,\ncharges 6xx" { class: source }
+  clickup: "ClickUp\nTemps passé, taux,\navancement" { class: source }
+}
+
+db: "Supabase Postgres\nVues SQL pré-calculées\nAlerte conso > 80%" { class: step }
+mcp: "7 outils MCP\n+ graphique" { class: step }
+
+claude: "Claude\nDesktop / web" { class: output }
+chat: "Chat app maison\noption · sans Claude" { class: option }
+
+sources.pennylane -> db: { style: { stroke: "#8A837A"; stroke-width: 8 } }
+sources.clickup -> db: { style: { stroke: "#8A837A"; stroke-width: 8 } }
+db -> mcp: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+mcp -> claude: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
+mcp -> chat: { style: { stroke: "#4A9EFF"; stroke-width: 6; stroke-dash: 4 } }

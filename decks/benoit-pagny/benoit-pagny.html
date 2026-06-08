@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benoit Pagny · Trois patterns agentiques | Toussaint Consulting</title>
-  <meta name="description" content="Brief PDF-ready pour Benoit Pagny. Trois patterns agentiques, un exemple concret par cas.">
+  <title>Benoit Pagny · DAF augmenté · Démo & installation | Toussaint Consulting</title>
+  <meta name="description" content="Démo de l'agent de suivi de rentabilité par dossier (Pennylane + ClickUp). Serveur MCP live branché à Claude, plus le guide d'installation.">
   <meta name="robots" content="noindex, nofollow">
 
   <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
@@ -12,8 +12,6 @@
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Self-hosted font CSS (Paged.js can't XHR-fetch cross-origin CSS due to CORS).
-       woff2 files still load from the CDN via @font-face — browser font loading is not XHR. -->
   <link href="../../assets/fonts/clash-display.css" rel="stylesheet">
   <link href="../../assets/fonts/bitter.css" rel="stylesheet">
   <link href="../../assets/fonts/inter-mono.css" rel="stylesheet">
@@ -42,7 +40,6 @@
     }
   </style>
 
-  <!-- Vanilla CSS — Paged.js parses this without choking on Tailwind v4 @theme syntax -->
   <style>
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0A0A0A; }
@@ -57,13 +54,13 @@
     .schema-dark {
       display: block;
       max-width: 100%;
-      max-height: 560px;
+      max-height: 520px;
       width: auto;
       height: auto;
       margin: 0 auto;
     }
 
-    /* === Readability bumps — screen + print === */
+    /* === Readability bumps === */
     body { font-size: 16px; line-height: 1.6; }
     .text-\[9px\]  { font-size: 11px !important; }
     .text-\[10px\] { font-size: 12px !important; letter-spacing: 0.15em !important; }
@@ -96,27 +93,8 @@
       .reveal, .hero-reveal { opacity: 1; transform: none; }
     }
 
-    /* ===== TOC ===== */
-    .toc-item {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      padding: 8px 0;
-      border-bottom: 1px dashed rgba(58, 52, 42, 0.6);
-      text-decoration: none;
-      color: #B8AFA0;
-      transition: color 0.15s;
-    }
-    .toc-item:hover { color: #C97A5F; }
-    .toc-item .dots {
-      flex: 1;
-      border-bottom: 1px dotted #3A342A;
-      transform: translateY(-4px);
-    }
+    /* ===== PRINT ===== */
 
-    /* ===== PRINT — full dark brand-consistent ===== */
-
-    /* sr-only utility used by .uc-running-title spans (kept for future Paged.js path) */
     .uc-running-title {
       position: absolute;
       width: 1px;
@@ -145,7 +123,7 @@
       .no-print { display: none !important; }
       .page-break { page-break-before: always; break-before: page; }
       .avoid-break { page-break-inside: avoid; break-inside: avoid; }
-      h2, h3, h4 { page-break-after: avoid; break-after: avoid; }
+      h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid; }
       .reveal, .hero-reveal { opacity: 1 !important; transform: none !important; animation: none !important; }
 
       section {
@@ -167,17 +145,12 @@
       .mb-3  { margin-bottom: 3mm !important; }
       .pt-16 { padding-top: 0 !important; }
       .pb-12 { padding-bottom: 0 !important; }
-      .p-5, .p-6, .p-8, .p-10, .md\:p-6, .md\:p-8, .md\:p-10 { padding: 8mm !important; }
+      .p-4, .p-5, .p-6, .p-8, .p-10, .md\:p-6, .md\:p-8, .md\:p-10 { padding: 7mm !important; }
       .gap-6, .md\:gap-4 { gap: 6mm !important; }
       .gap-3, .md\:gap-3 { gap: 4mm !important; }
 
-      /* Livrable cards : padding compact pour faire tenir 6 cartes + header sur 1 slide */
-      section .grid.md\:grid-cols-3 > .bg-surface-raised.p-5 { padding: 5mm !important; }
-
       .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
       .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
-      .md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
-      .md\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
 
       .bg-void { background: #0A0A0A !important; }
       .bg-surface { background: #1A1410 !important; }
@@ -190,18 +163,17 @@
       h1, h2, h3, h4 { color: #E8DCC4 !important; }
       .border-border { border-color: #2A251E !important; }
       .border-border-light { border-color: #3A342A !important; }
+      .border-l-accent { border-left-color: #C97A5F !important; }
+      .border-l-tech { border-left-color: #4A9EFF !important; }
 
       .schema-dark { display: block !important; max-height: none !important; max-width: 100% !important; margin: 0 auto !important; }
       .schema-light { display: none !important; }
-      img[src*="diagrams/"] { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 145mm !important; object-fit: contain; }
+      img[src*="diagrams/"] { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 95mm !important; object-fit: contain; }
+      img[src*="proto/"] { max-height: 122mm !important; object-fit: contain; }
 
       a { color: #C97A5F !important; text-decoration: underline; }
-      .print-url::after { content: " [" attr(href) "]"; font-size: 8pt; color: #8A837A; font-weight: normal; }
 
-      .toc-item { color: #B8AFA0 !important; padding: 14px 0 !important; font-size: 13pt !important; }
-      .toc-item .dots { border-color: #3A342A !important; }
-
-      h1 { font-size: 44pt !important; line-height: 1.0 !important; letter-spacing: -0.01em !important; }
+      h1 { font-size: 50pt !important; line-height: 1.0 !important; letter-spacing: -0.01em !important; }
       h2 { font-size: 30pt !important; line-height: 1.15 !important; margin-top: 0 !important; }
       h3 { font-size: 18pt !important; line-height: 1.25 !important; }
       h4 { font-size: 14pt !important; }
@@ -216,10 +188,29 @@
       .text-xl       { font-size: 18pt !important; }
       .text-2xl      { font-size: 22pt !important; }
       .text-3xl      { font-size: 26pt !important; }
+      .text-4xl      { font-size: 34pt !important; }
+      .text-5xl      { font-size: 44pt !important; }
+      .text-6xl      { font-size: 54pt !important; }
 
       p { margin-bottom: 0.7em; }
       ul, ol { margin-bottom: 1em; }
       li { margin-bottom: 0.4em; }
+    }
+
+    /* Install steps : compact numbered list */
+    .step-num {
+      width: 26px; height: 26px; border-radius: 6px;
+      background: rgba(201, 122, 95, 0.1); border: 1px solid rgba(201, 122, 95, 0.3);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    @media print {
+      .step-num { width: 8mm; height: 8mm; }
+
+      /* Slide 8 (permissions) — keep header + screenshot + 3 cards on one page */
+      img.perm-shot { max-height: 84mm !important; width: auto !important; max-width: 100% !important; margin: 0 auto !important; }
+      .install-compact .mb-5 { margin-bottom: 4mm !important; }
+      .install-compact .mb-4 { margin-bottom: 3mm !important; }
+      .install-compact .p-4 { padding: 5mm !important; }
     }
 
     .grid-bg {
@@ -250,450 +241,245 @@
     </div>
   </header>
 
-  <!-- ========== COVER ========== -->
+  <!-- ========== SLIDE 1 · COVER ========== -->
   <section class="pt-16 relative overflow-hidden grid-bg">
     <div class="max-w-[1100px] mx-auto px-6 md:px-10 pt-16 pb-12 relative">
       <div class="flex items-center gap-3 mb-6 hero-reveal">
         <div class="w-8 h-px bg-accent"></div>
-        <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted">Brief · Benoit Pagny</p>
+        <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted">DAF augmenté · Démo</p>
       </div>
-      <h1 class="font-display font-bold text-text leading-[0.95] tracking-tight mb-5 hero-reveal">
-        <span class="block text-4xl md:text-5xl lg:text-6xl">TROIS PATTERNS</span>
-        <span class="block text-4xl md:text-5xl lg:text-6xl text-accent">AGENTIQUES.</span>
+      <h1 class="font-display font-bold text-text leading-[0.95] tracking-tight mb-8 hero-reveal">
+        <span class="block text-4xl md:text-5xl lg:text-6xl">DE TON PROMPT.</span>
+        <span class="block text-4xl md:text-5xl lg:text-6xl text-accent">À L'AGENT.</span>
       </h1>
       <p class="font-subheading text-sm md:text-base text-text-secondary leading-relaxed max-w-3xl mb-6 hero-reveal">
-        {{PROSPECT_CONTEXT}}
+        Suite à notre échange. J'ai construit ton agent de suivi de rentabilité par dossier. Un serveur live, branché à Claude.
       </p>
-
-      <!-- Suite à notre échange -->
-      <!-- TODO COVER: Replace the 3 bullets below with the prospect's 3 actual UCs from your call notes.
-           Format: <strong>title</strong>. Then one short sentence reframing the pain.
-           Keep to 3 bullets max — they map 1:1 to the UC slides further down. -->
-      <div class="bg-surface-raised border border-border p-5 md:p-6 mb-8 hero-reveal avoid-break">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Suite à notre échange</p>
-        <ul class="space-y-2 text-sm text-text-secondary">
-          <li class="flex gap-3"><span class="text-accent font-mono text-xs shrink-0">01</span><span><span class="text-text">UC 1 — titre court.</span> Une phrase qui reformule la douleur exprimée en mots du prospect.</span></li>
-          <li class="flex gap-3"><span class="text-accent font-mono text-xs shrink-0">02</span><span><span class="text-text">UC 2 — titre court.</span> Une phrase qui reformule la douleur exprimée en mots du prospect.</span></li>
-          <li class="flex gap-3"><span class="text-accent font-mono text-xs shrink-0">03</span><span><span class="text-text">UC 3 — titre court.</span> Une phrase qui reformule la douleur exprimée en mots du prospect.</span></li>
-        </ul>
-      </div>
+      <p class="text-[10px] text-text-muted uppercase tracking-[0.25em] hero-reveal">
+        Pour Benoit Pagny · Juin 2026 · Confidentiel
+      </p>
     </div>
   </section>
 
-  <!-- ========== GRILLE DE LECTURE (own page — universal framework, do not modify) ========== -->
+  <!-- ========== SLIDE 2 · CE QUE TU M'AS DEMANDÉ ========== -->
   <section class="relative page-break">
-    <span class="uc-running-title">Grille de lecture · trois catégories d'agent</span>
+    <span class="uc-running-title">Ce que tu m'as demandé</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-6 hero-reveal avoid-break">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Grille de lecture · trois catégories d'agent</p>
-        <div class="grid md:grid-cols-3 gap-3 md:gap-4">
-          <div class="bg-surface border border-border p-4">
-            <span class="block font-mono text-[10px] font-bold text-accent mb-2">01</span>
-            <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Cat 1 · Déterministe</p>
-            <p class="text-xs text-text-secondary leading-snug mb-2 min-h-[5.6em]">Étapes posées à l'avance. LLM uniquement sur les nœuds créatifs (extraction, rédaction). Le reste : code classique.</p>
-            <p class="text-[11px] text-text-muted leading-snug"><span class="text-text">Quand :</span> volume, livrable récurrent, fiabilité &gt; créativité.</p>
-          </div>
-          <div class="bg-surface border border-border p-4">
-            <span class="block font-mono text-[10px] font-bold text-accent mb-2">02</span>
-            <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Cat 2 · Raisonné</p>
-            <p class="text-xs text-text-secondary leading-snug mb-2 min-h-[5.6em]">Un LLM décide de l'ordre des étapes à partir d'outils disponibles. Une seule boucle, un seul agent.</p>
-            <p class="text-[11px] text-text-muted leading-snug"><span class="text-text">Quand :</span> parcours variable selon l'entrée, périmètre d'outils stable.</p>
-          </div>
-          <div class="bg-surface border border-border p-4">
-            <span class="block font-mono text-[10px] font-bold text-tech mb-2">03</span>
-            <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Cat 3 · Multi-agents</p>
-            <p class="text-xs text-text-secondary leading-snug mb-2 min-h-[5.6em]">Plusieurs spécialistes en parallèle, un superviseur qui réconcilie. On reproduit une équipe humaine.</p>
-            <p class="text-[11px] text-text-muted leading-snug"><span class="text-text">Quand :</span> plusieurs domaines distincts, livrable structuré à citer.</p>
-          </div>
-        </div>
-        <!-- TODO GRILLE: Update the closing sentence to map the prospect's 3 UCs to Cat 1/2/3. -->
-        <p class="text-xs text-text-muted mt-3 italic">Vos trois sujets retombent sur [Cat X et Cat Y]. Pas le même pattern, pas les mêmes arbitrages. La suite détaille pour chacun.</p>
+      <div class="mb-6 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Ce que tu m'as demandé</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight">Ton brief, repris à la lettre.</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- ========== SOMMAIRE (own page) ========== -->
-  <!-- TODO TOC: Update the 3 entries below with each UC's title and Cat number.
-       Page numbers — fill AFTER the deck is finalized (each UC = 3-5 slides typically).
-       Default page guesses for a 3-UC × 3-slide deck: UC1 p.4, UC2 p.7, UC3 p.10. Update for your final structure. -->
-  <section class="relative page-break">
-    <span class="uc-running-title">Sommaire</span>
-    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="hero-reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-3">Sommaire</p>
-        <div class="space-y-0">
-          <a href="#uc1" class="toc-item"><span class="text-accent font-mono text-xs">01</span><span class="text-sm">UC 1 titre — <span class="text-text-muted">Cat X · type</span></span><span class="dots"></span><span class="text-text-muted text-xs">p. 4</span></a>
-          <a href="#uc2" class="toc-item"><span class="text-accent font-mono text-xs">02</span><span class="text-sm">UC 2 titre — <span class="text-text-muted">Cat X · type</span></span><span class="dots"></span><span class="text-text-muted text-xs">p. 7</span></a>
-          <a href="#uc3" class="toc-item"><span class="text-accent font-mono text-xs">03</span><span class="text-sm">UC 3 titre — <span class="text-text-muted">Cat X · type</span></span><span class="dots"></span><span class="text-text-muted text-xs">p. 10</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       USE CASE 1 — replace with prospect-specific content
-       Standard structure: 3 slides per UC.
-         Slide A · Header (UC number + Cat badge + h2 + Vous m'avez dit + problèmes/solutions)
-         Slide B · Architecture (D2 diagram, full-page)
-         Slide C · Pattern + Référence marché + Ce qui change pour vous
-       Add extra slides if a UC needs a demonstrator / scorecard / pipeline detail.
-       ======================================================================== -->
-
-  <!-- ===== UC1 · Slide A: Header ===== -->
-  <section id="uc1" class="py-14 md:py-20 relative page-break">
-    <span class="uc-running-title">UC 01 · {{TODO_UC1_RUNNING_TITLE}}</span>
-    <div class="absolute top-0 left-0 right-0 h-px bg-border"></div>
-    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-8 reveal">
-        <div class="flex items-center gap-4 mb-3">
-          <span class="font-display text-5xl font-bold text-accent/30 leading-none">01</span>
-          <div>
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-accent bg-accent-dim px-2 py-1 border border-accent/20">Cat X · type</span>
-            <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted mt-1">Cas d'usage</p>
-          </div>
-        </div>
-        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">TODO · titre UC1 avec un <span class="text-accent">mot accentué.</span></h2>
-        <div class="border-l-2 border-accent pl-4 max-w-3xl">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-1">Vous m'avez dit</p>
-          <p class="font-subheading text-sm md:text-base text-text-secondary italic leading-relaxed">TODO · quote reformulée des mots du prospect pendant le call.</p>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6 mb-8 avoid-break reveal">
+      <div class="grid md:grid-cols-2 gap-6 reveal avoid-break">
         <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de problèmes</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · pain point 1, exprimé en termes prospect.</li>
-            <li>TODO · pain point 2.</li>
-            <li>TODO · pain point 3.</li>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-3">Le besoin</p>
+          <ul class="space-y-2 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>Un agent de suivi de rentabilité, dossier par dossier.</li>
+            <li>Croiser Pennylane (financier) et ClickUp (temps passé), joints sur le code projet.</li>
+            <li>Toutes les variables : budget, CA facturé, charges directes, coût du temps, marge brute, conso budget, avancement.</li>
+            <li>Une alerte dès que la conso dépasse 80% et que l'avancement reste sous 80%.</li>
           </ul>
         </div>
         <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de solutions · briques que j'assemble</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · brique technique 1 nommée concrètement.</li>
-            <li>TODO · brique 2.</li>
-            <li>TODO · brique 3.</li>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-3">La contrainte</p>
+          <ul class="space-y-2 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>Une réponse instantanée. Pas un dashboard de plus à ouvrir.</li>
+            <li>En langage métier, dans les mots du dirigeant.</li>
+            <li>Trois vues : portefeuille, détail mensuel, graphique par dossier.</li>
+            <li>Réplicable d'un client à l'autre, sans tout refaire à chaque fois.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== UC1 · Slide B: Architecture ===== -->
+  <!-- ========== SLIDE 3 · CE QUE J'AI CONSTRUIT ========== -->
   <section class="relative page-break">
-    <span class="uc-running-title">UC 01 · Architecture</span>
+    <span class="uc-running-title">Ce que j'ai construit</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="bg-surface-raised border border-border p-4 md:p-6 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Architecture</p>
-        <img src="diagrams/uc1-dark.png" alt="Architecture UC1" class="schema-dark w-full h-auto block" />
-        <img src="diagrams/uc1-dark.svg" alt="Architecture UC1" class="schema-light w-full h-auto block" />
+      <div class="mb-6 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-tech mb-3">Ce que j'ai construit</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight">Pas une maquette. Un serveur live.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-3 md:gap-4 reveal avoid-break">
+        <div class="bg-surface border border-border p-5">
+          <span class="block font-mono text-[10px] font-bold text-tech mb-2">01</span>
+          <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Tout pré-calculé en SQL</p>
+          <p class="text-xs text-text-secondary leading-snug">Les métriques sont calculées dans la base, en SQL. L'agent ne calcule rien, il met en forme. Résultat : réponse en secondes, et zéro hallucination sur les chiffres.</p>
+        </div>
+        <div class="bg-surface border border-border p-5">
+          <span class="block font-mono text-[10px] font-bold text-tech mb-2">02</span>
+          <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">Sept outils, un graphique</p>
+          <p class="text-xs text-text-secondary leading-snug">Tableau de bord portefeuille, fiche d'un dossier, détail mensuel, dossiers en alerte. Et un graphique de rentabilité qui s'affiche directement dans la conversation.</p>
+        </div>
+        <div class="bg-surface border border-border p-5">
+          <span class="block font-mono text-[10px] font-bold text-tech mb-2">03</span>
+          <p class="font-display text-xs font-bold text-text uppercase tracking-[0.15em] leading-tight mb-3 min-h-[2.4em]">En langage naturel</p>
+          <p class="text-xs text-text-secondary leading-snug">Tu poses ta question comme tu la penses : « quels dossiers sont en alerte ? ». La réponse arrive en français, format DAF, prête à décider.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== UC1 · Slide C: Pattern + Référence + Ce qui change ===== -->
+  <!-- ========== SLIDE 4 · DÉMO ========== -->
   <section class="relative page-break">
-    <span class="uc-running-title">UC 01 · Pattern &amp; Preuve marché</span>
+    <span class="uc-running-title">Démo · ce que ça donne</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-
-      <!-- TODO REF: replace with a real public case (with URL) that proves the pattern works in production.
-           Examples from prior decks: Abridge (Cat 1 healthcare), Clay (Cat 1 prospection), Harvey (Cat 3 legal). -->
-      <div class="mb-8 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Référence marché · TODO</p>
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-sm text-text-secondary leading-relaxed">
-            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="text-text font-semibold underline decoration-accent/40 hover:decoration-accent">TODO Nom</a> applique ce pattern Cat X au [domaine] : [résumé en une phrase]. [Une phrase sur le déploiement / l'échelle / la preuve que ça tient en prod].
-          </p>
-        </div>
+      <div class="mb-5 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Démo · ce que ça donne</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-2">Le portefeuille, et le dossier qui dérape.</h2>
+        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl">
+          Données de démo. 7 dossiers actifs, 3 en alerte. RESTO-2025-03 brûle son budget : les charges et le temps passé ont déjà dépassé le CA facturé, la marge est négative.
+        </p>
       </div>
 
-      <div class="mb-6 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Pattern de référence · TODO nom court</p>
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-sm text-text-secondary leading-relaxed mb-4">TODO · explication courte du pattern et de quand il s'applique.</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · arbitrage d'archi 1.</li>
-            <li>TODO · arbitrage 2.</li>
-            <li>TODO · arbitrage 3.</li>
-          </ul>
+      <div class="grid md:grid-cols-2 gap-4 reveal avoid-break items-start">
+        <div class="bg-surface-raised border border-border rounded-md p-2">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Tableau de bord · vue portefeuille</p>
+          <img src="proto/demo-portfolio.png" alt="Tableau de bord portefeuille — 7 dossiers, 3 en alerte, trié par consommation" class="w-full h-auto block rounded-sm" />
         </div>
-      </div>
-
-      <div class="bg-accent/5 border-l-2 border-accent pl-5 pr-4 py-4 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-1">Ce qui change pour vous</p>
-        <p class="text-sm text-text-secondary leading-relaxed">TODO · 1-2 phrases sur l'impact concret pour le prospect, en mots prospect (pas en mots Toussaint).</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       USE CASE 2 — duplicate the 3-slide pattern, replace 01 → 02, customize.
-       ======================================================================== -->
-
-  <!-- ===== UC2 · Slide A: Header ===== -->
-  <section id="uc2" class="py-14 md:py-20 relative page-break">
-    <span class="uc-running-title">UC 02 · {{TODO_UC2_RUNNING_TITLE}}</span>
-    <div class="absolute top-0 left-0 right-0 h-px bg-border"></div>
-    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-8 reveal">
-        <div class="flex items-center gap-4 mb-3">
-          <span class="font-display text-5xl font-bold text-accent/30 leading-none">02</span>
-          <div>
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-accent bg-accent-dim px-2 py-1 border border-accent/20">Cat X · type</span>
-            <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted mt-1">Cas d'usage</p>
-          </div>
-        </div>
-        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">TODO · titre UC2 avec un <span class="text-accent">mot accentué.</span></h2>
-        <div class="border-l-2 border-accent pl-4 max-w-3xl">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-1">Vous m'avez dit</p>
-          <p class="font-subheading text-sm md:text-base text-text-secondary italic leading-relaxed">TODO · quote reformulée des mots du prospect.</p>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6 mb-8 avoid-break reveal">
-        <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de problèmes</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · pain point 1.</li>
-            <li>TODO · pain point 2.</li>
-            <li>TODO · pain point 3.</li>
-          </ul>
-        </div>
-        <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de solutions · briques que j'assemble</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · brique 1.</li>
-            <li>TODO · brique 2.</li>
-            <li>TODO · brique 3.</li>
-          </ul>
+        <div class="bg-surface-raised border border-border rounded-md p-2">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Graphique · RESTO-2025-03 (marge négative)</p>
+          <img src="proto/demo-chart.png" alt="Graphique de rentabilité RESTO-2025-03 — charges + temps au-dessus du CA facturé" class="w-full h-auto block rounded-sm" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== UC2 · Slide B: Architecture ===== -->
+  <!-- ========== SLIDE 5 · ARCHITECTURE ========== -->
   <section class="relative page-break">
-    <span class="uc-running-title">UC 02 · Architecture</span>
+    <span class="uc-running-title">Architecture</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="bg-surface-raised border border-border p-4 md:p-6 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Architecture</p>
-        <img src="diagrams/uc2-dark.png" alt="Architecture UC2" class="schema-dark w-full h-auto block" />
-        <img src="diagrams/uc2-dark.svg" alt="Architecture UC2" class="schema-light w-full h-auto block" />
+      <div class="mb-4 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-2">Architecture</p>
+        <h2 class="font-subheading text-xl md:text-2xl font-semibold text-text tracking-tight">La donnée vit dans le backend. La réponse est instantanée.</h2>
+        <p class="text-xs text-text-muted mt-2">Pennylane et ClickUp alimentent Supabase. Tout est pré-calculé en vues SQL, l'agent ne fait que lire. Stack : Next.js + Vercel + Supabase Postgres.</p>
+      </div>
+      <div class="bg-surface-raised border border-border p-4 md:p-6 reveal avoid-break">
+        <img src="diagrams/architecture-dark.png" alt="Architecture DAF augmenté — Pennylane et ClickUp vers Supabase vers outils MCP vers Claude" class="schema-dark w-full h-auto block" />
+        <img src="diagrams/architecture-dark.svg" alt="Architecture DAF augmenté — Pennylane et ClickUp vers Supabase vers outils MCP vers Claude" class="schema-light w-full h-auto block" />
       </div>
     </div>
   </section>
 
-  <!-- ===== UC2 · Slide C: Pattern + Référence + Ce qui change ===== -->
+  <!-- ========== SLIDE 6 · DEUX FAÇONS DE L'UTILISER ========== -->
   <section class="relative page-break">
-    <span class="uc-running-title">UC 02 · Pattern &amp; Preuve marché</span>
+    <span class="uc-running-title">Deux façons de l'utiliser</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-8 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Référence marché · TODO</p>
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-sm text-text-secondary leading-relaxed">
-            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="text-text font-semibold underline decoration-accent/40 hover:decoration-accent">TODO Nom</a> applique ce pattern Cat X au [domaine] : [résumé]. [Preuve d'échelle].
-          </p>
-        </div>
+      <div class="mb-6 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Deux façons de l'utiliser</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight">Dans Claude, ou dans ta propre app.</h2>
       </div>
-
-      <div class="mb-6 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Pattern de référence · TODO nom court</p>
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-sm text-text-secondary leading-relaxed mb-4">TODO · pattern explication.</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · arbitrage 1.</li>
-            <li>TODO · arbitrage 2.</li>
-            <li>TODO · arbitrage 3.</li>
+      <div class="grid md:grid-cols-2 gap-4 reveal avoid-break">
+        <div class="bg-surface border border-border border-l-2 border-l-accent p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-3">Option A · Dans Claude (MCP)</p>
+          <ul class="space-y-2 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>L'agent vit dans Claude, Desktop ou web.</li>
+            <li>Branché en deux minutes via un connecteur. Rien à installer côté serveur.</li>
+            <li>Live aujourd'hui. C'est ce que tu vas tester juste après.</li>
           </ul>
         </div>
-      </div>
-
-      <div class="bg-accent/5 border-l-2 border-accent pl-5 pr-4 py-4 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-1">Ce qui change pour vous</p>
-        <p class="text-sm text-text-secondary leading-relaxed">TODO · 1-2 phrases d'impact concret.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       USE CASE 3 — same 3-slide pattern. Add extra slides for Cat 3 richness
-       (e.g., pipeline intake, scorecard) if needed; just copy a <section> block.
-       ======================================================================== -->
-
-  <!-- ===== UC3 · Slide A: Header ===== -->
-  <section id="uc3" class="py-14 md:py-20 relative page-break">
-    <span class="uc-running-title">UC 03 · {{TODO_UC3_RUNNING_TITLE}}</span>
-    <div class="absolute top-0 left-0 right-0 h-px bg-border"></div>
-    <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-8 reveal">
-        <div class="flex items-center gap-4 mb-3">
-          <span class="font-display text-5xl font-bold text-tech/30 leading-none">03</span>
-          <div>
-            <span class="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-tech bg-tech-dim px-2 py-1 border border-tech/20">Cat X · type</span>
-            <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-text-muted mt-1">Cas d'usage</p>
-          </div>
-        </div>
-        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">TODO · titre UC3 avec un <span class="text-tech">mot accentué.</span></h2>
-        <div class="border-l-2 border-tech pl-4 max-w-3xl">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-1">Vous m'avez dit</p>
-          <p class="font-subheading text-sm md:text-base text-text-secondary italic leading-relaxed">TODO · quote reformulée.</p>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6 mb-8 avoid-break reveal">
-        <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de problèmes</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · pain point 1.</li>
-            <li>TODO · pain point 2.</li>
-            <li>TODO · pain point 3.</li>
-          </ul>
-        </div>
-        <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Type de solutions · briques que j'assemble</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · brique 1.</li>
-            <li>TODO · brique 2.</li>
-            <li>TODO · brique 3.</li>
+        <div class="bg-surface border border-border border-l-2 border-l-tech p-5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Option B · Chat dans une app</p>
+          <ul class="space-y-2 text-sm text-text-secondary list-disc list-outside pl-4">
+            <li>Une interface de chat maison, sur le même backend.</li>
+            <li>Pour les clients qui n'ont pas Claude.</li>
+            <li>Mêmes données, même rapidité, sous ta marque.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== UC3 · Slide B: Architecture ===== -->
+  <!-- ========== SLIDE 7 · INSTALLER 1/2 ========== -->
   <section class="relative page-break">
-    <span class="uc-running-title">UC 03 · Architecture</span>
+    <span class="uc-running-title">Installer · 1/2</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="bg-surface-raised border border-border p-4 md:p-6 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Architecture</p>
-        <img src="diagrams/uc3-dark.png" alt="Architecture UC3" class="schema-dark w-full h-auto block" />
-        <img src="diagrams/uc3-dark.svg" alt="Architecture UC3" class="schema-light w-full h-auto block" />
+      <div class="mb-5 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Installer · 1 / 2</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight">Brancher le connecteur.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 reveal avoid-break items-center">
+        <div class="space-y-4">
+          <div class="flex gap-3 items-start">
+            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">1</span></div>
+            <p class="text-sm text-text-secondary leading-snug pt-0.5">Dans Claude, ouvre <span class="text-text font-medium">Réglages → Connecteurs</span> (Desktop ou web).</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">2</span></div>
+            <p class="text-sm text-text-secondary leading-snug pt-0.5">Clique <span class="text-text font-medium">« Ajouter un connecteur personnalisé »</span>.</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">3</span></div>
+            <p class="text-sm text-text-secondary leading-snug pt-0.5">Donne-lui un nom simple, <span class="text-text font-medium">sans accent ni espace</span> (ex. <span class="font-mono text-text">daf-augmente</span>), puis colle l'URL :</p>
+          </div>
+          <div class="ml-9 -mt-1">
+            <p class="font-mono text-xs text-tech break-all bg-surface border border-border rounded px-3 py-2">https://benoit-pagny-daf.vercel.app/api/mcp</p>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">4</span></div>
+            <p class="text-sm text-text-secondary leading-snug pt-0.5">Valide avec <span class="text-text font-medium">Add</span>. Pas d'authentification : c'est la version de test.</p>
+          </div>
+        </div>
+        <div class="bg-surface-raised border border-border rounded-md p-2">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Ajouter un connecteur personnalisé</p>
+          <img src="proto/install-connector.png" alt="Boîte de dialogue Claude — ajouter un connecteur personnalisé avec l'URL du MCP" class="w-full h-auto block rounded-sm" />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== UC3 · Slide C: Pattern + Référence + Ce qui change ===== -->
-  <section class="relative page-break">
-    <span class="uc-running-title">UC 03 · Pattern &amp; Preuve marché</span>
+  <!-- ========== SLIDE 8 · INSTALLER 2/2 ========== -->
+  <section class="relative page-break install-compact">
+    <span class="uc-running-title">Installer · 2/2</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="mb-8 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Référence marché · TODO</p>
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-sm text-text-secondary leading-relaxed">
-            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="text-text font-semibold underline decoration-tech/40 hover:decoration-tech">TODO Nom</a> applique ce pattern Cat X au [domaine] : [résumé]. [Preuve d'échelle].
-          </p>
-        </div>
+     <div class="reveal avoid-break">
+      <div class="mb-5">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Installer · 2 / 2</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-2">Autoriser les outils, puis demander.</h2>
+        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl">
+          Une fois le connecteur ajouté, autorise les outils (<span class="text-text">Always allow</span>). C'est tout. Tu peux poser tes questions en langage naturel.
+        </p>
       </div>
 
-      <div class="mb-6 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-tech mb-3">Pattern de référence · TODO nom court</p>
-        <div class="bg-surface border border-border p-5 md:p-6">
-          <p class="text-sm text-text-secondary leading-relaxed mb-4">TODO · pattern explication.</p>
-          <ul class="space-y-1.5 text-xs text-text-secondary list-disc list-outside pl-4">
-            <li>TODO · arbitrage 1.</li>
-            <li>TODO · arbitrage 2.</li>
-            <li>TODO · arbitrage 3.</li>
-          </ul>
-        </div>
+      <div class="bg-surface-raised border border-border rounded-md p-2 mb-4">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Permissions · une fois connecté</p>
+        <img src="proto/install-permissions.png" alt="Écran des permissions Claude — les sept outils du connecteur daf-augmente en Always allow" class="perm-shot w-full h-auto block rounded-sm" />
       </div>
 
-      <div class="bg-tech/5 border-l-2 border-tech pl-5 pr-4 py-4 avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-tech mb-1">Ce qui change pour vous</p>
-        <p class="text-sm text-text-secondary leading-relaxed">TODO · 1-2 phrases d'impact concret.</p>
+      <div class="grid md:grid-cols-3 gap-3">
+        <div class="bg-surface border border-border p-4">
+          <p class="font-mono text-xs text-text-secondary leading-snug">« Quels dossiers sont en alerte de rentabilité ? »</p>
+        </div>
+        <div class="bg-surface border border-border p-4">
+          <p class="font-mono text-xs text-text-secondary leading-snug">« Donne-moi la rentabilité du dossier INCUB-2025-01. »</p>
+        </div>
+        <div class="bg-surface border border-border p-4">
+          <p class="font-mono text-xs text-text-secondary leading-snug">« Montre-moi le graphique du dossier RESTO-2025-03. »</p>
+        </div>
       </div>
+     </div>
     </div>
   </section>
 
-  <!-- ========== LIVRABLE (hero + 6 transferts — universal, do not modify) ========== -->
-  <section class="relative page-break">
-    <span class="uc-running-title">Livrable · 6 transferts</span>
-    <div class="max-w-[1100px] mx-auto px-6 md:px-10 avoid-break">
-      <div class="mb-3 reveal">
-        <div class="flex items-baseline gap-3 flex-wrap mb-2">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent">Livrable</p>
-          <h2 class="font-subheading text-xl md:text-2xl font-semibold text-text tracking-tight">Ce que <span class="text-accent">votre équipe récupère.</span></h2>
-        </div>
-        <p class="font-subheading text-sm text-text-secondary max-w-3xl">À la fin du build, votre équipe reprend la main. Pas de boîte noire, pas de SaaS facturé au mois. Voici ce qui est transféré dans tous les cas.</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-3 md:gap-4 reveal">
-        <div class="bg-surface-raised border border-border p-5">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span class="font-mono text-[10px] font-bold text-accent">01</span>
-            </div>
-            <p class="font-subheading text-sm font-semibold text-text">Code source complet</p>
-          </div>
-          <p class="text-xs text-text-secondary leading-relaxed">Python ou TypeScript selon la stack. Tests, typage strict, conventions documentées. Déposé dans votre dépôt Git, propriété pleine.</p>
-        </div>
-        <div class="bg-surface-raised border border-border p-5">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span class="font-mono text-[10px] font-bold text-accent">02</span>
-            </div>
-            <p class="font-subheading text-sm font-semibold text-text">Jeu d'évaluation</p>
-          </div>
-          <p class="text-xs text-text-secondary leading-relaxed">Cas de référence avec vérité terrain, rejouable en une commande. Toute modif du prompt ou du modèle se mesure immédiatement, zéro régression silencieuse.</p>
-        </div>
-        <div class="bg-surface-raised border border-border p-5">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span class="font-mono text-[10px] font-bold text-accent">03</span>
-            </div>
-            <p class="font-subheading text-sm font-semibold text-text">Observabilité en production</p>
-          </div>
-          <p class="text-xs text-text-secondary leading-relaxed">Traces, coûts, latence, taux d'acceptation par nœud. Dashboard prêt. Vous voyez où l'agent passe son temps et combien ça vous coûte à l'appel.</p>
-        </div>
-        <div class="bg-surface-raised border border-border p-5">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span class="font-mono text-[10px] font-bold text-accent">04</span>
-            </div>
-            <p class="font-subheading text-sm font-semibold text-text">Documentation &amp; runbook</p>
-          </div>
-          <p class="text-xs text-text-secondary leading-relaxed">Architecture, schémas de données, prompts commentés, runbook d'exploitation (déploiement, rollback, incidents fréquents). Votre équipe opère sans moi.</p>
-        </div>
-        <div class="bg-surface-raised border border-border p-5">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span class="font-mono text-[10px] font-bold text-accent">05</span>
-            </div>
-            <p class="font-subheading text-sm font-semibold text-text">Transfert de compétence</p>
-          </div>
-          <p class="text-xs text-text-secondary leading-relaxed">Deux sessions de handoff avec l'équipe qui reprend : revue ensemble du code et des choix d'architecture, questions à chaud, points de vigilance documentés. Aucune zone d'ombre à reconstituer après mon départ.</p>
-        </div>
-        <div class="bg-surface-raised border border-border p-5">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-7 h-7 rounded-md bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span class="font-mono text-[10px] font-bold text-accent">06</span>
-            </div>
-            <p class="font-subheading text-sm font-semibold text-text">Garantie post-livraison</p>
-          </div>
-          <p class="text-xs text-text-secondary leading-relaxed">2 semaines de support inclus après le handoff. Tout bug ou régression est corrigé sans re-facturation. Au-delà, forfait mensuel optionnel.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== POUR CREUSER + FOOTER ========== -->
+  <!-- ========== SLIDE 9 · POUR CREUSER + FOOTER ========== -->
   <section class="relative page-break">
     <span class="uc-running-title">Pour creuser</span>
     <div class="max-w-[1100px] mx-auto px-6 md:px-10">
-      <div class="avoid-break reveal">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-2">Pour creuser</p>
-        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl mb-5">Pour aller plus loin sur l'un des trois cas, le plus simple est un deuxième échange pour cadrer ensemble le sujet qu'on priorise. Cadence, périmètre et livrables s'ajustent au cas précis. Le domaine évolue rapidement, je préfère proposer un plan qui colle à votre contexte plutôt qu'un template.</p>
-
-        <div class="mb-5">
-          <a href="https://calendar.app.google/w35WNGT9Lsk65n5x8" target="_blank" rel="noopener noreferrer" class="inline-block text-accent font-semibold text-base hover:underline">Prendre RDV →</a>
-        </div>
-
-        <div class="text-sm text-text-secondary space-y-1">
-          <p><span class="text-text-muted">Email · </span><a href="mailto:a.toussaint@toussaint-consulting.com" class="text-accent hover:underline">a.toussaint@toussaint-consulting.com</a></p>
-          <p><span class="text-text-muted">Site · </span><a href="https://toussaint-consulting.com" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">toussaint-consulting.com</a></p>
-        </div>
+      <div class="mb-8 reveal">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Pour creuser</p>
+        <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight mb-3">Teste-le, puis on en parle.</h2>
+        <p class="text-sm text-text-secondary leading-relaxed max-w-3xl">Branche le connecteur, pose tes questions, vois si le format DAF colle à ce que tu as en tête. On en discute de vive voix quand tu veux.</p>
       </div>
-
+      <div class="grid md:grid-cols-2 gap-4 mb-12 reveal max-w-3xl avoid-break">
+        <a href="https://calendar.app.google/w35WNGT9Lsk65n5x8" target="_blank" rel="noopener noreferrer" class="bg-surface-raised border border-border p-5 hover:border-accent/50 transition-colors block">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-2">Calendar</p>
+          <p class="text-sm text-text">Prendre RDV directement →</p>
+        </a>
+        <a href="mailto:a.toussaint@toussaint-consulting.com" class="bg-surface-raised border border-border p-5 hover:border-accent/50 transition-colors block">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent mb-2">Email</p>
+          <p class="text-sm text-text">a.toussaint@toussaint-consulting.com</p>
+        </a>
+      </div>
       <div class="mt-12 pt-6 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4 reveal">
         <a href="https://toussaint-consulting.com" class="flex items-center gap-2 group">
           <div class="w-6 h-6 rounded-md bg-accent flex items-center justify-center">
@@ -705,7 +491,7 @@
           </div>
         </a>
         <p class="text-[10px] font-light text-text-muted tracking-wide">
-          Préparé pour Benoit Pagny · Confidentiel
+          Préparé pour Benoit Pagny · Confidentiel · Juin 2026
         </p>
       </div>
     </div>
