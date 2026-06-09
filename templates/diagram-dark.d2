@@ -87,7 +87,11 @@ classes: {
 }
 
 # Example structure — replace with your actual UC nodes and edges.
-# Arrow stroke-width 10 is calibrated for slide readability.
+# Arrow stroke-width 10 is calibrated for slide readability (SOLID edges only).
+# GOTCHA — dashed edge: D2 dash length = stroke-dash x stroke-width. A thick
+# dashed arrow (width 10 + stroke-dash 4 = 40px dashes) breaks into stubs + a
+# detached arrowhead on short branches. Dashed = thin (width 4-5) + stroke-dash 2.
+# See references/diagrams.md "Styling des flèches".
 
 input: "Entrée" { class: source }
 step1: "1. Première étape\nsous-détail" { class: step }
