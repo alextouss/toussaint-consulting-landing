@@ -398,31 +398,34 @@
         <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-accent mb-3">Installer · 1 / 2</p>
         <h2 class="font-subheading text-2xl md:text-3xl font-semibold text-text tracking-tight">Brancher le connecteur.</h2>
       </div>
-      <div class="grid md:grid-cols-2 gap-6 reveal avoid-break items-center">
-        <div class="space-y-4">
-          <div class="flex gap-3 items-start">
-            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">1</span></div>
-            <p class="text-sm text-text-secondary leading-snug pt-0.5">Dans Claude, ouvre <span class="text-text font-medium">Réglages → Connecteurs</span> (Desktop ou web).</p>
+      <div class="reveal avoid-break">
+        <div class="grid md:grid-cols-2 gap-6 items-center mb-4">
+          <div class="space-y-4">
+            <div class="flex gap-3 items-start">
+              <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">1</span></div>
+              <p class="text-sm text-text-secondary leading-snug pt-0.5">Dans Claude, ouvre <span class="text-text font-medium">Réglages → Connecteurs</span> (Desktop ou web).</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">2</span></div>
+              <p class="text-sm text-text-secondary leading-snug pt-0.5">Clique <span class="text-text font-medium">« Ajouter un connecteur personnalisé »</span>.</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">3</span></div>
+              <p class="text-sm text-text-secondary leading-snug pt-0.5">Donne-lui un nom simple, <span class="text-text font-medium">sans accent ni espace</span> (ex. <span class="font-mono text-text">daf-augmente</span>), puis colle l'URL du serveur (ci-dessous).</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">4</span></div>
+              <p class="text-sm text-text-secondary leading-snug pt-0.5">Valide avec <span class="text-text font-medium">Add</span>. Pas d'authentification : c'est la version de test.</p>
+            </div>
           </div>
-          <div class="flex gap-3 items-start">
-            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">2</span></div>
-            <p class="text-sm text-text-secondary leading-snug pt-0.5">Clique <span class="text-text font-medium">« Ajouter un connecteur personnalisé »</span>.</p>
-          </div>
-          <div class="flex gap-3 items-start">
-            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">3</span></div>
-            <p class="text-sm text-text-secondary leading-snug pt-0.5">Donne-lui un nom simple, <span class="text-text font-medium">sans accent ni espace</span> (ex. <span class="font-mono text-text">daf-augmente</span>), puis colle l'URL :</p>
-          </div>
-          <div class="ml-9 -mt-1">
-            <p class="font-mono text-xs text-tech break-all bg-surface border border-border rounded px-3 py-2">https://benoit-pagny-daf.vercel.app/api/mcp</p>
-          </div>
-          <div class="flex gap-3 items-start">
-            <div class="step-num"><span class="font-mono text-[10px] font-bold text-accent">4</span></div>
-            <p class="text-sm text-text-secondary leading-snug pt-0.5">Valide avec <span class="text-text font-medium">Add</span>. Pas d'authentification : c'est la version de test.</p>
+          <div class="bg-surface-raised border border-border rounded-md p-2">
+            <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Ajouter un connecteur personnalisé</p>
+            <img src="proto/install-connector.png" alt="Boîte de dialogue Claude — ajouter un connecteur personnalisé avec l'URL du MCP" class="w-full h-auto block rounded-sm" />
           </div>
         </div>
-        <div class="bg-surface-raised border border-border rounded-md p-2">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Ajouter un connecteur personnalisé</p>
-          <img src="proto/install-connector.png" alt="Boîte de dialogue Claude — ajouter un connecteur personnalisé avec l'URL du MCP" class="w-full h-auto block rounded-sm" />
+        <div class="bg-surface border border-border rounded px-4 py-3">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-1.5">URL du serveur MCP · à coller dans Claude</p>
+          <a href="https://benoit-pagny-daf.vercel.app/api/mcp" target="_blank" rel="noopener noreferrer" class="font-mono text-sm md:text-base text-tech whitespace-nowrap hover:text-accent transition-colors">https://benoit-pagny-daf.vercel.app/api/mcp</a>
         </div>
       </div>
     </div>
