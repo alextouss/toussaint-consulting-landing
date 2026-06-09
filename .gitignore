@@ -5,8 +5,9 @@ Thumbs.db
 # Playwright
 .playwright-mcp/
 
-# Claude
-.claude/
+# Claude — ignore tout sauf les skills versionnés (settings.local.json reste ignoré)
+.claude/*
+!.claude/skills/
 
 # Screenshots
 screenshots/
