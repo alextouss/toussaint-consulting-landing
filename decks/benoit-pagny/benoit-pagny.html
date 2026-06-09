@@ -24,14 +24,14 @@
       --font-subheading: 'Bitter', serif;
       --font-body: 'Inter', system-ui, sans-serif;
       --font-mono: 'IBM Plex Mono', monospace;
-      --color-void: #0A0A0A;
-      --color-surface: #1A1410;
-      --color-surface-raised: #251F18;
-      --color-border: #2A251E;
-      --color-border-light: #3A342A;
-      --color-text: #E8DCC4;
-      --color-text-secondary: #B8AFA0;
-      --color-text-muted: #8A837A;
+      --color-void: #15110D;
+      --color-surface: #201A13;
+      --color-surface-raised: #2B2219;
+      --color-border: #382F24;
+      --color-border-light: #4A4032;
+      --color-text: #F0E6D2;
+      --color-text-secondary: #C5BBA8;
+      --color-text-muted: #998F80;
       --color-accent: #C97A5F;
       --color-accent-hover: #D98F74;
       --color-accent-dim: rgba(201, 122, 95, 0.08);
@@ -42,9 +42,9 @@
 
   <style>
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0A0A0A; }
-    ::-webkit-scrollbar-thumb { background: #2A251E; border-radius: 3px; }
-    ::selection { background-color: rgba(201, 122, 95, 0.25); color: #E8DCC4; }
+    ::-webkit-scrollbar-track { background: #15110D; }
+    ::-webkit-scrollbar-thumb { background: #382F24; border-radius: 3px; }
+    ::selection { background-color: rgba(201, 122, 95, 0.25); color: #F0E6D2; }
 
     .font-subheading { font-family: var(--font-subheading); }
     .font-mono { font-family: var(--font-mono); }
@@ -114,8 +114,8 @@
 
     @media print {
       html, body {
-        background: #0A0A0A !important;
-        color: #E8DCC4 !important;
+        background: #15110D !important;
+        color: #F0E6D2 !important;
         font-size: 13pt;
         line-height: 1.6;
       }
@@ -152,17 +152,17 @@
       .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
       .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
 
-      .bg-void { background: #0A0A0A !important; }
-      .bg-surface { background: #1A1410 !important; }
-      .bg-surface-raised { background: #251F18 !important; }
-      .text-text { color: #E8DCC4 !important; }
-      .text-text-secondary { color: #B8AFA0 !important; }
-      .text-text-muted { color: #8A837A !important; }
+      .bg-void { background: #15110D !important; }
+      .bg-surface { background: #201A13 !important; }
+      .bg-surface-raised { background: #2B2219 !important; }
+      .text-text { color: #F0E6D2 !important; }
+      .text-text-secondary { color: #C5BBA8 !important; }
+      .text-text-muted { color: #998F80 !important; }
       .text-accent { color: #C97A5F !important; }
       .text-tech { color: #4A9EFF !important; }
-      h1, h2, h3, h4 { color: #E8DCC4 !important; }
-      .border-border { border-color: #2A251E !important; }
-      .border-border-light { border-color: #3A342A !important; }
+      h1, h2, h3, h4 { color: #F0E6D2 !important; }
+      .border-border { border-color: #382F24 !important; }
+      .border-border-light { border-color: #4A4032 !important; }
       .border-l-accent { border-left-color: #C97A5F !important; }
       .border-l-tech { border-left-color: #4A9EFF !important; }
 
@@ -211,6 +211,19 @@
       .install-compact .mb-5 { margin-bottom: 4mm !important; }
       .install-compact .mb-4 { margin-bottom: 3mm !important; }
       .install-compact .p-4 { padding: 5mm !important; }
+    }
+
+    /* Product screenshots as light floating windows on the softened-dark slides */
+    .capture {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(240, 230, 210, 0.14);
+      box-shadow: 0 16px 46px rgba(0, 0, 0, 0.55);
+      background: #ffffff;
+    }
+    .capture img { display: block; width: 100%; height: auto; }
+    @media print {
+      .capture { box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
 
     .grid-bg {
@@ -334,13 +347,13 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-4 reveal avoid-break items-start">
-        <div class="bg-surface-raised border border-border rounded-md p-2">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Tableau de bord · vue portefeuille</p>
-          <img src="proto/demo-portfolio.png" alt="Tableau de bord portefeuille — 7 dossiers, 3 en alerte, trié par consommation" class="w-full h-auto block rounded-sm" />
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Tableau de bord · vue portefeuille</p>
+          <div class="capture"><img src="proto/demo-portfolio.png" alt="Tableau de bord portefeuille — 7 dossiers, 3 en alerte, trié par consommation" /></div>
         </div>
-        <div class="bg-surface-raised border border-border rounded-md p-2">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Graphique · RESTO-2025-03 (marge négative)</p>
-          <img src="proto/demo-chart.png" alt="Graphique de rentabilité RESTO-2025-03 — charges + temps au-dessus du CA facturé" class="w-full h-auto block rounded-sm" />
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Graphique · RESTO-2025-03 (marge négative)</p>
+          <div class="capture"><img src="proto/demo-chart.png" alt="Graphique de rentabilité RESTO-2025-03 — charges + temps au-dessus du CA facturé" /></div>
         </div>
       </div>
     </div>
@@ -423,9 +436,9 @@
               <p class="text-sm text-text-secondary leading-snug pt-0.5">Valide avec <span class="text-text font-medium">Add</span>. Pas d'authentification : c'est la version de test.</p>
             </div>
           </div>
-          <div class="bg-surface-raised border border-border rounded-md p-2">
-            <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Ajouter un connecteur personnalisé</p>
-            <img src="proto/install-connector.png" alt="Boîte de dialogue Claude — ajouter un connecteur personnalisé avec l'URL du MCP" class="w-full h-auto block rounded-sm" />
+          <div>
+            <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Ajouter un connecteur personnalisé</p>
+            <div class="capture"><img src="proto/install-connector.png" alt="Boîte de dialogue Claude — ajouter un connecteur personnalisé avec l'URL du MCP" /></div>
           </div>
         </div>
         <div class="bg-surface border border-border rounded px-4 py-3">
@@ -449,9 +462,9 @@
         </p>
       </div>
 
-      <div class="bg-surface-raised border border-border rounded-md p-2 mb-4">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2 px-2 pt-1">Permissions · une fois connecté</p>
-        <img src="proto/install-permissions.png" alt="Écran des permissions Claude — les sept outils du connecteur daf-augmente en Always allow" class="perm-shot w-full h-auto block rounded-sm" />
+      <div class="mb-4">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted mb-2">Permissions · une fois connecté</p>
+        <div class="capture"><img src="proto/install-permissions.png" alt="Écran des permissions Claude — les sept outils du connecteur daf-augmente en Always allow" class="perm-shot" /></div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-3">

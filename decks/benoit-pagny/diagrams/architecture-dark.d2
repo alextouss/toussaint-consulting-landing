@@ -8,7 +8,7 @@
 vars: {
   d2-config: {
     theme-overrides: {
-      N7: "#251F18"
+      N7: "#2B2219"
     }
   }
 }
@@ -19,10 +19,10 @@ classes: {
   source: {
     shape: rectangle
     style: {
-      fill: "#1A1410"
-      stroke: "#3A342A"
+      fill: "#201A13"
+      stroke: "#4A4032"
       stroke-width: 1
-      font-color: "#E8DCC4"
+      font-color: "#F0E6D2"
       font-size: 28
       border-radius: 4
     }
@@ -30,10 +30,10 @@ classes: {
   step: {
     shape: rectangle
     style: {
-      fill: "#251F18"
+      fill: "#2B2219"
       stroke: "#C97A5F"
       stroke-width: 2
-      font-color: "#E8DCC4"
+      font-color: "#F0E6D2"
       font-size: 30
       border-radius: 4
     }
@@ -41,10 +41,10 @@ classes: {
   output: {
     shape: rectangle
     style: {
-      fill: "#251F18"
+      fill: "#2B2219"
       stroke: "#C97A5F"
       stroke-width: 3
-      font-color: "#E8DCC4"
+      font-color: "#F0E6D2"
       font-size: 32
       border-radius: 4
     }
@@ -52,11 +52,11 @@ classes: {
   option: {
     shape: rectangle
     style: {
-      fill: "#1A1410"
+      fill: "#201A13"
       stroke: "#4A9EFF"
       stroke-width: 1
       stroke-dash: 4
-      font-color: "#B8AFA0"
+      font-color: "#C5BBA8"
       font-size: 26
       border-radius: 4
     }
@@ -65,10 +65,10 @@ classes: {
 
 sources: "Deux sources · clé = code projet" {
   style: {
-    fill: "#0A0A0A"
-    stroke: "#2A251E"
+    fill: "#15110D"
+    stroke: "#382F24"
     stroke-width: 1
-    font-color: "#8A837A"
+    font-color: "#998F80"
     font-size: 24
     border-radius: 4
   }
@@ -83,8 +83,8 @@ mcp: "7 outils MCP\n+ graphique" { class: step }
 claude: "Claude\nDesktop / web" { class: output }
 chat: "Chat app maison\noption · sans Claude" { class: option }
 
-sources.pennylane -> db: { style: { stroke: "#8A837A"; stroke-width: 8 } }
-sources.clickup -> db: { style: { stroke: "#8A837A"; stroke-width: 8 } }
+sources.pennylane -> db: { style: { stroke: "#998F80"; stroke-width: 8 } }
+sources.clickup -> db: { style: { stroke: "#998F80"; stroke-width: 8 } }
 db -> mcp: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
 mcp -> claude: { style: { stroke: "#C97A5F"; stroke-width: 10 } }
 mcp -> chat: { style: { stroke: "#4A9EFF"; stroke-width: 6; stroke-dash: 4 } }
