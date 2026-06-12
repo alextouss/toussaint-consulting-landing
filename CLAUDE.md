@@ -4,7 +4,7 @@
 
 Ce projet sert **deux usages** :
 
-1. **Landing page** (`index.html`) — Toussaint Consulting, freelance product leader & builder. Positionnement 50/50 : "PRODUCT LEADERSHIP MEETS EXECUTION." — product leadership pour les équipes (freelance PM, fractional CPO) + product building = construire et fiabiliser des logiciels et systèmes IA production-grade. **Le framing "MVP en 4-6 semaines" a été retiré (juin 2026)** car commoditisé par l'IA-native ; carte 02 reformulée autour de la robustesse prouvée (tests + evals + mesure sur de vraies données, force data PM), wording audience-agnostique. Cf. `market-analysis-ai-transformation-2026.md`.
+1. **Landing page** (`index.html`) — Toussaint Consulting, AI & data product leader freelance. **Positionnement problème-first (12 juin 2026)** : H1 "AI SYSTEMS THAT MAKE IT TO PRODUCTION." — le titre nomme le problème résolu (le gap pilote→production), pas les compétences. Tilt vertical finance (fonds d'investissement & équipes finance) dans le sub, trust bar, About et meta ; le rebrand vertical NOMINAL du H1 reste conditionné à 2-3 deals finance payés. Deux offres inchangées : product leadership (freelance PM, fractional CPO) + product building (systèmes IA production-grade, robustesse prouvée : tests + evals + mesure sur de vraies données ; l'ancien framing "MVP 4-6 semaines" est retiré depuis juin 2026). Section `#what-i-build` : 2 cartes use-case représentatives, jamais de citations clients ni de métriques inventées. Cf. `market-analysis-ai-transformation-2026.md` (marché) et `positioning-icp-strategy-2026-06.md` (ICP, offre, système outbound).
 
 2. **Slide-deck PDF sur mesure par prospect** — pour chaque prospect, produire un **PDF format slide-deck** (A4 landscape, dark brandé edge-to-edge) à envoyer après un call de découverte. Deux formats : Discovery 3-UCs (~16 slides, 3 douleurs distinctes) et Lean proposition (~9 slides, 1 idée / wedge). L'HTML est l'intermédiaire, chaque `<section>` = une slide.
 
@@ -38,6 +38,8 @@ tc_website/
   Alexandre_Toussaint_CV.pdf       <- PDF exporté du CV
   CLAUDE.md                        <- Ce fichier
   competitive-analysis.md          <- Analyse concurrentielle
+  market-analysis-ai-transformation-2026.md <- Analyse marché (2 juin 2026) : commoditisation, wedge PME, pricing
+  positioning-icp-strategy-2026-06.md <- Stratégie ICP/positionnement + système outbound (12 juin 2026)
   vercel.json                      <- Redirects : anciennes URLs racine -> /decks/<slug>/
   .gitignore                       <- !decks/**/*.png + !.claude/skills/ pour whitelister
   .vercel/                         <- Config deploiement Vercel
@@ -63,6 +65,7 @@ tc_website/
       proto/                       <- screenshots prototype (dashboard.png, detail-*.png)
     <slug>/                        <- 1 dossier par futur prospect (html + pdf + diagrams/)
   prospects/                       <- GITIGNORÉ · INPUTS privés, 1 dossier/prospect
+    outreach/                      <- GTM privé : séquences LinkedIn (VC/PE Paris), copies profil, bannière
     <slug>/
       notes.md                     <- Contact + use cases bruts du call + à-faire
       (transcript, email reçu, pièces jointes déposés ici)
@@ -103,13 +106,14 @@ tc_website/
 
 ## Sections de la Landing (`index.html`)
 
-1. **Navbar** — sticky, frosted glass dark, 4 liens (Services, How I Work, About, Contact), toggle langue FR/EN, CTA "Book a Call" (Google Calendar)
-2. **Hero** — "PRODUCT LEADERSHIP MEETS EXECUTION." + terminal mockup (--help style) + trust bar (10+ yrs, 3 products) + floating badges (Available, Strategy → Execution)
+1. **Navbar** — sticky, frosted glass dark, 5 liens (Services, What I Build, How I Work, About, Contact), toggle langue FR/EN, CTA "Book a Call" (Google Calendar)
+2. **Hero** — "AI SYSTEMS THAT MAKE IT / TO PRODUCTION." (3 lignes équilibrées, breaks explicites via `hero.headline1` en data-i18n-html) + sub problème-first (gap pilote→production, fonds d'investissement & équipes finance) + terminal mockup (--help style) + trust bar (10+ yrs, 15+ products, Fintech·Data·Asset Management) + floating badges (Available, Strategy → Execution)
 3. **Services** — 2 cartes 50/50 (6+6 cols) : Product Leadership (bleu tech) + Product Building (terracotta)
-4. **How I Work** — 3 principes : Understand Fast, Build Lean, Iterate Relentlessly
-5. **About** — "Product Leader Who Builds." + key facts grid + bio sans noms d'employeurs
-6. **Contact** — "LET'S WORK TOGETHER." + 2 cartes (Calendar + Email), pas de formulaire
-7. **Footer** — logo + nav + connect (LinkedIn, Email, Book a Call)
+4. **What I Build** (`#what-i-build`) — 2 cartes use-case représentatives : Document Extraction + Reporting & Data Assembly. Framing "ce que je construis" (systèmes communs), PAS des cas clients : aucune citation client, aucune métrique inventée ; chaque carte finit sur une proof line (mesuré sur vos données / chiffres traçables)
+5. **How I Work** — 3 principes : Understand Fast, Build Lean, Iterate Relentlessly
+6. **About** — "Product Leader Who Builds." + key facts grid + bio "fintech, data, asset management", sans noms d'employeurs
+7. **Contact** — "LET'S WORK TOGETHER." + 2 cartes (Calendar + Email), pas de formulaire
+8. **Footer** — logo + nav + connect (LinkedIn, Email, Book a Call)
 
 ## i18n
 
@@ -123,9 +127,10 @@ tc_website/
 - **Fondateur** : Alexandre Toussaint
 - **Entite** : Toussaint Technologies SASU
 - **Marque commerciale** : Toussaint Consulting
-- **Positionnement** : Product Leader & Builder (50/50)
+- **Positionnement (juin 2026)** : AI & Data Product Leader — des systèmes IA pour fonds d'investissement & équipes finance, qui arrivent en production (testés, mesurés sur de vraies données). 3 différenciateurs : finance first (10 ans fintech/asset management), jugement produit avant le code, preuve mesurée. Headline LinkedIn alignée : "AI systems for investment firms & finance teams · Tested, measured, reliable in production · AI & Data Product Leader".
+- **ICP (stratégie 12 juin 2026)** : (A) fonds PE midcap français 10-50 pers. + leurs participations (entrée : IC memo / LP reporting / DDQ / KPIs portcos ; expansion via operating partner) ; (B) fonction finance des PME via prescripteurs (DAF externalisés type Benoit Pagny, experts-comptables, DFCG). Ne plus cibler : COO/founders génériques, grands comptes en direct, SGP <20 pers. Détail → `positioning-icp-strategy-2026-06.md`.
 - **Offre 1** : Product Leadership — embedded PM (3-6 mois), fractional CPO, product audits, roadmap
-- **Offre 2** : Product Building — construire et fiabiliser des logiciels et systèmes IA production-grade, de bout en bout. Différenciateur = robustesse prouvée (tests + evals + mesure sur de vraies données), ancrée sur la force data PM. "Run" (opérer dans la durée) proposé en option. Wording audience-agnostique (PME, fondateurs, scale-ups, enterprise). Ancien framing "MVP en 4-6 semaines" retiré (juin 2026, commoditisé).
+- **Offre 2** : Product Building — construire et fiabiliser des logiciels et systèmes IA production-grade, de bout en bout. Différenciateur = robustesse prouvée (tests + evals + mesure sur de vraies données), ancrée sur la force data PM. "Run" (opérer dans la durée) proposé en option. Ladder : POC 3-8K€ → build 10-20K€ (fonds : 15-40K€) → run 1,5-3K€/mois → fractional AI lead 5-10K€/mois (jamais affiché sur le site). Ancien framing "MVP en 4-6 semaines" retiré (juin 2026, commoditisé).
 - **Side projects** : Closter (AI lead gen B2B), Seya (SaaS data intelligence — ne pas citer comme Chrome extension en public)
 - **Langues** : Francais, Anglais
 - **Email** : a.toussaint@toussaint-consulting.com
@@ -135,8 +140,8 @@ tc_website/
 ### Mots-cles du messaging
 
 **Landing page** (`index.html`) :
-- Utiliser : product leadership, execution, embed, build, ship, launch, strategy, end-to-end, fractional CPO, freelance PM
-- Eviter : AI automation, workflow, n8n, Make, Zapier, ROI (galvauge), transformation, solutions
+- Utiliser : AI systems, production, pilot to production, tested, measured on real data, reliable, investment firms, finance teams, product leadership, execution, embed, build, ship, end-to-end, fractional CPO, freelance PM
+- Eviter : AI automation, workflow, n8n, Make, Zapier, ROI (galvauge), transformation, solutions ; jamais de citations clients ni de métriques inventées sur la landing
 
 **Follow-up prospects** : positionnement AI Agent Builder + listes utiliser/éviter → skill `prospect-deck` (`references/editorial.md`).
 

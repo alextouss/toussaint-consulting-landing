@@ -166,4 +166,17 @@ Pondération cible : **40 % prescripteurs · 30 % outbound manuel sur signaux ·
 
 ---
 
+## 10. Exécution — état au 12 juin 2026 (soir)
+
+Fait le jour même de la stratégie :
+
+- **LinkedIn aligné.** Headline live : "AI systems for investment firms & finance teams · Tested, measured, reliable in production · AI & Data Product Leader" (profil en anglais pour ne pas fermer l'international ; les DMs suivent la langue du profil du prospect). About v5 différenciation-first : claim + gap pilote→production + 3 différenciateurs (finance first / jugement produit / preuve mesurée) + mode d'engagement, sans noms d'employeurs, sans CFA, sans CTA email. Bannière 1584×396 générée. Copies et checklist : `prospects/outreach/linkedin-profile-2026-06.md`.
+- **Séquence outreach prête.** Alex a extrait une liste de 700 contacts VC/PE Paris (COO, CFO, Partner, Managing Partner, 0-200 employés). Séquence : T0 invitation sans note → T1 question problème <400 caractères (3 variantes par titre : OPS fonds / PORTCOS PE / DOCS VC, en FR et EN) → T2 offre (pas envoi) d'une démo 60 s → T3 referral. 3 touches max, 20-25 invitations manuelles/jour, 1 personne par fonds par vague. `prospects/outreach/sequence-vcpe-paris-2026-06.md`.
+- **Site repositionné** (commit f9702bc, live). H1 problème-first "AI SYSTEMS THAT MAKE IT TO PRODUCTION." (décision Alex : le titre doit nommer ce qu'il solutionne, pas ses compétences), nouvelle section What I Build (2 cartes use-case représentatives : extraction documentaire, reporting et consolidation ; framing "ce que je construis", zéro citation client, zéro métrique inventée), tilt finance dans le sub, trust bar (Asset Management), About et meta/OG. Le §4 ci-dessus ("le H1 peut rester") est dépassé sur ce point ; le rebrand vertical NOMINAL (H1 = finance) reste conditionné aux 2-3 deals payés.
+- **CV inchangé** sur décision d'Alex : la règle "pas d'Europ Assistance, pas de -70 %" s'applique aux nouveaux supports (LinkedIn, decks, site), pas au CV sans demande explicite.
+
+Reste avant lancement de la campagne : la vidéo démo 60 s (l'artefact du T2, à capturer depuis la démo live "DAF augmenté"), le tri de la liste 700 en 4 lots (A1 CFO/COO fonds PE > A2 Partners PE > B1 ops VC > B2 partners VC), et le sheet de suivi. Kill rule : <2 % de réponses positives après 200 envois = changer de variante, pas de volume.
+
+---
+
 *Sources détaillées : rapports des deux agents de recherche (12 juin 2026), `market-analysis-ai-transformation-2026.md` (2 juin), `competitive-analysis.md`. Benchmarks clés : Expandi 13,2M invitations 2025-26 ; FTI 2026 Private Equity AI Radar ; AMF Chiffres clés 2024 ; France Invest activité 2025 ; Consulting Success marketing study.*
